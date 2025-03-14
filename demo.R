@@ -27,9 +27,4 @@ str(df)
 missing_values <- colSums(is.na(df))
 missing_values
 
-# Chuyển gender thành 0,1 ("Male" = 1, "Female" = 0)
-df$gender <- as.numeric(df$gender == "Male" )
-head(df)
 
-# biểu đồ tương quan 
-cor(df)
