@@ -3,10 +3,10 @@ library(corrplot)
 install.packages("rpart")
 library(rpart)
 
-# df <- read.csv("D:/BT/clonegit/doanthaytung/healthcare-dataset-stroke-data.csv")
+df <- read.csv("D:/BT/clonegit/doanthaytung/healthcare-dataset-stroke-data.csv")
 
 
-df <- read.csv("/Users/huy/Documents/doanthaytung/healthcare-dataset-stroke-data.csv")
+#df <- read.csv("/Users/huy/Documents/doanthaytung/healthcare-dataset-stroke-data.csv")
 
 head(df)
 str(df)
@@ -72,4 +72,43 @@ df$smoking_status <- factor(df$smoking_status, levels = c(1, 2, 3, 4),
                             labels = c("formerly smoked", "never smoked", "smokes", "Unknown"))
 
 str(df)
+# Lấy danh sách các biến số (numeric) trong dataframe
+numeric_vars <- names(df)[sapply(df, is.numeric)]  
 
+# Thiết lập bố cục để vẽ tất cả boxplot trên một hàng
+par(mfrow = c(1, length(numeric_vars)))  
+
+# Lặp qua từng biến số và vẽ boxplot theo chiều dọc
+for (var in numeric_vars) {
+  boxplot(df[[var]], main = paste("Boxplot of", var),
+          col = "lightblue")
+}
+
+# Đặt lại bố cục mặc định
+par(mfrow = c(1,1))  
+
+
+# Xác định các biến số (numeric)
+numeric_vars <- names(df)[sapply(df, is.numeric)]
+
+# Kiểm tra outliers bằng IQR và in kết quả
+for (var in numeric_vars) {
+  Q1 <- quantile(df[[var]], 0.25, na.rm = TRUE)
+  Q3 <- quantile(df[[var]], 0.75, na.rm = TRUE)
+  IQR <- Q3 - Q1
+  
+  lower_bound <- Q1 - 1.5 * IQR
+  upper_bound <- Q3 + 1.5 * IQR
+  
+  num_outliers <- sum(df[[var]] < lower_bound | df[[var]] > upper_bound, na.rm = TRUE)
+  
+  cat("Biến:", var, "- Tổng số outliers:", num_outliers, "\n")
+}
+
+# Vẽ boxplot theo chiều dọc, tất cả trên một hàng
+par(mfrow = c(1, length(numeric_vars)))  
+for (var in numeric_vars) {
+  boxplot(df[[var]], main = paste("Boxplot of", var),
+          col = "pink")  # Mặc định vẽ dọc
+}
+par(mfrow = c(1,1))
