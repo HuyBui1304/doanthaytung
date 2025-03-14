@@ -9,9 +9,27 @@ df$ever_married <- as.factor(df$ever_married)
 df$work_type <- as.factor(df$work_type)
 df$Residence_type <- as.factor(df$Residence_type)
 df$smoking_status <- as.factor(df$smoking_status)
+
 # xem dữ liệu
 str(df)
+
 # chuyển sang dạng numeric
 df$bmi <- as.numeric(df$bmi)
+
 # xem dữ liệu 
 str(df)
+
+# xoá cột id
+df <- subset(df, select = -id)
+str(df)
+
+# kiểm tra dữ liệu thiếu 
+missing_values <- colSums(is.na(df))
+missing_values
+
+# Chuyển gender thành 0,1 ("Male" = 1, "Female" = 0)
+df$gender <- as.numeric(df$gender == "Male" )
+head(df)
+
+# biểu đồ tương quan 
+cor(df)
