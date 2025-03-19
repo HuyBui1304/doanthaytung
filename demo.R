@@ -10,7 +10,7 @@ library(rpart)
 library(ggplot2)
 
 df <- read.csv("/Users/huy/Documents/doanthaytung/healthcare-dataset-stroke-data.csv")
-
+df <- read.csv('healthcare-dataset-stroke-data.csv')
 str(df)
 df <- df %>%
   mutate(
@@ -30,6 +30,7 @@ df_numeric <- df %>%
 
 # Tính ma trận tương quan và vẽ heatmap
 cor_matrix <- cor(df_numeric, use = "pairwise.complete.obs")
+
 corrplot(cor_matrix, method = "color", col = colorRampPalette(c("blue", "white", "red"))(200),
          tl.cex = 0.8, tl.col = "black", number.cex = 0.7, addCoef.col = "black")
 
@@ -119,8 +120,10 @@ par(mfrow = c(1,1))
 categorical_vars <- names(df)[sapply(df, is.factor)]
 par(mfrow = c(ceiling(length(categorical_vars) / 3), 3))
 for (var in categorical_vars) {
-  barplot(table(df[[var]]), main = paste("Barplot of", var), col = rainbow(length(unique(df[[var]]))), las = 2)
+  barplot(table(df[[var]]), main = paste("Barplot of", var),
+          col = rainbow(length(unique(df[[var]]))), las = 2)
 }
+
 par(mfrow = c(1,1))
 
 
@@ -144,10 +147,14 @@ df$age_cat <- cut(df$age,
 
 # Nhóm dữ liệu theo nhóm tuổi và số lượng người bị đột quỵ
 stroke_age <- df %>% filter(stroke == 1) %>% count(age_cat)
+head(stroke_age)
 healthy_age <- df %>% filter(stroke == 0) %>% count(age_cat)
+head(healthy_age)
 
 # Hợp nhất dữ liệu để vẽ Dumbbell Plot
 dumbbell_data <- merge(healthy_age, stroke_age, by = "age_cat", all = TRUE)
+head(dumbbell_data)
+# đổi tên cột 
 colnames(dumbbell_data) <- c("age_cat", "healthy", "stroke")
 
 # Thay NA bằng 0
@@ -155,9 +162,19 @@ dumbbell_data[is.na(dumbbell_data)] <- 0
 
 # Biểu đồ Dumbbell
 p1 <- ggplot(dumbbell_data, aes(y = age_cat)) +
+  # vẽ đường thẳng nối 2 điểm 
   geom_segment(aes(x = healthy, xend = stroke, yend = age_cat), color = "grey") +
+  # vễ điểm 
   geom_point(aes(x = healthy), size = 4, color = "#512b58", alpha = 0.8) + 
+  # geom_text(aes(x =  healthy, label =  healthy), 
+  #           hjust = 1.5,  # Căn chỉnh nhãn lệch về bên trái
+  #           color = "#fe346e", 
+  #           size = 4) +
   geom_point(aes(x = stroke), size = 4, color = "#fe346e", alpha = 0.8) +  
+  geom_text(aes(x = stroke, label = stroke), 
+            hjust = 1.5,  # Căn chỉnh nhãn lệch về bên trái
+            color = "#fe346e", 
+            size = 4) +
   labs(title = "Ảnh hưởng của tuổi tác đối với đột quỵ",
        x = "Số lượng người", y = "Nhóm tuổi") +
   theme_minimal()
@@ -173,3 +190,45 @@ p2 <- ggplot(df, aes(x = age, fill = as.factor(stroke))) +
 
 print(p2)
 
+# biểu đồ KDE: phân bố mức đường huyết giữa hai nhóm 
+p3 <- ggplot(df, aes(x=avg_glucose_level, fill = as.factor(stroke))) +
+    geom_density(alpha = 0.5) +
+  scale_fill_manual(values = c("#512b58", "#fe346e"), labels = c("Healthy", "Stroke")) +
+  labs(title = "Phân bố mức đường huyết giữa hai nhóm",
+       x = "Mức đường huyết trung bình (mg/dL)", y = "Mật độ", fill = "Tình trạng sức khỏe") +
+  theme_minimal()
+
+print(p3)
+
+# Biểu đồ tỷ lệ đột quỵ theo huyết áp cao và bệnh tim
+hypertension_heart_disease <- df %>%
+  group_by(hypertension, heart_disease) %>%
+  summarise(stroke_rate = mean(stroke))
+
+p4 <- ggplot(hypertension_heart_disease, aes(x = as.factor(hypertension), y = stroke_rate, fill = as.factor(heart_disease))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(values = c("#512b58", "#fe346e"), labels = c("Không có bệnh tim", "Có bệnh tim")) +
+  labs(title = "Tỷ lệ đột quỵ theo huyết áp và bệnh tim",
+       x = "Huyết áp cao (0 = Không, 1 = Có)", y = "Tỷ lệ đột quỵ", fill = "Bệnh tim") +
+  theme_minimal()
+
+print(p4)
+
+
+# Biểu đồ tỷ lệ đột quỵ theo tình trạng hút thuốc
+df_percent <- df %>%
+  group_by(smoking_status, stroke) %>%
+  summarise(count = n()) %>%
+  mutate(percent = count / sum(count) * 100)
+
+# Vẽ biểu đồ với nhãn phần trăm
+p5 <- ggplot(df_percent, aes(x = smoking_status, y = percent, fill = as.factor(stroke))) +
+  geom_bar(stat = "identity", position = "fill") +  
+  geom_text(aes(label = sprintf("%.1f%%", percent)), 
+            position = position_fill(vjust = 0.5), size = 4, color = "white") +
+  scale_fill_manual(values = c("0" = "#512b58", "1" = "#fe346e"), labels = c("Healthy", "Stroke")) +
+  labs(title = "Tỷ lệ đột quỵ theo tình trạng hút thuốc",
+       x = "Tình trạng hút thuốc", y = "Tỷ lệ phần trăm", fill = "Tình trạng sức khỏe") +
+  theme_minimal()
+
+print(p5)
