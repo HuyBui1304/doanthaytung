@@ -231,18 +231,69 @@ print(p4)
 
 
 
+#  biểu đồ Dumbbel cho mức heart_disease
 
 
+# Nhóm dữ liệu theo tình trạng bệnh tim và số lượng người bị/không bị đột quỵ
+stroke_heart <- df %>% filter(stroke == 1) %>% count(heart_disease)
+healthy_heart <- df %>% filter(stroke == 0) %>% count(heart_disease)
 
-p6 <- ggplot(df, aes(x=avg_glucose_level, fill = as.factor(stroke))) +
-    geom_density(alpha = 0.5) +
-  scale_fill_manual(values = c("#1f77b4", "#d62728"), labels = c("Healthy", "Stroke")) +
-  scale_x_continuous(limits = c(0, 250), expand = c(0.02, 0.02)) +  
-  labs(title = "Phân bố mức đường huyết giữa hai nhóm",
-       x = "Mức đường huyết trung bình (mg/dL)", y = "Mật độ", fill = "Tình trạng sức khỏe") +
+# Hợp nhất dữ liệu để vẽ Dumbbell Plot
+dumbbell_heart <- merge(healthy_heart, stroke_heart, by = "heart_disease", all = TRUE)
+colnames(dumbbell_heart) <- c("heart_disease", "healthy", "stroke")
+print(dumbbell_heart)
+# Thay NA bằng 0
+dumbbell_heart[is.na(dumbbell_heart)] <- 0
+max_x <- max(dumbbell_heart$healthy, dumbbell_heart$stroke) * 1.2  # Thêm dư 20% để tránh bị sát lề
+
+# Vẽ biểu đồ Dumbbell cho bệnh tim
+p5 <- ggplot(dumbbell_heart, aes(y = heart_disease)) +
+  geom_segment(aes(x = healthy, xend = stroke, yend = heart_disease), color = "grey", size = 1) +
+  geom_point(aes(x = healthy), size = 3, color = "#1f77b4", alpha = 0.8) + 
+  geom_point(aes(x = stroke), size = 3, color = "#d62728", alpha = 0.8) +  
+  geom_text(aes(x = healthy, label = healthy), hjust = -0.3, vjust = 0.5, color = "#1f77b4", size = 5) + 
+  geom_text(aes(x = stroke, label = stroke), hjust = 1.2, vjust = 0.5, color = "#d62728", size = 5) + 
+  scale_x_continuous(limits = c(0, max_x)) +  
+  scale_y_continuous(breaks = c(0, 1), labels = c("0", "1")) +  # Chỉ hiển thị 0 & 1
+  labs(title = "Ảnh hưởng của bệnh tim đối với đột quỵ",
+       x = "Số lượng người", y = "Tình trạng bệnh tim") +
   theme_minimal()
 
+print(p5)
+
+
+
+
+df_percent <- df %>%
+  group_by(heart_disease, stroke) %>%
+  summarise(count = n()) %>%
+  mutate(percent = count / sum(count))  # Tính phần trăm trong từng nhóm
+
+# Vẽ biểu đồ với nhãn phần trăm
+p6 <- ggplot(df_percent, aes(x = as.factor(heart_disease), y = percent, fill = as.factor(stroke))) +
+  geom_bar(stat = "identity", position = "fill", alpha = 0.8) +  # Biểu đồ stacked bar theo tỷ lệ
+  geom_text(aes(label = scales::percent(percent, accuracy = 0.1)),  # Hiển thị nhãn %
+            position = position_fill(vjust = 0.5), size = 5, color = "white") +
+  scale_fill_manual(values = c("#1f77b4", "#d62728"), labels = c("Healthy", "Stroke")) +
+  scale_y_continuous(labels = scales::percent_format()) +  # Hiển thị tỷ lệ %
+  labs(title = "Phân bố bệnh tim giữa người bị đột quỵ và người khỏe mạnh",
+       x = "Tình trạng bệnh tim (Không, Có)", 
+       y = "Tỷ lệ phần trăm", fill = "Tình trạng sức khỏe") +
+  theme_minimal()
 print(p6)
+
+
+p6 <- ggplot(df_percent, aes(x = as.factor(hypertension), y = stroke_rate, fill = as.factor(heart_disease))) +
+  geom_bar(stat = "identity", position = "dodge", alpha = 0.8) +  # Cột cạnh nhau
+  scale_fill_manual(values = c("#3F1D3B", "#FF4376"), labels = c("Không có bệnh tim", "Có bệnh tim")) +  
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +  # Hiển thị tỷ lệ %
+  labs(title = "Tỷ lệ đột quỵ theo huyết áp và bệnh tim",
+       x = "Huyết áp cao (0 = Không, 1 = Có)", 
+       y = "Tỷ lệ đột quỵ",
+       fill = "Bệnh tim") +
+print(p6)
+
+
 
 # Biểu đồ tỷ lệ đột quỵ theo huyết áp cao và bệnh tim
 hypertension_heart_disease <- df %>%
@@ -251,28 +302,32 @@ hypertension_heart_disease <- df %>%
 
 p7 <- ggplot(hypertension_heart_disease, aes(x = as.factor(hypertension), y = stroke_rate, fill = as.factor(heart_disease))) +
   geom_bar(stat = "identity", position = "dodge") +
-  scale_fill_manual(values = c("#512b58", "#fe346e"), labels = c("Không có bệnh tim", "Có bệnh tim")) +
+  scale_fill_manual(values = c("#1f77b4", "#d62728"), labels = c("Không có bệnh tim", "Có bệnh tim")) +
   labs(title = "Tỷ lệ đột quỵ theo huyết áp và bệnh tim",
-       x = "Huyết áp cao (0 = Không, 1 = Có)", y = "Tỷ lệ đột quỵ", fill = "Bệnh tim") +
+       x = "Huyết áp cao (Không, Có)", y = "Tỷ lệ đột quỵ", fill = "Bệnh tim") +
   theme_minimal()
 
 print(p7)
 
 
-# Biểu đồ tỷ lệ đột quỵ theo tình trạng hút thuốc
+
+
+
+# Biểu đồ tỷ lệ đột quỵ theo ever_married
+
 df_percent <- df %>%
-  group_by(smoking_status, stroke) %>%
+  group_by(ever_married, stroke) %>%
   summarise(count = n()) %>%
   mutate(percent = count / sum(count) * 100)
 
 # Vẽ biểu đồ với nhãn phần trăm
-p8 <- ggplot(df_percent, aes(x = smoking_status, y = percent, fill = as.factor(stroke))) +
+p8 <- ggplot(df_percent, aes(x = ever_married, y = percent, fill = as.factor(stroke))) +
   geom_bar(stat = "identity", position = "fill") +  
   geom_text(aes(label = sprintf("%.1f%%", percent)), 
             position = position_fill(vjust = 0.5), size = 4, color = "white") +
-  scale_fill_manual(values = c("0" = "#512b58", "1" = "#fe346e"), labels = c("Healthy", "Stroke")) +
-  labs(title = "Tỷ lệ đột quỵ theo tình trạng hút thuốc",
-       x = "Tình trạng hút thuốc", y = "Tỷ lệ phần trăm", fill = "Tình trạng sức khỏe") +
+  scale_fill_manual(values = c("0" = "#1f77b4", "1" ="#d62728"), labels = c("Healthy", "Stroke")) +
+  labs(title = "Tỷ lệ đột quỵ theo tình trạng hôn nhân",
+       x = "Tình trạng hôn nhân", y = "Tỷ lệ phần trăm", fill = "Tình trạng sức khỏe") +
   theme_minimal()
 
 print(p8)
