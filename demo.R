@@ -9,8 +9,9 @@ library(corrplot)
 library(rpart)
 library(ggplot2)
 
-df <- read.csv("/Users/huy/Documents/doanthaytung/healthcare-dataset-stroke-data.csv")
 df <- read.csv('healthcare-dataset-stroke-data.csv')
+df <- read.csv("/Users/huy/Documents/doanthaytung/healthcare-dataset-stroke-data.csv")
+
 str(df)
 df <- df %>%
   mutate(
@@ -30,7 +31,6 @@ df_numeric <- df %>%
 
 # Tính ma trận tương quan và vẽ heatmap
 cor_matrix <- cor(df_numeric, use = "pairwise.complete.obs")
-
 corrplot(cor_matrix, method = "color", col = colorRampPalette(c("blue", "white", "red"))(200),
          tl.cex = 0.8, tl.col = "black", number.cex = 0.7, addCoef.col = "black")
 
@@ -120,10 +120,8 @@ par(mfrow = c(1,1))
 categorical_vars <- names(df)[sapply(df, is.factor)]
 par(mfrow = c(ceiling(length(categorical_vars) / 3), 3))
 for (var in categorical_vars) {
-  barplot(table(df[[var]]), main = paste("Barplot of", var),
-          col = rainbow(length(unique(df[[var]]))), las = 2)
+  barplot(table(df[[var]]), main = paste("Barplot of", var), col = rainbow(length(unique(df[[var]]))), las = 2)
 }
-
 par(mfrow = c(1,1))
 
 
@@ -134,85 +132,131 @@ stroke_df <- data.frame(stroke = names(stroke_counts), count = as.numeric(stroke
 ggplot(stroke_df, aes(x = reorder(stroke, count), y = count, fill = stroke)) +
   geom_bar(stat = "identity") +
   coord_flip() +
-  scale_fill_manual(values = c("0" = "#512b58", "1" = "#fe346e")) +
+  scale_fill_manual(values = c("0" = "#1f77b4", "1" = "#d62728")) +
   labs(title = "Tỷ lệ người bị đột quỵ",
        subtitle = "Dữ liệu bị mất cân bằng, chỉ có 5% bị đột quỵ",
        x = "Trạng thái", y = "Số lượng") +
   theme_minimal()
 
+# Chuyển BMI thành nhóm
+df$bmi_cat <- cut(df$bmi, 
+                  breaks = c(0, 19, 25, 30, 10000), 
+                  labels = c("Underweight", "Ideal", "Overweight", "Obesity"), 
+                  include.lowest = TRUE)
+
+# Chuyển tuổi thành nhóm
 df$age_cat <- cut(df$age, 
                   breaks = c(0, 13, 18, 45, 60, 200), 
-                  labels = c("Children", "Teens", "Adults", "Mid Adults", "Elderly"),
+                  labels = c("Children", "Teens", "Adults", "Mid Adults", "Elderly"), 
                   include.lowest = TRUE)
+
+# Chuyển mức glucose thành nhóm
+df$glucose_cat <- cut(df$avg_glucose_level, 
+                      breaks = c(0, 90, 160, 230, 500), 
+                      labels = c("Low", "Normal", "High", "Very High"), 
+                      include.lowest = TRUE)
 
 # Nhóm dữ liệu theo nhóm tuổi và số lượng người bị đột quỵ
 stroke_age <- df %>% filter(stroke == 1) %>% count(age_cat)
-head(stroke_age)
 healthy_age <- df %>% filter(stroke == 0) %>% count(age_cat)
-head(healthy_age)
 
 # Hợp nhất dữ liệu để vẽ Dumbbell Plot
 dumbbell_data <- merge(healthy_age, stroke_age, by = "age_cat", all = TRUE)
-head(dumbbell_data)
-# đổi tên cột 
 colnames(dumbbell_data) <- c("age_cat", "healthy", "stroke")
 
 # Thay NA bằng 0
 dumbbell_data[is.na(dumbbell_data)] <- 0
 
 # Biểu đồ Dumbbell
+# Biểu đồ Dumbbell có số lượng người
 p1 <- ggplot(dumbbell_data, aes(y = age_cat)) +
-  # vẽ đường thẳng nối 2 điểm 
   geom_segment(aes(x = healthy, xend = stroke, yend = age_cat), color = "grey") +
-  # vễ điểm 
-  geom_point(aes(x = healthy), size = 4, color = "#512b58", alpha = 0.8) + 
-  # geom_text(aes(x =  healthy, label =  healthy), 
-  #           hjust = 1.5,  # Căn chỉnh nhãn lệch về bên trái
-  #           color = "#fe346e", 
-  #           size = 4) +
-  geom_point(aes(x = stroke), size = 4, color = "#fe346e", alpha = 0.8) +  
-  geom_text(aes(x = stroke, label = stroke), 
-            hjust = 1.5,  # Căn chỉnh nhãn lệch về bên trái
-            color = "#fe346e", 
-            size = 4) +
+  geom_point(aes(x = healthy), size = 4, color = "#1f77b4", alpha = 0.8) + 
+  geom_point(aes(x = stroke), size = 4, color = "#d62728", alpha = 0.8) +  
+  geom_text(aes(x = healthy, label = healthy), vjust = -0.5, color = "#1f77b4", size = 4) + 
+  geom_text(aes(x = stroke, label = stroke), vjust = -0.5, color = "#d62728", size = 4) + 
   labs(title = "Ảnh hưởng của tuổi tác đối với đột quỵ",
        x = "Số lượng người", y = "Nhóm tuổi") +
   theme_minimal()
 
 print(p1)
+
 # Biểu đồ KDE (Density Plot) so sánh phân bố tuổi
 p2 <- ggplot(df, aes(x = age, fill = as.factor(stroke))) +
-  geom_density(alpha = 0.5) +
-  scale_fill_manual(values = c("#512b58", "#fe346e"), labels = c("Healthy", "Stroke")) +
+  geom_density(alpha = 0.5, adjust = 0.7) +  
+  scale_fill_manual(values = c("#1f77b4", "#d62728"), labels = c("Healthy", "Stroke")) +
+  scale_x_continuous(limits = c(-10, 100), expand = c(0.02, 0.02)) +  
   labs(title = "Phân bố tuổi giữa người bị đột quỵ và người khỏe mạnh",
        x = "Tuổi", y = "Mật độ", fill = "Tình trạng sức khỏe") +
   theme_minimal()
 
 print(p2)
 
-# biểu đồ KDE: phân bố mức đường huyết giữa hai nhóm 
-p3 <- ggplot(df, aes(x=avg_glucose_level, fill = as.factor(stroke))) +
+
+# Nhóm dữ liệu theo mức glucose và số lượng người bị đột quỵ
+stroke_glucose <- df %>% filter(stroke == 1) %>% count(glucose_cat)
+healthy_glucose <- df %>% filter(stroke == 0) %>% count(glucose_cat)
+
+# Hợp nhất dữ liệu để vẽ Dumbbell Plot
+dumbbell_glucose <- merge(healthy_glucose, stroke_glucose, by = "glucose_cat", all = TRUE)
+colnames(dumbbell_glucose) <- c("glucose_cat", "healthy", "stroke")
+
+# Thay NA bằng 0
+dumbbell_glucose[is.na(dumbbell_glucose)] <- 0
+
+# Biểu đồ Dumbbell cho mức glucose
+p3 <- ggplot(dumbbell_glucose, aes(y = glucose_cat)) +
+  geom_segment(aes(x = healthy, xend = stroke, yend = glucose_cat), color = "grey") +
+  geom_point(aes(x = healthy), size = 4, color = "#1f77b4", alpha = 0.8) + 
+  geom_point(aes(x = stroke), size = 4, color = "#d62728", alpha = 0.8) +  
+  geom_text(aes(x = healthy, label = healthy), vjust = -0.5, color = "#1f77b4", size = 4) + 
+  geom_text(aes(x = stroke, label = stroke), vjust = -0.5, color = "#d62728", size = 4) + 
+  labs(title = "Ảnh hưởng của mức glucose đối với đột quỵ",
+       x = "Số lượng người", y = "Nhóm glucose") +
+  theme_minimal()
+
+print(p3)
+
+
+p4 <- ggplot(df, aes(x = avg_glucose_level, fill = as.factor(stroke))) +
+  geom_density(alpha = 0.5, adjust = 0.7) +
+  scale_fill_manual(values = c("#1f77b4", "#d62728"), labels = c("Healthy", "Stroke")) +
+  scale_x_continuous(limits = c(0, 250), expand = c(0.02, 0.02)) +  
+  labs(title = "Phân bố mức glucose giữa người bị đột quỵ và người khỏe mạnh",
+       x = "Mức glucose trung bình", y = "Mật độ", fill = "Tình trạng sức khỏe") +
+  theme_minimal()
+
+print(p4)
+
+
+
+
+
+
+
+p6 <- ggplot(df, aes(x=avg_glucose_level, fill = as.factor(stroke))) +
     geom_density(alpha = 0.5) +
-  scale_fill_manual(values = c("#512b58", "#fe346e"), labels = c("Healthy", "Stroke")) +
+  scale_fill_manual(values = c("#1f77b4", "#d62728"), labels = c("Healthy", "Stroke")) +
+  scale_x_continuous(limits = c(0, 250), expand = c(0.02, 0.02)) +  
   labs(title = "Phân bố mức đường huyết giữa hai nhóm",
        x = "Mức đường huyết trung bình (mg/dL)", y = "Mật độ", fill = "Tình trạng sức khỏe") +
   theme_minimal()
 
-print(p3)
+print(p6)
 
 # Biểu đồ tỷ lệ đột quỵ theo huyết áp cao và bệnh tim
 hypertension_heart_disease <- df %>%
   group_by(hypertension, heart_disease) %>%
   summarise(stroke_rate = mean(stroke))
 
-p4 <- ggplot(hypertension_heart_disease, aes(x = as.factor(hypertension), y = stroke_rate, fill = as.factor(heart_disease))) +
+p7 <- ggplot(hypertension_heart_disease, aes(x = as.factor(hypertension), y = stroke_rate, fill = as.factor(heart_disease))) +
   geom_bar(stat = "identity", position = "dodge") +
   scale_fill_manual(values = c("#512b58", "#fe346e"), labels = c("Không có bệnh tim", "Có bệnh tim")) +
   labs(title = "Tỷ lệ đột quỵ theo huyết áp và bệnh tim",
        x = "Huyết áp cao (0 = Không, 1 = Có)", y = "Tỷ lệ đột quỵ", fill = "Bệnh tim") +
   theme_minimal()
 
-print(p4)
+print(p7)
 
 
 # Biểu đồ tỷ lệ đột quỵ theo tình trạng hút thuốc
@@ -222,7 +266,7 @@ df_percent <- df %>%
   mutate(percent = count / sum(count) * 100)
 
 # Vẽ biểu đồ với nhãn phần trăm
-p5 <- ggplot(df_percent, aes(x = smoking_status, y = percent, fill = as.factor(stroke))) +
+p8 <- ggplot(df_percent, aes(x = smoking_status, y = percent, fill = as.factor(stroke))) +
   geom_bar(stat = "identity", position = "fill") +  
   geom_text(aes(label = sprintf("%.1f%%", percent)), 
             position = position_fill(vjust = 0.5), size = 4, color = "white") +
@@ -231,4 +275,6 @@ p5 <- ggplot(df_percent, aes(x = smoking_status, y = percent, fill = as.factor(s
        x = "Tình trạng hút thuốc", y = "Tỷ lệ phần trăm", fill = "Tình trạng sức khỏe") +
   theme_minimal()
 
-print(p5)
+print(p8)
+
+str(df)
