@@ -7,15 +7,9 @@ library(dplyr)
 library(gridExtra)
 library(corrplot)
 library(rpart)
-<<<<<<< HEAD
-df <- read.csv('healthcare-dataset-stroke-data.csv')
-
-# df <- read.csv("D:/BT/clonegit/doanthaytung/healthcare-dataset-stroke-data.csv")
-=======
 library(ggplot2)
 
 df <- read.csv("/Users/huy/Documents/doanthaytung/healthcare-dataset-stroke-data.csv")
->>>>>>> 15b26c7d1d941b34c356f44a659f4e5911bcd13b
 
 str(df)
 df <- df %>%
@@ -34,30 +28,8 @@ print(colSums(is.na(df)))
 df_numeric <- df %>%
   mutate_if(is.factor, as.numeric)
 
-<<<<<<< HEAD
-df <- subset(df, select = -id)
-str(df)
-
-missing_values <- colSums(is.na(df))
-print(missing_values)
-
-
-
-df$gender <- as.numeric(as.factor(df$gender))
-df$ever_married <- as.numeric(as.factor(df$ever_married))
-df$work_type <- as.numeric(as.factor(df$work_type))
-df$Residence_type <- as.numeric(as.factor(df$Residence_type))
-
-df$smoking_status <- as.numeric(as.factor(df$smoking_status))
-
-# Tạo ma trận tương quan, tránh mất dữ liệu
-cor_matrix <- cor(df[, sapply(df, is.numeric)], use = "pairwise.complete.obs")
-
-# Vẽ heatmap tương quan
-=======
 # Tính ma trận tương quan và vẽ heatmap
 cor_matrix <- cor(df_numeric, use = "pairwise.complete.obs")
->>>>>>> 15b26c7d1d941b34c356f44a659f4e5911bcd13b
 corrplot(cor_matrix, method = "color", col = colorRampPalette(c("blue", "white", "red"))(200),
          tl.cex = 0.8, tl.col = "black", number.cex = 0.7, addCoef.col = "black")
 
@@ -143,8 +115,6 @@ for (var in numeric_vars) {
 }
 par(mfrow = c(1,1))
 
-<<<<<<< HEAD
-=======
 # Biểu đồ Barplot cho các biến phân loại
 categorical_vars <- names(df)[sapply(df, is.factor)]
 par(mfrow = c(ceiling(length(categorical_vars) / 3), 3))
@@ -203,4 +173,3 @@ p2 <- ggplot(df, aes(x = age, fill = as.factor(stroke))) +
 
 print(p2)
 
->>>>>>> 15b26c7d1d941b34c356f44a659f4e5911bcd13b
