@@ -1,0 +1,195 @@
+---
+title: ""
+author: ""
+
+output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: false            
+    number_sections: true
+    fig_caption: true
+    fig_height: 5
+    fig_width: 7
+    highlight: tango
+    keep_tex: true
+    includes:
+      before_body: bia.tex
+  html_document: default
+
+header-includes:
+  - \usepackage{pdfpages}
+  - \usepackage{fontspec}
+  - \setmainfont{Times New Roman}
+---
+
+\newpage
+\thispagestyle{empty}
+
+\begin{center}
+    \LARGE \textbf{LỜI CAM ĐOAN}
+\end{center}
+\vspace{1em}
+
+
+\setlength{\parindent}{2em}
+\begin{flushright}
+Chúng tôi, \textbf{Bùi Minh Huy}, \textbf{Trần Lê Vân}, \textbf{Nguyễn Thị Thanh Tâm} xin cam đoan rằng:
+    Tất cả thông tin và phân tích trình bày trong báo cáo này được thực hiện một cách chính xác và trung thực. Mọi dữ liệu, nhận định hoặc ý kiến được trích dẫn từ các nguồn khác đều đã được nêu rõ nguồn gốc và trích dẫn đúng quy định. Chúng tôi cam đoan rằng không có bất kỳ hành vi sao chép hoặc sử dụng thông tin không hợp pháp nào từ các nguồn khác. Bài báo cáo này là kết quả của công trình nghiên cứu độc lập của chúng tôi và chưa từng được công bố tại bất kỳ nơi nào khác. Chúng tôi cam đoan đã tuân thủ nghiêm ngặt các quy tắc và quy định của môn học, bao gồm việc tham khảo và áp dụng các công cụ nghiên cứu một cách hợp lệ. Nếu phát hiện có bất kỳ sự gian lận nào, chúng tôi xin hoàn toàn chịu trách nhiệm về nội dung bài báo cáo của mình. Chúng tôi hy vọng rằng bài báo cáo này sẽ cung cấp những thông tin hữu ích cho các nhà nghiên cứu, doanh nghiệp, góp phần vào việc hiểu rõ hơn về mạng xã hội ngày nay.
+\end{flushright}
+
+\vspace{2em}
+
+\begin{flushright}
+    TP. Hồ Chí Minh, ngày 28 tháng 3 năm 2025
+
+    \textbf{Sinh viên}
+\end{flushright}
+
+</div>
+
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+# Chương 1: Giới thiệu
+
+## Giới thiệu dữ liệu
+
+Bộ dữ liệu **Human Activity Recognition (HAR)** được thu thập từ 30 người tham gia (gọi là *subjects*), thực hiện các hoạt động hằng ngày như đi bộ, ngồi, nằm, đứng, v.v... Dữ liệu được ghi lại bằng một điện thoại thông minh đeo ở thắt lưng của người dùng. Các cảm biến gồm **accelerometer** và **gyroscope** được sử dụng để ghi lại chuyển động theo 3 trục X, Y, Z với tần suất 50Hz.
+
+Mỗi chuỗi tín hiệu được chia thành các **cửa sổ trượt** có độ dài 2.56 giây, tương ứng với 128 lần đo. Từ mỗi cửa sổ, các đặc trưng (features) đã được trích xuất từ **miền thời gian** và **miền tần số** để tạo ra một tập hợp dữ liệu có cấu trúc sẵn sàng cho mô hình học máy.
+
+Các nhóm tín hiệu chính bao gồm:
+
+- `tBodyAcc-XYZ`: Gia tốc cơ thể theo 3 trục trong miền thời gian  
+- `tGravityAcc-XYZ`: Gia tốc do trọng lực  
+- `tBodyGyro-XYZ`: Tốc độ quay từ con quay hồi chuyển  
+- `tBodyAccJerk-XYZ`, `tBodyGyroJerk-XYZ`: Jerk - đo sự thay đổi đột ngột của chuyển động  
+- `Mag`: Độ lớn vector gia tốc, được tính bằng chuẩn Euclidean:  
+  \[
+  \text{Mag} = \sqrt{X^2 + Y^2 + Z^2}
+  \]
+- `fBodyAcc-XYZ`, `fBodyGyro-XYZ`: Biến miền tần số được tạo từ FFT
+
+Từ các tín hiệu trên, một loạt đặc trưng thống kê được tính toán như:
+
+- `mean()`, `std()`, `mad()`, `max()`, `min()`
+- `sma()`: Signal Magnitude Area
+- `energy()`: Tổng bình phương chia số phần tử
+- `entropy()`, `iqr()`, `arCoeff()`, `correlation()`
+- `meanFreq()`, `skewness()`, `kurtosis()`, `bandsEnergy()`, `angle()`
+
+Tập dữ liệu gồm **561 biến đầu vào (features)**, mỗi dòng tương ứng với một cửa sổ thời gian, và một nhãn phân lớp từ 1 đến 6:
+
+| Giá trị nhãn | Hoạt động             |
+|--------------|------------------------|
+| 1            | WALKING                |
+| 2            | WALKING_UPSTAIRS       |
+| 3            | WALKING_DOWNSTAIRS     |
+| 4            | SITTING                |
+| 5            | STANDING               |
+| 6            | LAYING                 |
+```{r}
+#install.packages("showtext")
+#install.packages("ggplot2")
+```
+
+
+```{r}
+train <-read.csv('/Users/huy/Documents/doanthaytung/archive/train.csv')
+head(train)
+dim(train)
+```
+
+```{r}
+test <-read.csv('/Users/huy/Documents/doanthaytung/archive/test.csv')
+head(test)
+dim(test)
+```
+
+```{r}
+cat("Giá trị thiếu ở tập train:", sum(is.na(train)), "\n")
+cat("Giá trị thiếu ở tập test:", sum(is.na(test)), "\n")
+```
+
+
+```{r}
+cat("Số dòng bị trùng lặp trong tập train:", sum(duplicated(train)), "\n")
+cat("Số dòng bị trùng lặp trong tập test :", sum(duplicated(test)), "\n")
+```
+
+
+```{r, fig.width=16, fig.height=8}
+library(ggplot2)
+library(showtext)
+showtext_auto()
+
+ggplot(train, aes(x = factor(subject), fill = Activity)) +
+  geom_bar(position = "dodge", width = 0.7) +
+  scale_fill_brewer(palette = "Set2") + 
+  labs(
+    title = "Số lượng mẫu dữ liệu theo người dùng và hoạt động",
+    x = "Người dùng (Subject)",
+    y = "Số lượng mẫu",
+    fill = "Hoạt động"
+  ) +
+  theme_minimal(base_size = 16) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 20),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "right"
+  )
+```
+
+
+```{r}
+library(ggplot2)
+
+ggplot(train, aes(x = Activity, fill = Activity)) +
+  geom_bar() +
+  labs(
+    title = "Số lượng mẫu theo từng hoạt động",
+    x = "Hoạt động",
+    y = "Số lượng mẫu"
+  ) +
+  theme_minimal(base_size = 15) +
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5),
+    plot.title = element_text(hjust = 0.5, face = "bold")
+  ) +
+  guides(fill = "none")
+```
+```{r}
+colnames(train)
+```
+```{r}
+columns <- colnames(train)
+columns <- gsub("\\.", "", columns)
+colnames(train) <- columns
+colnames(test) <- columns
+colnames(train)
+```
+
+
+```{r, fig.width=18, fig.height=8}
+library(ggplot2)
+
+ggplot(train, aes(x = tBodyAccMagmean, color = Activity)) +
+  geom_density(size = 1.2) +
+  scale_color_brewer(palette = "Set1") +
+  scale_x_continuous(limits = c(-1.1, 1)) + 
+  labs(
+    title = "Phân bố tBodyAccMagmean theo hoạt động",
+    x = "tBodyAccMagmean",
+    y = "Mật độ"
+  ) +
+  theme_minimal(base_size = 16) +
+  theme(
+    plot.title = element_text(hjust = 0.5)
+  )
+```
+
+
