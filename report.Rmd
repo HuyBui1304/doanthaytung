@@ -109,6 +109,23 @@ test <-read.csv('/Users/huy/Documents/doanthaytung/archive/test.csv')
 head(test)
 dim(test)
 ```
+xem các các type có trong data
+```{r}
+table(sapply(train, class))
+```
+
+in ra cột có dạng charactor
+```{r}
+names(train)[sapply(train, class) == "character"]
+```
+
+```{r}
+unique(train$Activity)
+```
+chuyển thành factor
+```{r}
+train$Activity <- as.factor(train$Activity)
+```
 
 ```{r}
 cat("Giá trị thiếu ở tập train:", sum(is.na(train)), "\n")
@@ -192,4 +209,117 @@ ggplot(train, aes(x = tBodyAccMagmean, color = Activity)) +
   )
 ```
 
+```{r}
+class(train$Activity)
+```
 
+```{r}
+unique(train$Activity)
+```
+
+```{r, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+
+p1 <- train %>%
+  filter(Activity %in% c("SITTING", "STANDING", "LAYING")) %>%
+  ggplot(aes(x = tBodyAccMagmean, color = Activity)) +
+  geom_density(size = 1.2) +
+  labs(
+    title = "Static Activities (closer view)",
+    x = "tBodyAccMagmean",
+    y = "Density"
+  ) +
+  xlim(-1.05, -0.1) +
+  ylim(0, 35) +
+  theme_minimal(base_size = 14)
+p1
+```
+
+```{r}
+p2 <- train %>%
+  filter(Activity %in% c("WALKING", "WALKING_DOWNSTAIRS", "WALKING_UPSTAIRS")) %>%
+  ggplot(aes(x = tBodyAccMagmean, color = Activity)) +
+  geom_density(size = 1.2) +
+  labs(
+    title = "Dynamic Activities (closer view)",
+    x = "tBodyAccMagmean",
+    y = "Density"
+  ) + xlim(-0.65, 1) +
+  theme_minimal(base_size = 14)
+
+p2
+
+```
+
+
+```{r}
+library(ggplot2)
+
+ggplot(train, aes(x = Activity, y = tBodyAccMagmean)) +
+  geom_boxplot(
+    outlier.shape = NA,
+    fill = "skyblue",
+    color = "darkgreen",
+    width = 0.6
+  ) +
+  labs(
+    title = "Phân bố giữa tBodyAccMagmean và Activity",
+    y = "tBodyAccMagmean",
+    x = "Activity"
+  ) +
+  coord_cartesian(ylim = c(-1.1, 1.2)) + 
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 15, face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 12),
+    axis.title.x = element_text(margin = margin(t = 10)),
+    axis.title.y = element_text(margin = margin(r = 10))
+  )
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(train, aes(x = Activity, y = angleXgravityMean)) +
+  geom_boxplot(
+    fill = "lightblue",
+    color = "darkblue",
+    outlier.shape = NA,
+    width = 0.6
+  ) +
+  labs(
+    title = "Phân bố giữa angleXgravityMean và Activity",
+    x = "Activity",
+    y = "angleXgravityMean"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 15, face = "bold"),
+    axis.text.x = element_text(angle = 40, hjust = 1, size = 11)
+  )
+```
+
+
+```{r}
+library(ggplot2)
+
+ggplot(train, aes(x = Activity, y = angleYgravityMean)) +
+  geom_boxplot(
+    fill = "lightblue",
+    color = "darkblue",
+    outlier.shape = NA,
+    width = 0.6
+  ) +
+  labs(
+    title = "Phân bố giữa angleYgravityMean và Activity",
+    x = "Activity",
+    y = "angleYgravityMean"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 15, face = "bold"),
+    axis.text.x = element_text(angle = 40, hjust = 1, size = 11)
+  )
+```
