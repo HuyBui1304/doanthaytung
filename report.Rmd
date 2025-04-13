@@ -28,24 +28,26 @@ header-includes:
 \begin{center}
     \LARGE \textbf{LỜI CAM ĐOAN}
 \end{center}
+\vspace{1.5em}
+
+Chúng tôi, **Bùi Minh Huy**, **Trần Lê Vân**, **Nguyễn Thị Thanh Tâm** xin cam đoan rằng:
+
+  Tất cả thông tin và phân tích trình bày trong báo cáo này được thực hiện một cách chính xác và trung thực. Mọi dữ liệu, nhận định hoặc ý kiến được trích dẫn từ các nguồn khác đều đã được nêu rõ nguồn gốc và trích dẫn đúng quy định. Chúng tôi cam đoan rằng không có bất kỳ hành vi sao chép hoặc sử dụng thông tin không hợp pháp nào từ các nguồn khác. Bài báo cáo này là kết quả của công trình nghiên cứu độc lập của chúng tôi và chưa từng được công bố tại bất kỳ nơi nào khác. Chúng tôi cam đoan đã tuân thủ nghiêm ngặt các quy tắc và quy định của môn học, bao gồm việc tham khảo và áp dụng các công cụ nghiên cứu một cách hợp lệ. Nếu phát hiện có bất kỳ sự gian lận nào, chúng tôi xin hoàn toàn chịu trách nhiệm về nội dung bài báo cáo của mình. Chúng tôi hy vọng rằng bài báo cáo này sẽ cung cấp những thông tin hữu ích cho các nhà nghiên cứu, doanh nghiệp, góp phần vào việc hiểu rõ hơn về mạng xã hội ngày nay.
+    
+\vspace{3em}
+
+\begin{flushright}
+\begin{minipage}{0.5\textwidth}
+\raggedleft
+TP.\ Hồ Chí Minh, ngày 28 tháng 3 năm 2025
+
 \vspace{1em}
 
-
-\setlength{\parindent}{2em}
-\begin{flushright}
-Chúng tôi, \textbf{Bùi Minh Huy}, \textbf{Trần Lê Vân}, \textbf{Nguyễn Thị Thanh Tâm} xin cam đoan rằng:
-    Tất cả thông tin và phân tích trình bày trong báo cáo này được thực hiện một cách chính xác và trung thực. Mọi dữ liệu, nhận định hoặc ý kiến được trích dẫn từ các nguồn khác đều đã được nêu rõ nguồn gốc và trích dẫn đúng quy định. Chúng tôi cam đoan rằng không có bất kỳ hành vi sao chép hoặc sử dụng thông tin không hợp pháp nào từ các nguồn khác. Bài báo cáo này là kết quả của công trình nghiên cứu độc lập của chúng tôi và chưa từng được công bố tại bất kỳ nơi nào khác. Chúng tôi cam đoan đã tuân thủ nghiêm ngặt các quy tắc và quy định của môn học, bao gồm việc tham khảo và áp dụng các công cụ nghiên cứu một cách hợp lệ. Nếu phát hiện có bất kỳ sự gian lận nào, chúng tôi xin hoàn toàn chịu trách nhiệm về nội dung bài báo cáo của mình. Chúng tôi hy vọng rằng bài báo cáo này sẽ cung cấp những thông tin hữu ích cho các nhà nghiên cứu, doanh nghiệp, góp phần vào việc hiểu rõ hơn về mạng xã hội ngày nay.
+\centering
+\textbf{\LARGE Sinh viên}
+\end{minipage}
 \end{flushright}
 
-\vspace{2em}
-
-\begin{flushright}
-    TP. Hồ Chí Minh, ngày 28 tháng 3 năm 2025
-
-    \textbf{Sinh viên}
-\end{flushright}
-
-</div>
 
 \newpage
 \thispagestyle{empty}
@@ -54,13 +56,25 @@ Chúng tôi, \textbf{Bùi Minh Huy}, \textbf{Trần Lê Vân}, \textbf{Nguyễn 
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-# Chương 1: Giới thiệu
+# Abstract
 
-## Giới thiệu dữ liệu
 
-Bộ dữ liệu **Human Activity Recognition (HAR)** được thu thập từ 30 người tham gia (gọi là *subjects*), thực hiện các hoạt động hằng ngày như đi bộ, ngồi, nằm, đứng, v.v... Dữ liệu được ghi lại bằng một điện thoại thông minh đeo ở thắt lưng của người dùng. Các cảm biến gồm **accelerometer** và **gyroscope** được sử dụng để ghi lại chuyển động theo 3 trục X, Y, Z với tần suất 50Hz.
 
-Mỗi chuỗi tín hiệu được chia thành các **cửa sổ trượt** có độ dài 2.56 giây, tương ứng với 128 lần đo. Từ mỗi cửa sổ, các đặc trưng (features) đã được trích xuất từ **miền thời gian** và **miền tần số** để tạo ra một tập hợp dữ liệu có cấu trúc sẵn sàng cho mô hình học máy.
+# Introduction
+
+  Trong thời đại của điện toán di động và thiết bị thông minh, việc theo dõi và nhận dạng hoạt động con người (Human Activity Recognition - HAR) đã trở thành một lĩnh vực nghiên cứu đóng vai trò quan trọng trong nhiều ngành như trí tuệ nhân tạo, khoa học dữ liệu, y học và công nghệ cảm biến. HAR đóng vai trò cốt lõi trong các ứng dụng như giám sát sức khỏe, phát hiện té ngã, điều khiển nhà thông minh. Ngày nay, nhu cầu càng ngày gia tăng về các thiết bị công nghệ có thể hiểu hành vi con người dẫn đến việc phát triển các mô hình HAR là chính xác, hiệu quả và có khả năng triển khai thực tế là vô cùng cần thết. 
+  
+  Một trong những yếu tố chính thúc đẩy sự phát triển của HẢ là sự phổ biến của các thiết bị di động thông minh và đồng hồ thông minh, vốn đợc trang bị sẵn các cảm biến quán tính bao gồm gia tốc kế (accelerometer) và con quay hồi chuyển (gyroscope). Những cảm biến này cho phép thu thập dữ liệu về chuyển động của người sử dụng với độ chính xác cao, chi phí thấp và tính khả dụng cao trong đời sống hàng ngày. Nhờ vậy, hệ thống HAR có thể được lắp đặt mà không cần sử dụng các thiết bị đắt tiền hoặc lắp đặt phức tạp.
+  
+  Bên cạnh tiềm năng ứng dụng rộng rãi, việc xây dựng các mô hình HAR vẫn có nhiều khó khăn thách thức như dữ liệu cảm biến thường có số chiều lớn, có nhiều dữ liệu nhiễu và có tính biến động cao do phụ thuộc vào thói quen và hình thể của mỗi người. Bên cạnh đó, một số hoạt động có thể có mẫu tín hiệu tương tự nhau khiến cho các bài toán phân loại trở nên khó khăn hơn. Vì vậy, cần có một quy trình xử lý dữ liệu bài bản bao gồm các bước tiền xử lý dữ liệu, giảm chiều dữ liệu và huấn luyện mô hình học máy để có thể đặt được hiệu quả cao trong việc nhận dạng hoạt động con người.
+  
+  Trong nghiên cứu này, chúng em đã tiến hành khai thác bộ dữ liệu "**Human Activity Recognition with Smartphones** " do UCI Machine Learning Repository cung cấp, một bộ dữ liệu được sử dụng rộng raix trong cộng đồng nghiên cứu HAR. Chúng em đề xuất một quy trình học máy toàn diện bao gồm phân tích đặc trưng, giảm chiều dữ liệu bằng UMAP, PCA, TSNE và huấn luyện bằng các mô hình học máy như Random Forest, Decision Tree, Logistic Regression, Support Vectot Machine (SVM) để phân loại các hoạt động với mục tiêu là nâng cao độ chính xác và hiệu quả của mô hình. Những kết quả này sẽ cung cấp cái nhìn thực nghiệm rõ ràng cho các nhà nghiên cứu, đồng thời làm nền móng cho việc triển khai các hệ thống nhận dạng hoạt động trong thế giới thực.
+  
+# Dataset and Preprocessing (Dữ liệu và tiền xử lý)
+
+Bộ dữ liệu **Human Activity Recognition with Smartphones** được thu thập từ 30 người tham gia (gọi là *subjects*) (15 nam và 15 nữ, độ tuổi từ 19 đến 48) thực hiện sáu hoạt động thường ngày như Đi bộ (Walking), đi lên cầu thang (Walking Upstairs), đi xuống cầu thang (WalkingDownstairs), ngồi (Sitting),đứng (Standing),nằm (Laying). Dữ liệu được ghi lại bằng một điện thoại thông minh (Samsung Galaxy S II)  đeo ở thắt lưng của người dùng. Các cảm biến gồm **accelerometer** và **gyroscope** được sử dụng để ghi lại chuyển động theo 3 trục X, Y, Z với tần suất 50Hz.
+
+  Mỗi chuỗi tín hiệu được chia thành các **cửa sổ trượt** có độ dài 2.56 giây, tương ứng với 128 lần đo. Từ mỗi cửa sổ, các đặc trưng (features) đã được trích xuất từ **miền thời gian** và **miền tần số** để tạo ra một tập hợp dữ liệu có cấu trúc sẵn sàng cho mô hình học máy.
 
 Các nhóm tín hiệu chính bao gồm:
 
@@ -82,8 +96,8 @@ Từ các tín hiệu trên, một loạt đặc trưng thống kê được tí
 - `entropy()`, `iqr()`, `arCoeff()`, `correlation()`
 - `meanFreq()`, `skewness()`, `kurtosis()`, `bandsEnergy()`, `angle()`
 
-Tập dữ liệu gồm **561 biến đầu vào (features)**, mỗi dòng tương ứng với một cửa sổ thời gian, và một nhãn phân lớp từ 1 đến 6:
-
+  Toàn bộ bộ dữ liệu được chia thành hai phần: Tập huấn luyện (train.csv): bao gồm 7352 mẫu. Tập kiểm tra (test.csv): bao gồm 2947 mẫu. Mỗi mẫu tương ứng với một cửa sổ thời gian 2.56 giây, được biểu diễn bằng **561 đặc trưng đầu vào (features)**, 1mỗi mẫu còn bao gồm một mã định danh người thực hiện (subject) và một nhãn hoạt động (Activity), ác nhãn này được mã hóa từ 1 đến 6 tương ứng với: 
+  
 | Giá trị nhãn | Hoạt động             |
 |--------------|------------------------|
 | 1            | WALKING                |
@@ -93,22 +107,24 @@ Tập dữ liệu gồm **561 biến đầu vào (features)**, mỗi dòng tươ
 | 5            | STANDING               |
 | 6            | LAYING                 |
 ```{r}
-#install.packages("showtext")
-#install.packages("ggplot2")
+# install.packages("showtext")
+# install.packages("ggplot2")
 ```
 
 
 ```{r}
 # train <-read.csv('/Users/huy/Documents/doanthaytung/archive/train.csv')
-train <-read.csv("D:/BT/clonegit/doanthaytung/archive/train.csv")
-head(train)
+# train <-read.csv("D:/BT/clonegit/doanthaytung/archive/train.csv")
+train <- read.csv('archive/train.csv')
+# head(train)
 dim(train)
 ```
 
 ```{r}
 # test <-read.csv('/Users/huy/Documents/doanthaytung/archive/test.csv')
-test <-read.csv("D:/BT/clonegit/doanthaytung/archive/test.csv")
-head(test)
+# test <-read.csv("D:/BT/clonegit/doanthaytung/archive/test.csv")
+test <- read.csv("archive/test.csv")
+# head(test)
 dim(test)
 ```
 xem các các type có trong data
@@ -162,7 +178,7 @@ ggplot(train, aes(x = factor(subject), fill = Activity)) +
     legend.position = "right"
   )
 ```
-
+  
 
 ```{r}
 library(ggplot2)
@@ -176,20 +192,18 @@ ggplot(train, aes(x = Activity, fill = Activity)) +
   ) +
   theme_minimal(base_size = 15) +
   theme(
-    axis.text.x = element_text(angle = 90, vjust = 0.5),
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust=1),
     plot.title = element_text(hjust = 0.5, face = "bold")
   ) +
   guides(fill = "none")
 ```
-```{r}
-colnames(train)
-```
+  Số lượng mẫu cho mỗi hoạt động dao động trong khoảng 1000 mẫu đến 1200 mẫu. Các hoạt động tĩnh như laying, sitting, standing có xu hướng chiếm tỷ lệ cao hơn một chút so với các hoạt động di chuyển như walking, walking_upstairs, walking_downstairs. Mức độ chênh lệch không qua lớn giữa các nhóm, là điểm thuận lợi cho các mô hình học máy tránh bị lệch nhãn và đảm bảo khả năng học đều giữa các lớp.  
 ```{r}
 columns <- colnames(train)
 columns <- gsub("\\.", "", columns)
 colnames(train) <- columns
 colnames(test) <- columns
-colnames(train)
+# colnames(train)
 ```
 
 
@@ -327,6 +341,70 @@ ggplot(train, aes(x = Activity, y = angleYgravityMean)) +
 
 ```
 
+**Kmean**
+```{r}
+train_kmean <- train
+X <- train_kmean  %>% select(-Activity, -subject)
+wcss <- numeric(10)
+for(i in 1:10) {
+  kmeans_model <- kmeans(X, centers=i, nstart=25)
+  wcss[i]  <- kmeans_model$tot.withinss
+}
+
+plot(1:10, wcss, type = "b", pch = 19, 
+     xlab = "Số cụm (K)", 
+     ylab = "Tổng bình phương khoảng cách trong cụm (WCSS)",
+     main = "Phương pháp Elbow")
+
+```
+```{r}
+# # Tính điểm Silhouette trung bình cho các giá trị K từ 2 đến 10
+# library(cluster)
+# 
+# avg_sil <- numeric(9)
+# for(k in 2:10) {
+#   km <- kmeans(X, centers = k, nstart = 25)
+#   ss <- silhouette(km$cluster, dist(X))
+#   avg_sil[k-1] <- mean(ss[, 3])
+# }
+# 
+# # Vẽ biểu đồ Silhouette
+# plot(2:10, avg_sil, type = "b", pch = 19,
+#      xlab = "So luong cum (K)",
+#      ylab = "Diem Silhouette trung binh",
+#      main = "Phuong phap Silhouette")
+```
+
+ Đánh giá kết quả phân cụm với k = 2
+```{r, fig.cap="Bieu do Silhouette cho ket qua phan cum"}
+library(factoextra)
+library(cluster)
+
+# Áp dụng K-Means với K = 2
+km_result <- kmeans(X, centers = 2, nstart = 100)
+
+# Tính và vẽ biểu đồ Silhouette
+sil <- silhouette(km_result$cluster, dist(X))
+fviz_silhouette(sil, print.summary = TRUE)
+```
+
+Trực quan kết quả phân cụm với k = 2
+```{r}
+label_cluster <- ifelse(km_result$cluster == 1, "Tĩnh", "Di chuyển")
+km_labeled <- km_result
+km_labeled$cluster <- as.factor(label_cluster)
+fviz_cluster(km_labeled, data = X,
+             palette = c("#1B9E77", "#D95F02"),
+             geom = "point",
+             ellipse.type = "convex",
+             ggtheme = theme_minimal(),
+             main = "Ket qua phan cum K-Means (K=2)")
+
+```
+
+
+
+
 
 ```{r}
 train_pca <- train  
@@ -335,8 +413,7 @@ pca_result <- prcomp(df_pca, center = TRUE, scale. = TRUE)
 df_pca_result <- as.data.frame(pca_result$x[, 1:2])  
 df_pca_result$Activity <- train$Activity  
 
-
-
+# df_pca_result
 ```
 
 
@@ -357,8 +434,8 @@ ggplot(df_pca_result, aes(x = PC1, y = PC2, color = Activity)) +
 
 ```{r}
 
-# install.packages("dplyr")
-# install.packages("umap")
+#install.packages("dplyr")
+#install.packages("umap")
 
 # Nạp thư viện
 library(dplyr)
@@ -372,10 +449,13 @@ umap_result <- umap(df_umap)
 df_umap_result <- as.data.frame(umap_result$layout)
 df_umap_result$Activity <- train_umap$Activity
 
+# train_umap
+# df_umap_result
+
 ```
 
 
-
+ Trực quan hóa kết quả giảm chiều bằng umap
 ```{r}
 
 ggplot(df_umap_result, aes(x = V1, y = V2, color = Activity)) +
@@ -390,8 +470,29 @@ ggplot(df_umap_result, aes(x = V1, y = V2, color = Activity)) +
 
 ```
 
+Trực quan kết quả phân cụm umap  với k = 2 
 ```{r}
-install.packages("Rtsne")  # nếu chưa cài
+set.seed(42)
+kmeans_result <- kmeans(df_umap_result[, 1:2], centers = 2, nstart = 25)
+df_umap_result$Cluster <- as.factor(kmeans_result$cluster)
+df_umap_result$Label <- ifelse(df_umap_result$Cluster == 1, "Tĩnh", "Di chuyển")
+
+ggplot(df_umap_result, aes(x = V1, y = V2, color = Label)) +
+  geom_point(alpha = 0.8, size = 2) +
+  labs(
+    title = "Phân cụm KMeans sau khi giảm chiều bằng UMAP",
+    x = "UMAP 1", y = "UMAP 2",
+    color = "Ý nghĩa cụm"
+  ) +
+  scale_color_manual(values = c("Tĩnh" = "#E64B35", "Di chuyển" = "#00A087")) +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+
+```{r}
+# install.packages("Rtsne")  # nếu chưa cài
 library(Rtsne)
 
 train_tsne <- train
@@ -402,6 +503,7 @@ tsne_result <- Rtsne(as.matrix(df_tsne), dims = 2, perplexity = 30, verbose = TR
 df_tsne_result <- as.data.frame(tsne_result$Y)
 df_tsne_result$Activity <- train_tsne$Activity
 
+# df_tsne_result
 ```
 
 
@@ -418,3 +520,4 @@ ggplot(df_tsne_result, aes(x = V1, y = V2, color = Activity)) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"))
 
 ```
+# Methodology (Phương pháp)
