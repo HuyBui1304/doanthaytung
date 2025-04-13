@@ -99,13 +99,15 @@ Tập dữ liệu gồm **561 biến đầu vào (features)**, mỗi dòng tươ
 
 
 ```{r}
-train <-read.csv('/Users/huy/Documents/doanthaytung/archive/train.csv')
+# train <-read.csv('/Users/huy/Documents/doanthaytung/archive/train.csv')
+train <-read.csv("D:/BT/clonegit/doanthaytung/archive/train.csv")
 head(train)
 dim(train)
 ```
 
 ```{r}
-test <-read.csv('/Users/huy/Documents/doanthaytung/archive/test.csv')
+# test <-read.csv('/Users/huy/Documents/doanthaytung/archive/test.csv')
+test <-read.csv("D:/BT/clonegit/doanthaytung/archive/test.csv")
 head(test)
 dim(test)
 ```
@@ -322,4 +324,97 @@ ggplot(train, aes(x = Activity, y = angleYgravityMean)) +
     plot.title = element_text(hjust = 0.5, size = 15, face = "bold"),
     axis.text.x = element_text(angle = 40, hjust = 1, size = 11)
   )
+
+```
+
+
+```{r}
+train_pca <- train  
+df_pca <- train_pca %>% select(-subject, -Activity)
+pca_result <- prcomp(df_pca, center = TRUE, scale. = TRUE)
+df_pca_result <- as.data.frame(pca_result$x[, 1:2])  
+df_pca_result$Activity <- train$Activity  
+
+
+
+```
+
+
+```{r}
+
+ggplot(df_pca_result, aes(x = PC1, y = PC2, color = Activity)) +
+  geom_point(alpha = 0.7) +
+  labs(
+    title = " PCA ",
+    x = "Thành phần chính 1 (PC1)",
+    y = "Thành phần chính 2 (PC2)"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+
+```
+
+
+```{r}
+
+# install.packages("dplyr")
+# install.packages("umap")
+
+# Nạp thư viện
+library(dplyr)
+library(umap)
+library(ggplot2)
+
+train_umap <- train
+df_umap <- train_umap %>% select(-subject, -Activity)
+
+umap_result <- umap(df_umap)
+df_umap_result <- as.data.frame(umap_result$layout)
+df_umap_result$Activity <- train_umap$Activity
+
+```
+
+
+
+```{r}
+
+ggplot(df_umap_result, aes(x = V1, y = V2, color = Activity)) +
+  geom_point(alpha = 0.7) +
+  labs(
+    title = "UMAP ",
+    x = "UMAP1",
+    y = "UMAP2"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+
+```
+
+```{r}
+install.packages("Rtsne")  # nếu chưa cài
+library(Rtsne)
+
+train_tsne <- train
+df_tsne <- train_tsne %>% select(-subject, -Activity)
+
+set.seed(42)  # đảm bảo tái lập kết quả
+tsne_result <- Rtsne(as.matrix(df_tsne), dims = 2, perplexity = 30, verbose = TRUE, max_iter = 500)
+df_tsne_result <- as.data.frame(tsne_result$Y)
+df_tsne_result$Activity <- train_tsne$Activity
+
+```
+
+
+```{r}
+
+ggplot(df_tsne_result, aes(x = V1, y = V2, color = Activity)) +
+  geom_point(alpha = 0.7) +
+  labs(
+    title = "t-SNE ",
+    x = "t-SNE1",
+    y = "t-SNE2"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+
 ```
