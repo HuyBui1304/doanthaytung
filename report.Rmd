@@ -143,6 +143,7 @@ unique(train$Activity)
 chuyển thành factor
 ```{r}
 train$Activity <- as.factor(train$Activity)
+test$Activity <- as.factor(test$Activity)
 ```
 
 ```{r}
@@ -203,7 +204,6 @@ columns <- colnames(train)
 columns <- gsub("\\.", "", columns)
 colnames(train) <- columns
 colnames(test) <- columns
-# colnames(train)
 ```
 
 
@@ -225,13 +225,6 @@ ggplot(train, aes(x = tBodyAccMagmean, color = Activity)) +
   )
 ```
 
-```{r}
-class(train$Activity)
-```
-
-```{r}
-unique(train$Activity)
-```
 
 ```{r, warning=FALSE}
 library(ggplot2)
@@ -341,183 +334,278 @@ ggplot(train, aes(x = Activity, y = angleYgravityMean)) +
 
 ```
 
-**Kmean**
+
 ```{r}
-train_kmean <- train
-X <- train_kmean  %>% select(-Activity, -subject)
-wcss <- numeric(10)
-for(i in 1:10) {
-  kmeans_model <- kmeans(X, centers=i, nstart=25)
-  wcss[i]  <- kmeans_model$tot.withinss
+subject_ids <- train$subject
+activity_labels <- train$Activity
+sensor_data <- train[, !(names(train) %in% c("Activity", "subject"))]
+subject_ids_test <- test$subject
+activity_labels_test <- test$Activity
+sensor_data_test <- test[, !(names(test) %in% c("Activity", "subject"))]
+
+is_outlier_iqr <- function(x) {
+  Q1 <- quantile(x, 0.25, na.rm = TRUE)
+  Q3 <- quantile(x, 0.75, na.rm = TRUE)
+  IQR_val <- Q3 - Q1
+  lower_bound <- Q1 - 1.5 * IQR_val
+  upper_bound <- Q3 + 1.5 * IQR_val
+  x < lower_bound | x > upper_bound
 }
 
-plot(1:10, wcss, type = "b", pch = 19, 
-     xlab = "Số cụm (K)", 
-     ylab = "Tổng bình phương khoảng cách trong cụm (WCSS)",
-     main = "Phương pháp Elbow")
+outlier_matrix <- mapply(is_outlier_iqr, sensor_data)
 
-```
-```{r}
-# # Tính điểm Silhouette trung bình cho các giá trị K từ 2 đến 10
-# library(cluster)
-# 
-# avg_sil <- numeric(9)
-# for(k in 2:10) {
-#   km <- kmeans(X, centers = k, nstart = 25)
-#   ss <- silhouette(km$cluster, dist(X))
-#   avg_sil[k-1] <- mean(ss[, 3])
-# }
-# 
-# # Vẽ biểu đồ Silhouette
-# plot(2:10, avg_sil, type = "b", pch = 19,
-#      xlab = "So luong cum (K)",
-#      ylab = "Diem Silhouette trung binh",
-#      main = "Phuong phap Silhouette")
-```
+total_outlier_values <- sum(outlier_matrix)
+total_cells <- nrow(sensor_data) * ncol(sensor_data)
+percent_outlier_cells <- round(total_outlier_values / total_cells * 100, 2)
 
- Đánh giá kết quả phân cụm với k = 2
-```{r, fig.cap="Bieu do Silhouette cho ket qua phan cum"}
-library(factoextra)
-library(cluster)
-
-# Áp dụng K-Means với K = 2
-km_result <- kmeans(X, centers = 2, nstart = 100)
-
-# Tính và vẽ biểu đồ Silhouette
-sil <- silhouette(km_result$cluster, dist(X))
-fviz_silhouette(sil, print.summary = TRUE)
-```
-
-Trực quan kết quả phân cụm với k = 2
-```{r}
-label_cluster <- ifelse(km_result$cluster == 1, "Tĩnh", "Di chuyển")
-km_labeled <- km_result
-km_labeled$cluster <- as.factor(label_cluster)
-fviz_cluster(km_labeled, data = X,
-             palette = c("#1B9E77", "#D95F02"),
-             geom = "point",
-             ellipse.type = "convex",
-             ggtheme = theme_minimal(),
-             main = "Ket qua phan cum K-Means (K=2)")
-
-```
-
-
-
-
-
-```{r}
-train_pca <- train  
-df_pca <- train_pca %>% select(-subject, -Activity)
-pca_result <- prcomp(df_pca, center = TRUE, scale. = TRUE)
-df_pca_result <- as.data.frame(pca_result$x[, 1:2])  
-df_pca_result$Activity <- train$Activity  
-
-# df_pca_result
+cat("Tổng số giá trị outlier:", total_outlier_values, "/", total_cells, "\n")
+cat("Tỷ lệ giá trị outlier:", percent_outlier_cells, "%\n")
 ```
 
 
 ```{r}
+cap_outliers <- function(df, lower = 0.01, upper = 0.99) {
+  for (col in names(df)) {
+    q_low <- quantile(df[[col]], lower, na.rm = TRUE)
+    q_high <- quantile(df[[col]], upper, na.rm = TRUE)
+    df[[col]] <- pmin(pmax(df[[col]], q_low), q_high)
+  }
+  df
+}
 
-ggplot(df_pca_result, aes(x = PC1, y = PC2, color = Activity)) +
-  geom_point(alpha = 0.7) +
-  labs(
-    title = " PCA ",
-    x = "Thành phần chính 1 (PC1)",
-    y = "Thành phần chính 2 (PC2)"
-  ) +
-  theme_minimal(base_size = 14) +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+sensor_data_capped <- cap_outliers(sensor_data)
+sensor_data_test_capped <- cap_outliers(sensor_data_test)
 
+train_capped <- cbind(sensor_data_capped, subject = subject_ids, Activity = activity_labels)
+test_capped <- cbind(sensor_data_test_capped, subject = subject_ids_test, Activity = activity_labels_test)
+
+str(train_capped)
+str(test_capped)
+```
+
+
+
+
+
+```{r, fig.width=16, fig.height=8}
+library(umap)
+library(ggplot2)
+library(gridExtra)
+
+perform_umap_grid <- function(X_data, y_data,
+                              neighbors_list = c(5, 15, 30),
+                              min_dist_list = c(0.001, 0.01, 0.1)) {
+  plots <- list()
+  index <- 1
+  
+  for (n in neighbors_list) {
+    for (d in min_dist_list) {
+      config <- umap.defaults
+      config$n_neighbors <- n
+      config$min_dist <- d
+      config$n_components <- 2
+      
+      umap_result <- umap(X_data, config = config)
+      df <- as.data.frame(umap_result$layout)
+      colnames(df) <- c("x", "y")
+      df$label <- y_data
+      
+      p <- ggplot(df, aes(x = x, y = y, color = label)) +
+        geom_point(size = 0.6, alpha = 0.6) +
+        scale_color_brewer(palette = "Set1") +
+        theme_minimal(base_size = 10) +
+        labs(title = paste("n =", n, ", dist =", d), x = NULL, y = NULL) +
+        theme(legend.position = "none",
+              plot.title = element_text(size = 10, hjust = 0.5))
+      
+      plots[[index]] <- p
+      index <- index + 1
+    }
+  }
+  
+  do.call(grid.arrange, c(plots, ncol = length(min_dist_list)))
+}
+
+perform_umap_grid(
+  X_data = sensor_data_capped,
+  y_data = train$Activity,
+  neighbors_list = c(5, 15, 30),
+  min_dist_list = c(0.001, 0.01, 0.1)
+)
 ```
 
 
 ```{r}
-
-#install.packages("dplyr")
-#install.packages("umap")
-
-# Nạp thư viện
-library(dplyr)
 library(umap)
 library(ggplot2)
 
-train_umap <- train
-df_umap <- train_umap %>% select(-subject, -Activity)
+config <- umap.defaults
+config$n_neighbors <- 30
+config$min_dist <- 0.1
+config$n_components <- 2
 
-umap_result <- umap(df_umap)
-df_umap_result <- as.data.frame(umap_result$layout)
-df_umap_result$Activity <- train_umap$Activity
+umap_result <- umap(sensor_data_capped, config = config)
 
-# train_umap
-# df_umap_result
+umap_df <- as.data.frame(umap_result$layout)
+colnames(umap_df) <- c("UMAP_1", "UMAP_2")
+umap_df$Activity <- train$Activity
 
-```
-
-
- Trực quan hóa kết quả giảm chiều bằng umap
-```{r}
-
-ggplot(df_umap_result, aes(x = V1, y = V2, color = Activity)) +
-  geom_point(alpha = 0.7) +
-  labs(
-    title = "UMAP ",
-    x = "UMAP1",
-    y = "UMAP2"
-  ) +
+ggplot(umap_df, aes(x = UMAP_1, y = UMAP_2, color = Activity)) +
+  geom_point(size = 0.7, alpha = 0.6) +
+  scale_color_brewer(palette = "Set1") +
   theme_minimal(base_size = 14) +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
-
-```
-
-Trực quan kết quả phân cụm umap  với k = 2 
-```{r}
-set.seed(42)
-kmeans_result <- kmeans(df_umap_result[, 1:2], centers = 2, nstart = 25)
-df_umap_result$Cluster <- as.factor(kmeans_result$cluster)
-df_umap_result$Label <- ifelse(df_umap_result$Cluster == 1, "Tĩnh", "Di chuyển")
-
-ggplot(df_umap_result, aes(x = V1, y = V2, color = Label)) +
-  geom_point(alpha = 0.8, size = 2) +
   labs(
-    title = "Phân cụm KMeans sau khi giảm chiều bằng UMAP",
-    x = "UMAP 1", y = "UMAP 2",
-    color = "Ý nghĩa cụm"
-  ) +
-  scale_color_manual(values = c("Tĩnh" = "#E64B35", "Di chuyển" = "#00A087")) +
-  theme_minimal(base_size = 14) +
-  theme(plot.title = element_text(hjust = 0.5))
+    title = "UMAP (n_neighbors = 30, min_dist = 0.01)",
+    x = "UMAP 1", y = "UMAP 2"
+  )
+```
 
+
+
+```{r}
+X_train <- train_capped[, !(names(train_capped) %in% c("subject", "Activity"))]
+y_train <- train_capped$Activity
+
+X_test <- test_capped[, !(names(test_capped) %in% c("subject", "Activity"))]
+y_test <- test_capped$Activity
+
+dim(X_train)
+length(y_train)
+
+dim(X_test)
+length(y_test)
+```
+
+```{r}
+head(train)
+```
+
+
+```{r, warning=FALSE}
+train_and_evaluate_model <- function(
+  model_name,
+  X_train, y_train, X_test, y_test,
+  class_labels,
+  tuneGrid = NULL,
+  k_folds = 5
+) {
+  if (!require(caret)) install.packages("caret", quiet = TRUE)
+  if (!require(ggplot2)) install.packages("ggplot2", quiet = TRUE)
+
+  library(caret)
+  library(ggplot2)
+  
+  y_train <- as.factor(y_train)
+  y_test <- as.factor(y_test)
+  
+  ctrl <- trainControl(method = "cv", number = k_folds)
+  
+  set.seed(123)
+  model_fit <- train(
+    x = X_train,
+    y = y_train,
+    method = model_name,
+    trControl = ctrl,
+    tuneGrid = tuneGrid
+  )
+  
+  y_pred <- predict(model_fit, X_test)
+  
+  # Accuracy
+  accuracy <- mean(y_pred == y_test)
+  cat("---------------------\n")
+  cat("|      Accuracy      |\n")
+  cat("---------------------\n")
+  cat(sprintf("\n    %.4f\n\n", accuracy))
+  
+  # Confusion matrix
+  cm <- table(Predicted = y_pred, Actual = y_test)
+  cat("--------------------\n")
+  cat("| Confusion Matrix |\n")
+  cat("--------------------\n")
+  print(cm)
+  
+  # Plot confusion matrix
+  cm_df <- as.data.frame(cm)
+  colnames(cm_df) <- c("Predicted", "Actual", "Freq")
+  
+  ggplot(data = cm_df, aes(x = Actual, y = Predicted, fill = Freq)) +
+    geom_tile(color = "white") +
+    geom_text(aes(label = Freq), color = "black", size = 5) +
+    scale_fill_gradient(low = "white", high = "darkgreen") +
+    labs(title = "Confusion Matrix", x = "True Label", y = "Predicted Label") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
+  # Classification report
+  cat("-------------------------\n")
+  cat("| Classification Report |\n")
+  cat("-------------------------\n")
+  print(confusionMatrix(y_pred, y_test)$byClass)
+  
+  cat('--------------------------\n')
+  cat('|     Best Parameters     |\n')
+  cat('--------------------------\n')
+  print(model_fit$bestTune)
+  
+  cat('--------------------------\n')
+  cat('|      Best Accuracy      |\n')
+  cat('--------------------------\n')
+  print(max(model_fit$results$Accuracy))
+  
+  return(list(
+    model = model_fit,
+    accuracy = accuracy,
+    confusion_matrix = cm,
+    prediction = y_pred
+  ))
+}
+```
+
+```{r}
+grid_logistic <- expand.grid(
+  alpha = c(0, 1),
+  lambda = 1 / c(0.01, 0.1, 1, 10, 20, 30)
+)
+
+results_log <- train_and_evaluate_model(
+  model_name = "glmnet",
+  X_train = X_train, y_train = y_train,
+  X_test = X_test, y_test = y_test,
+  class_labels = labels,
+  tuneGrid = grid_logistic,
+  k_folds = 5
+)
 ```
 
 
 ```{r}
-# install.packages("Rtsne")  # nếu chưa cài
-library(Rtsne)
+grid_linear_svc <- expand.grid(C = c(0.125, 0.5, 1, 2, 8, 16))
 
-train_tsne <- train
-df_tsne <- train_tsne %>% select(-subject, -Activity)
-
-set.seed(42)  # đảm bảo tái lập kết quả
-tsne_result <- Rtsne(as.matrix(df_tsne), dims = 2, perplexity = 30, verbose = TRUE, max_iter = 500)
-df_tsne_result <- as.data.frame(tsne_result$Y)
-df_tsne_result$Activity <- train_tsne$Activity
-
-# df_tsne_result
+results_svc <- train_and_evaluate_model(
+  model_name = "svmLinear",
+  X_train = X_train, y_train = y_train,
+  X_test = X_test, y_test = y_test,
+  class_labels = labels,
+  tuneGrid = grid_linear_svc,
+  k_folds = 5
+)
 ```
-
 
 ```{r}
+grid_dt <- expand.grid(maxdepth = seq(3, 9, by = 2))
 
-ggplot(df_tsne_result, aes(x = V1, y = V2, color = Activity)) +
-  geom_point(alpha = 0.7) +
-  labs(
-    title = "t-SNE ",
-    x = "t-SNE1",
-    y = "t-SNE2"
-  ) +
-  theme_minimal(base_size = 14) +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+results_dt <- train_and_evaluate_model(
+  model_name = "rpart2",  
+  X_train = X_train,
+  y_train = y_train,
+  X_test = X_test,
+  y_test = y_test,
+  class_labels = labels,
+  tuneGrid = grid_dt,
+  k_folds = 5
+)
 
 ```
-# Methodology (Phương pháp)
+
+
