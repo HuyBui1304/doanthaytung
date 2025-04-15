@@ -23,7 +23,7 @@ header-includes:
   - \usepackage{indentfirst}
   - \setlength{\parindent}{2em}
   - \renewcommand{\contentsname}{MỤC LỤC}
-  - \renewcommand{\listfigurename}{DANH SÁCH HÌNH}  # <-- Đổi tiêu đề mục lục hình
+  - \renewcommand{\listfigurename}{DANH SÁCH HÌNH}
   - \renewcommand{\listtablename}{DANH SÁCH BẢNG} 
   - \renewcommand{\figurename}{Hình}
 ---
@@ -496,7 +496,7 @@ Từ các tín hiệu trên, 561 đặc trưng thống kê đã được trích 
 # train <-read.csv('/Users/huy/Documents/doanthaytung/archive/train.csv')
 # train <-read.csv("D:/BT/clonegit/doanthaytung/archive/train.csv")
 train <- read.csv('archive/train.csv')
-# head(train)
+head(train)
 dim(train)
 ```
 
@@ -504,7 +504,7 @@ dim(train)
 # test <-read.csv('/Users/huy/Documents/doanthaytung/archive/test.csv')
 # test <-read.csv("D:/BT/clonegit/doanthaytung/archive/test.csv")
 test <- read.csv("archive/test.csv")
-# head(test)
+head(test)
 dim(test)
 ```
   * Kiểm tra kiểu dữ liệu của các biến trong tập huấn luyện để thống kê số lượng cột thuộc từng kiểu dữ liệu trong bảng dữ liệu train. Kết quả sẽ cung cấp một cái nhìn tổng quan về cấu trúc dữ liệu, giúp đánh giá mức độ sẵn sàng của tập dữ liệu cho các bước xử lý tiếp theo.
@@ -780,6 +780,7 @@ cat("Tỷ lệ giá trị outlier:", percent_outlier_cells, "%\n")
   
   
   * Tiến hành Chuẩn hóa outlier bằng kỹ thuật cắt ngưỡng (Percentile Capping)  nhằm giảm ảnh hưởng của các outlier mà không loại bỏ chúng hoàn toàn khỏi tập dữ liệu. Thay thế các giá trị cực đoan bằng một ngưỡng giới hạn mềm dựa trên các phân vị phần trăm (percentiles) của phân phối dữ liệu. định nghĩa một hàm cap_outliers() để áp dụng quy tắc sau trên từng cột trong bảng dữ liệu: giá trị nhỏ hơn phân vị 1% (1st percentile) được gán bằng chính giá trị tại phân vị này, giá trị lớn hơn phân vị 99% (99th percentile) được gán bằng giá trị tại phân vị đó, các giá trị nằm giữa hai ngưỡng này được giữ nguyên.
+  
 ```{r}
  cap_outliers <- function(df, lower = 0.01, upper = 0.99) {
    for (col in names(df)) {
@@ -796,8 +797,7 @@ cat("Tỷ lệ giá trị outlier:", percent_outlier_cells, "%\n")
  train_capped <- cbind(sensor_data_capped, subject = subject_ids, Activity = activity_labels)
  test_capped <- cbind(sensor_data_test_capped, subject = subject_ids_test, Activity = activity_labels_test)
 
-# str(train_capped)
-# str(test_capped)
+
 ```
 
 
@@ -862,6 +862,8 @@ perform_umap_grid(
   
   
   * Dựa vào kết phân tích hệ thống các siêu tham số trong kỹ thuật giảm chiều UMAP thì cấu hình n_neighbors = 30 và min_dist = 0.01 đã được xác định là một trong những cấu hình hiệu quả nhất để đảm bảo cấu trúc dữ liệu và phân tách các nhãn rõ ràng. Chúng em sẽ tiến hành minh họa kết quả giảm chiều dữ liệu cảm biến từ 561 đặc trưng về 2 chiều, áp dụng các cấu hinhg tối ưu nêu trên, mỗi điểm là đại diện cho một mẫu dữ liệu và được tô mày theo loại hoạt động được gán nhãn.
+  
+  
 ```{r, fig.cap=" trực quan hóa kết quả giảm chiều dữ liệu bằng UMAP"}
 library(umap)
 library(ggplot2)
@@ -886,6 +888,7 @@ ggplot(umap_df, aes(x = UMAP_1, y = UMAP_2, color = Activity)) +
     x = "UMAP 1", y = "UMAP 2"
   )
 ```
+
   Các hoạt động như LAYING, SITTING và STANDING tạo thành ba cụm rõ ràng, thấy được tín hiệu cảm biến ở trong thái tĩnh có sự ổn định cao và dễ phân biệt.
   Các hoạt động như WALKING, WALKING_DOWNSTAIRS, WALKING_UPSTAIRS có xu hướng gần nhau hơn trong không gian 2 chiều, mặc dù vẫn tạo thành các cụm riêng biệt, nhưng vẫn có vẻ chồng lấn, cho thấy được biến thiên phức tạp của vận động trong thực tế. Thấy được sự tách biệt rõ ràng giữa các nhóm động và tĩnh. Đây là bước tiền xử lý và kiểm định trực quan quan trọng trước khi đưa dữ liệu vào các thuật toán học máy như Random Forest, SVM, Logistic Regression và k-NN.
  
@@ -911,6 +914,8 @@ length(y_test)
 ## xây dựng hàm đánh giá tổng quá mô hình học máy 
 
   Để đảm bảo sự thống nhất và tái sử dụng trong việc đào tạo và đánh giá các mô hình học máy, một hàm tổng quát có tên train_and_evaluate_model đã được thiết lập.Hàm thực hiện quy trình huấn luyện, dự đoán, đánh giá và trực quan hóa kết quả của một mô hình phân loại với cấu trúc linh hoạt, cho phép sử dụng nhiều thuật toán khác nhau như Random Forest, SVM, Logistic Regression, hoặc k-NN.
+  
+  
 ```{r, warning=FALSE}
 train_and_evaluate_model <- function(
   model_name,
@@ -939,27 +944,69 @@ train_and_evaluate_model <- function(
     tuneGrid = tuneGrid
   )
 
-  y_pred <- predict(model_fit, X_test)
+  best_param <- model_fit$bestTune
 
-  # Accuracy
-  accuracy <- mean(y_pred == y_test)
-  cat("---------------------\n")
-  cat("|      Accuracy      |\n")
-  cat("---------------------\n")
-  cat(sprintf("\n    %.4f\n\n", accuracy))
+  final_model <- train(
+    x = X_train,
+    y = y_train,
+    method = model_name,
+    trControl = trainControl(method = "none"),
+    tuneGrid = best_param
+  )
 
-  # Confusion matrix
-  cm <- table(Predicted = y_pred, Actual = y_test)
-  cat("--------------------\n")
-  cat("| Confusion Matrix |\n")
-  cat("--------------------\n")
-  print(cm)
+  y_pred <- predict(final_model, X_test)
 
-  # Plot confusion matrix
-  cm_df <- as.data.frame(cm)
-  colnames(cm_df) <- c("Predicted", "Actual", "Freq")
+  cm <- confusionMatrix(y_pred, y_test)
+  report <- cm$byClass[, c("Precision", "Recall", "F1")]
+  test_acc <- mean(y_pred == y_test)
 
-  ggplot(data = cm_df, aes(x = Actual, y = Predicted, fill = Freq)) +
+  macro_precision <- mean(report[, "Precision"], na.rm = TRUE)
+  macro_recall <- mean(report[, "Recall"], na.rm = TRUE)
+  macro_f1 <- mean(report[, "F1"], na.rm = TRUE)
+
+  support <- as.numeric(table(y_test))
+  weighted_precision <- weighted.mean(report[, "Precision"], w = support, na.rm = TRUE)
+  weighted_recall <- weighted.mean(report[, "Recall"], w = support, na.rm = TRUE)
+  weighted_f1 <- weighted.mean(report[, "F1"], w = support, na.rm = TRUE)
+
+  cat('--------------------------\n')
+  cat('|     Best Parameters     |\n')
+  cat('--------------------------\n')
+  for (param in names(best_param)) {
+    cat(sprintf("%s = %s\n", param, best_param[[param]]))
+  }
+
+  cat('--------------------------\n')
+  cat('|     Best CV Accuracy    |\n')
+  cat('--------------------------\n')
+  print(round(max(model_fit$results$Accuracy), 4))
+
+  cat('--------------------------\n')
+  cat('|      Test Accuracy      |\n')
+  cat('--------------------------\n')
+  print(round(test_acc, 4))
+
+  cat('--------------------------\n')
+  cat('| Precision / Recall / F1 |\n')
+  cat('--------------------------\n')
+  print(round(report, 4))
+
+  cat('------------------------------\n')
+  cat('|   Macro Avg (All Classes)  |\n')
+  cat('------------------------------\n')
+  cat(sprintf("Precision: %.4f\nRecall   : %.4f\nF1-score : %.4f\n",
+              macro_precision, macro_recall, macro_f1))
+
+  cat('------------------------------\n')
+  cat('| Weighted Avg (By Support)  |\n')
+  cat('------------------------------\n')
+  cat(sprintf("Precision: %.4f\nRecall   : %.4f\nF1-score : %.4f\n",
+              weighted_precision, weighted_recall, weighted_f1))
+
+  cm_table <- as.data.frame(cm$table)
+  colnames(cm_table) <- c("Predicted", "Actual", "Freq")
+
+  p <- ggplot(data = cm_table, aes(x = Actual, y = Predicted, fill = Freq)) +
     geom_tile(color = "white") +
     geom_text(aes(label = Freq), color = "black", size = 5) +
     scale_fill_gradient(low = "white", high = "darkgreen") +
@@ -967,30 +1014,23 @@ train_and_evaluate_model <- function(
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-  # Classification report
-  cat("-------------------------\n")
-  cat("| Classification Report |\n")
-  cat("-------------------------\n")
-  print(confusionMatrix(y_pred, y_test)$byClass)
-
-  cat('--------------------------\n')
-  cat('|     Best Parameters     |\n')
-  cat('--------------------------\n')
-  print(model_fit$bestTune)
-
-  cat('--------------------------\n')
-  cat('|      Best Accuracy      |\n')
-  cat('--------------------------\n')
-  print(max(model_fit$results$Accuracy))
+  print(p)
 
   return(list(
-    model = model_fit,
-    accuracy = accuracy,
-    confusion_matrix = cm,
+    model = final_model,
+    best_parameters = best_param,
+    best_cv_accuracy = max(model_fit$results$Accuracy),
+    test_accuracy = test_acc,
+    report = report,
+    macro_metrics = c(Precision = macro_precision, Recall = macro_recall, F1 = macro_f1),
+    weighted_metrics = c(Precision = weighted_precision, Recall = weighted_recall, F1 = weighted_f1),
+    confusion_matrix = cm$table,
     prediction = y_pred
   ))
 }
 ```
+
+Trước tiên, ta tiến hành thực hiện quá trình lựa chọn siêu tham số và huấn luyện mô hình Logistic Regression
 
 ```{r}
 grid_logistic <- expand.grid(
@@ -1000,14 +1040,28 @@ grid_logistic <- expand.grid(
 
 results_log <- train_and_evaluate_model(
   model_name = "glmnet",
-  X_train = X_train, y_train = y_train,
-  X_test = X_test, y_test = y_test,
+  X_train = X_train,
+  y_train = y_train,
+  X_test = X_test, 
+  y_test = y_test,
   class_labels = labels,
   tuneGrid = grid_logistic,
   k_folds = 5
 )
 ```
+  
+  Mô hình Logistic Regression với lựa chọn siêu tham số tối ưu (alpha = 0, lambda = 0.0333) đạt độ chính xác rất cao trên tập kiểm tra (94.88%) và kiểm định chéo (96.89%), cho thấy mô hình tổng quát hóa tốt và không bị overfitting.
 
+  Nhìn vào confusion matrix, phần lớn các dự đoán đều nằm trên đường chéo chính, thể hiện mô hình đã phân loại chính xác đa số các trường hợp. Một số điểm đáng chú ý:
+	- LAYING được mô hình nhận diện chính xác tuyệt đối với 537/537 mẫu, phản ánh đặc trưng tín hiệu riêng biệt và dễ nhận dạng.
+	-	WALKING cũng đạt độ chính xác rất cao, chỉ nhầm lẫn rất ít sang WALKING_UPSTAIRS (22 mẫu) và WALKING_DOWNSTAIRS (10 mẫu), phù hợp với sự tương đồng trong hoạt động vận động.
+	-	SITTING và STANDING là hai lớp dễ nhầm lẫn lẫn nhau: 57 mẫu STANDING bị dự đoán nhầm sang SITTING, và 30 mẫu SITTING nhầm sang STANDING, điều này là hợp lý do hai tư thế này có tín hiệu khá giống nhau.
+	-	WALKING_UPSTAIRS vẫn là lớp có nhiều nhầm lẫn nhất, với 446 mẫu bị dự đoán nhầm sang các hành vi khác như WALKING (23 mẫu) hoặc WALKING_DOWNSTAIRS (3 mẫu), cho thấy mô hình gặp khó khăn trong việc phân biệt các hoạt động di chuyển gần giống nhau.
+
+=> Tổng thể, Logistic Regression cho kết quả rất ấn tượng trên tập dữ liệu này, đặc biệt là ở các lớp có đặc trưng rõ ràng. Tuy nhiên, vẫn tồn tại sự nhầm lẫn ở các lớp có hành vi tương đồng, điều này có thể được cải thiện bằng cách bổ sung thêm đặc trưng hoặc thử các mô hình phi tuyến khác.
+
+
+  Sau khi đánh giá Logistic Regression, ta tiếp tục thử nghiệm với mô hình SVM tuyến tính để so sánh hiệu quả giữa hai phương pháp phân loại tuyến tính.
 
 ```{r}
 grid_linear_svc <- expand.grid(C = c(0.125, 0.5, 1, 2, 8, 16))
@@ -1022,6 +1076,20 @@ results_svc <- train_and_evaluate_model(
 )
 ```
 
+  Mô hình SVM tuyến tính cho kết quả rất tốt trên tập kiểm tra, với độ chính xác đạt 96.06%. Đồng thời, các chỉ số đánh giá F1-score trung bình cũng rất cao (Macro F1 = 0.9603, Weighted F1 = 0.9605), cho thấy mô hình hoạt động hiệu quả và khá ổn định trên cả các lớp phổ biến lẫn các lớp ít xuất hiện.
+  
+  Khi quan sát ma trận nhầm lẫn, ta thấy phần lớn các điểm dữ liệu đều được mô hình phân loại đúng, thể hiện qua các giá trị lớn nằm trên đường chéo chính. Tuy nhiên, vẫn còn một số lỗi nhầm lẫn nhỏ:
+  
+	- SITTING và STANDING đôi lúc bị nhầm lẫn cho nhau (ví dụ: có 16 mẫu SITTING bị nhầm thành STANDING, và 53 mẫu STANDING bị dự đoán thành SITTING). Điều này dễ hiểu vì hai hoạt động này đều thuộc nhóm tĩnh và có tín hiệu khá giống nhau.
+	
+	- Một vài mẫu WALKING bị nhầm sang WALKING_UPSTAIRS hoặc WALKING_DOWNSTAIRS, phản ánh sự tương đồng giữa các hành vi di chuyển.
+	
+	- Các lớp như LAYING, WALKING và WALKING_DOWNSTAIRS được mô hình phân loại rất chính xác, hầu như không có nhầm lẫn.
+	
+=> Tổng thể, mô hình SVM tuyến tính phân loại khá tốt và ổn định, đặc biệt hiệu quả với các hành vi có đặc trưng rõ ràng. Những lỗi nhỏ chủ yếu xảy ra ở các hành vi có tín hiệu tương tự nhau, điều này là hợp lý trong bài toán phân loại hoạt động con người.
+
+
+  Tiếp theo, ta tiến hành xây dựng và đánh giá mô hình Decision Tree Classifier nhằm so sánh hiệu quả với các mô hình tuyến tính đã triển khai trước đó.
 ```{r}
 grid_dt <- expand.grid(maxdepth = seq(3, 9, by = 2))
 
@@ -1037,8 +1105,24 @@ results_dt <- train_and_evaluate_model(
 )
 
 ```
+  Mô hình Decision Tree với độ sâu tối ưu là maxdepth = 7 đạt độ chính xác kiểm định chéo ở mức 88.60% và độ chính xác trên tập kiểm tra là 84.02%. So với Logistic Regression và SVM, độ chính xác của mô hình này thấp hơn, cho thấy khả năng tổng quát hóa của cây quyết định có phần hạn chế hơn trong bài toán này.
 
-```{r}
+  Quan sát confusion matrix cho thấy một số xu hướng nhầm lẫn điển hình:
+	•	LAYING tiếp tục là lớp được phân loại chính xác tuyệt đối với 537/537 mẫu, khẳng định đặc trưng tín hiệu rõ ràng của hoạt động này.
+	•	WALKING có hiệu suất khá tốt, tuy có 40 mẫu nhầm sang WALKING_DOWNSTAIRS và 61 mẫu nhầm sang WALKING_UPSTAIRS — phản ánh sự chồng lấn về đặc trưng giữa các hoạt động di chuyển.
+	•	SITTING và STANDING tiếp tục là cặp lớp dễ nhầm lẫn nhất: 91 mẫu STANDING bị nhầm sang SITTING, và 107 mẫu SITTING bị nhầm thành STANDING.
+	•	WALKING_UPSTAIRS là lớp có tỉ lệ nhầm lẫn cao nhất, với hơn 400 mẫu bị dự đoán sai, chủ yếu sang WALKING và WALKING_DOWNSTAIRS.
+
+  Về mặt chỉ số:
+	•	F1-score các lớp dao động từ 0.78 đến 1.00, với điểm trung bình Macro F1 đạt 0.8360 và Weighted F1 đạt 0.8399, phản ánh mô hình vẫn giữ được độ chính xác tương đối ổn định dù không cao bằng các mô hình trước đó.
+
+=> Tổng thể, Decision Tree là mô hình trực quan, dễ giải thích nhưng hiệu suất phân loại thấp hơn đáng kể so với Logistic Regression và SVM trong trường hợp này. Những sai số đáng kể giữa các lớp tĩnh và động có thể được giảm thiểu nếu kết hợp với các kỹ thuật như pruning, boosting hoặc sử dụng các mô hình phức tạp hơn như Random Forest.
+
+
+
+
+  Sau khi đánh giá hiệu quả của mô hình Decision Tree, ta tiếp tục triển khai mô hình Random Forest – một phương pháp tổ hợp (ensemble) giúp khắc phục hiện tượng overfitting thường gặp ở cây quyết định đơn lẻ.
+```{r,warning=FALSE, message=FALSE}
 library(randomForest)
 grid_rf <- expand.grid(mtry = c(16, 20, 24, 28, 32))
 results_rf <- train_and_evaluate_model(
@@ -1051,11 +1135,22 @@ results_rf <- train_and_evaluate_model(
   tuneGrid = grid_rf,
   k_folds = 5
 )
-
 ```
 
+  Mô hình Random Forest đạt độ chính xác kiểm tra là 94.1%, cùng với Macro F1-score = 0.9384 và Weighted F1-score = 0.9406, cho thấy đây là một mô hình mạnh, có khả năng phân loại tổng thể tốt và tương đối đồng đều giữa các lớp.
+
+  Dựa vào ma trận nhầm lẫn, ta thấy hầu hết các hoạt động như LAYING, SITTING, STANDING, và WALKING đều được mô hình nhận diện khá tốt, với số lượng mẫu dự đoán đúng lớn nằm trên đường chéo chính. Tuy nhiên, mô hình vẫn mắc một số lỗi phân loại:
+	-	SITTING bị nhầm sang STANDING 23 mẫu, và chiều ngược lại STANDING nhầm 40 mẫu sang SITTING. Đây là điều dễ hiểu vì hai hoạt động đều là trạng thái tĩnh, có đặc điểm tín hiệu gần giống nhau.
+	-	WALKING_UPSTAIRS có mức độ nhầm lẫn cao nhất, với 47 mẫu bị nhầm sang WALKING_DOWNSTAIRS và 24 mẫu sang WALKING. Điều này phản ánh rằng các hành vi di chuyển tương tự như lên cầu thang, xuống cầu thang và đi bộ có tín hiệu khá giống nhau nên mô hình dễ nhầm lẫn.
+	-	WALKING_DOWNSTAIRS cũng bị ảnh hưởng, với 10 mẫu bị nhầm sang WALKING, cho thấy cần cải thiện khả năng phân biệt giữa các hành vi động học này.
+
+  Về tổng thể, mô hình Random Forest có khả năng nhận diện tốt các hành vi rõ ràng như LAYING (F1 = 1.000), WALKING (F1 = 0.9422), và STANDING (F1 = 0.9417). Tuy nhiên, vẫn còn không ít nhầm lẫn ở các lớp có ranh giới mờ hoặc tín hiệu gần nhau như WALKING_UPSTAIRS và WALKING_DOWNSTAIRS.
+
+
+Sau đó ta tiếp tục với mô hình KNN với số k được tối ưu
+
 ```{r}
-grid_knn <- expand.grid(k = seq(1, 30, by = 2))  
+grid_knn <- expand.grid(k = seq(3, 30, by = 2))  
 
 results_knn <- train_and_evaluate_model(
   model_name = "knn",
@@ -1069,6 +1164,83 @@ results_knn <- train_and_evaluate_model(
 )
 
 best_k <- results_knn$model$bestTune$k
-cat("Giá trị k tối ưu là:", best_k, "\n")
 ```
+
+  Mô hình KNN mặc dù đơn giản, nhưng cho thấy hiệu quả phân loại khá cao trên tập dữ liệu hoạt động con người. Với độ chính xác kiểm tra đạt 90.3% và Macro F1-score 90.01%, KNN đứng trong nhóm mô hình có hiệu suất tốt nhất, chỉ xếp sau các mô hình tuyến tính như SVM và Logistic Regression.
+
+  Tuy nhiên, một số điểm cần lưu ý:
+	-	Mô hình nhạy cảm với nhiễu và có thể gặp khó khăn với các lớp có ranh giới mờ như SITTING và STANDING – điều thể hiện rõ qua tỷ lệ nhầm lẫn cao giữa hai lớp này.
+	-	Các hoạt động động như WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS vẫn còn nhầm lẫn lẫn nhau, phản ánh tính chất tín hiệu gần giống trong không gian đặc trưng.
+	-	Mô hình yêu cầu dữ liệu được chuẩn hóa tốt để đảm bảo khoảng cách Euclidean phản ánh đúng sự tương đồng giữa các điểm.
+
+  Tóm lại, KNN là một lựa chọn hiệu quả cho bài toán phân loại này, đặc biệt khi không cần mô hình phức tạp. Tuy nhiên, hiệu năng của KNN phụ thuộc nhiều vào việc chọn số k phù hợp và đặc điểm phân bố dữ liệu trong không gian.
+
+
+
+
+Cuối cùng, chúng tôi tiến hành tổng hợp và so sánh hiệu suất của các mô hình dựa trên các chỉ số đánh giá quan trọng như Accuracy, Macro F1 và Weighted F1.
+```{r}
+model_summary <- data.frame(
+  Model = c("Logistic Regression", "SVM (Linear)", "Decision Tree", "Random Forest", "KNN"),
+  Accuracy = c(
+    results_log$test_accuracy,
+    results_svc$test_accuracy,
+    results_dt$test_accuracy,
+    results_rf$test_accuracy,
+    results_knn$test_accuracy
+  ),
+  Macro_F1 = c(
+    results_log$macro_metrics["F1"],
+    results_svc$macro_metrics["F1"],
+    results_dt$macro_metrics["F1"],
+    results_rf$macro_metrics["F1"],
+    results_knn$macro_metrics["F1"]
+  ),
+  Weighted_F1 = c(
+    results_log$weighted_metrics["F1"],
+    results_svc$weighted_metrics["F1"],
+    results_dt$weighted_metrics["F1"],
+    results_rf$weighted_metrics["F1"],
+    results_knn$weighted_metrics["F1"]
+  )
+)
+
+print(model_summary)
+```
+
+
+
+Hình dưới đây minh họa trực quan mức độ hiệu quả của các mô hình dựa trên ba chỉ số đánh giá chính. Có thể thấy rõ rằng SVM đạt điểm cao nhất ở cả ba thước đo, trong khi các mô hình như Logistic Regression và Random Forest bám sát theo sau. Decision Tree là mô hình có hiệu suất thấp nhất trong nhóm, đặc biệt trên chỉ số Macro F1.
+
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+model_summary_long <- model_summary %>%
+  pivot_longer(cols = c("Accuracy", "Macro_F1", "Weighted_F1"),
+               names_to = "Metric", values_to = "Value")
+
+ggplot(model_summary_long, aes(x = Model, y = Value, fill = Metric)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8)) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    title = "So sánh hiệu suất các mô hình",
+    x = "Mô hình",
+    y = "Giá trị",
+    fill = "Chỉ số đánh giá"
+  ) +
+  ylim(0, 1) +
+  theme_minimal(base_size = 14) +
+  theme(axis.text.x = element_text(angle = 15, hjust = 1))
+
+```
+
+# Kết luận
+	•	SVM tuyến tính là mô hình có hiệu suất cao nhất trên cả ba chỉ số, thể hiện khả năng phân loại mạnh mẽ và ổn định giữa các lớp.
+	•	Logistic Regression và Random Forest cũng cho kết quả rất tốt, chỉ xếp sau SVM một cách sát sao. Logistic hoạt động đặc biệt hiệu quả trong không gian tuyến tính, còn Random Forest thể hiện ưu thế ở các lớp có tính phi tuyến cao.
+	•	KNN, mặc dù đơn giản, vẫn đạt hiệu suất đáng kể với Accuracy > 90%, cho thấy phù hợp với dữ liệu đã được chuẩn hóa và có ranh giới rõ ràng.
+	•	Decision Tree là mô hình có độ chính xác thấp nhất, chủ yếu do nhầm lẫn giữa các lớp tĩnh và giới hạn về khả năng khái quát khi không được kết hợp với các kỹ thuật tổ hợp như Random Forest.
+
+Tổng thể, mô hình SVM tuyến tính được đánh giá là lựa chọn tối ưu nhất cho bài toán phân loại này, trong khi các mô hình khác như Logistic Regression và Random Forest vẫn có thể được cân nhắc tùy theo yêu cầu cụ thể về tốc độ, độ phức tạp và khả năng giải thích.
 

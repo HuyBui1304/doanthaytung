@@ -1580,9 +1580,6 @@ một mức thấp, dữ liệu phần lớn ổn định và sạch.
 
 \NormalTok{ train\_capped }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(sensor\_data\_capped, }\AttributeTok{subject =}\NormalTok{ subject\_ids, }\AttributeTok{Activity =}\NormalTok{ activity\_labels)}
 \NormalTok{ test\_capped }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(sensor\_data\_test\_capped, }\AttributeTok{subject =}\NormalTok{ subject\_ids\_test, }\AttributeTok{Activity =}\NormalTok{ activity\_labels\_test)}
-
-\CommentTok{\# str(train\_capped)}
-\CommentTok{\# str(test\_capped)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1716,16 +1713,21 @@ máy.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{report_files/figure-latex/unnamed-chunk-22-1.pdf} Các
-hoạt động như LAYING, SITTING và STANDING tạo thành ba cụm rõ ràng, thấy
-được tín hiệu cảm biến ở trong thái tĩnh có sự ổn định cao và dễ phân
-biệt. Các hoạt động như WALKING, WALKING\_DOWNSTAIRS, WALKING\_UPSTAIRS
-có xu hướng gần nhau hơn trong không gian 2 chiều, mặc dù vẫn tạo thành
-các cụm riêng biệt, nhưng vẫn có vẻ chồng lấn, cho thấy được biến thiên
-phức tạp của vận động trong thực tế. Thấy được sự tách biệt rõ ràng giữa
-các nhóm động và tĩnh. Đây là bước tiền xử lý và kiểm định trực quan
-quan trọng trước khi đưa dữ liệu vào các thuật toán học máy như Random
-Forest, SVM, Logistic Regression và k-NN.
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-22-1.pdf}
+\caption{trực quan hóa kết quả giảm chiều dữ liệu bằng UMAP}
+\end{figure}
+
+Các hoạt động như LAYING, SITTING và STANDING tạo thành ba cụm rõ ràng,
+thấy được tín hiệu cảm biến ở trong thái tĩnh có sự ổn định cao và dễ
+phân biệt. Các hoạt động như WALKING, WALKING\_DOWNSTAIRS,
+WALKING\_UPSTAIRS có xu hướng gần nhau hơn trong không gian 2 chiều, mặc
+dù vẫn tạo thành các cụm riêng biệt, nhưng vẫn có vẻ chồng lấn, cho thấy
+được biến thiên phức tạp của vận động trong thực tế. Thấy được sự tách
+biệt rõ ràng giữa các nhóm động và tĩnh. Đây là bước tiền xử lý và kiểm
+định trực quan quan trọng trước khi đưa dữ liệu vào các thuật toán học
+máy như Random Forest, SVM, Logistic Regression và k-NN.
 
 \subsection{Chuẩn bị dữ liệu cho mô hình học
 máy}\label{chuux1ea9n-bux1ecb-dux1eef-liux1ec7u-cho-muxf4-huxecnh-hux1ecdc-muxe1y}
@@ -1821,27 +1823,75 @@ nhau như Random Forest, SVM, Logistic Regression, hoặc k-NN.
     \AttributeTok{tuneGrid =}\NormalTok{ tuneGrid}
 \NormalTok{  )}
 
-\NormalTok{  y\_pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model\_fit, X\_test)}
+  \CommentTok{\# Lấy tham số tốt nhất và train lại final model}
+\NormalTok{  best\_param }\OtherTok{\textless{}{-}}\NormalTok{ model\_fit}\SpecialCharTok{$}\NormalTok{bestTune}
 
-  \CommentTok{\# Accuracy}
-\NormalTok{  accuracy }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(y\_pred }\SpecialCharTok{==}\NormalTok{ y\_test)}
-  \FunctionTok{cat}\NormalTok{(}\StringTok{"{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-  \FunctionTok{cat}\NormalTok{(}\StringTok{"|      Accuracy      |}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-  \FunctionTok{cat}\NormalTok{(}\StringTok{"{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-  \FunctionTok{cat}\NormalTok{(}\FunctionTok{sprintf}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{    \%.4f}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{, accuracy))}
+\NormalTok{  final\_model }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(}
+    \AttributeTok{x =}\NormalTok{ X\_train,}
+    \AttributeTok{y =}\NormalTok{ y\_train,}
+    \AttributeTok{method =}\NormalTok{ model\_name,}
+    \AttributeTok{trControl =} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method =} \StringTok{"none"}\NormalTok{),}
+    \AttributeTok{tuneGrid =}\NormalTok{ best\_param}
+\NormalTok{  )}
 
-  \CommentTok{\# Confusion matrix}
-\NormalTok{  cm }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(}\AttributeTok{Predicted =}\NormalTok{ y\_pred, }\AttributeTok{Actual =}\NormalTok{ y\_test)}
-  \FunctionTok{cat}\NormalTok{(}\StringTok{"{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-  \FunctionTok{cat}\NormalTok{(}\StringTok{"| Confusion Matrix |}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-  \FunctionTok{cat}\NormalTok{(}\StringTok{"{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-  \FunctionTok{print}\NormalTok{(cm)}
+  \CommentTok{\# Dự đoán bằng mô hình cuối}
+\NormalTok{  y\_pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(final\_model, X\_test)}
 
-  \CommentTok{\# Plot confusion matrix}
-\NormalTok{  cm\_df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(cm)}
-  \FunctionTok{colnames}\NormalTok{(cm\_df) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Predicted"}\NormalTok{, }\StringTok{"Actual"}\NormalTok{, }\StringTok{"Freq"}\NormalTok{)}
+  \CommentTok{\# Đánh giá}
+\NormalTok{  cm }\OtherTok{\textless{}{-}} \FunctionTok{confusionMatrix}\NormalTok{(y\_pred, y\_test)}
+\NormalTok{  report }\OtherTok{\textless{}{-}}\NormalTok{ cm}\SpecialCharTok{$}\NormalTok{byClass[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Precision"}\NormalTok{, }\StringTok{"Recall"}\NormalTok{, }\StringTok{"F1"}\NormalTok{)]}
+\NormalTok{  test\_acc }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(y\_pred }\SpecialCharTok{==}\NormalTok{ y\_test)}
 
-  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ cm\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Actual, }\AttributeTok{y =}\NormalTok{ Predicted, }\AttributeTok{fill =}\NormalTok{ Freq)) }\SpecialCharTok{+}
+  \CommentTok{\# Tính macro / weighted average}
+\NormalTok{  macro\_precision }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(report[, }\StringTok{"Precision"}\NormalTok{], }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  macro\_recall }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(report[, }\StringTok{"Recall"}\NormalTok{], }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  macro\_f1 }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(report[, }\StringTok{"F1"}\NormalTok{], }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{  support }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{table}\NormalTok{(y\_test))}
+\NormalTok{  weighted\_precision }\OtherTok{\textless{}{-}} \FunctionTok{weighted.mean}\NormalTok{(report[, }\StringTok{"Precision"}\NormalTok{], }\AttributeTok{w =}\NormalTok{ support, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  weighted\_recall }\OtherTok{\textless{}{-}} \FunctionTok{weighted.mean}\NormalTok{(report[, }\StringTok{"Recall"}\NormalTok{], }\AttributeTok{w =}\NormalTok{ support, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  weighted\_f1 }\OtherTok{\textless{}{-}} \FunctionTok{weighted.mean}\NormalTok{(report[, }\StringTok{"F1"}\NormalTok{], }\AttributeTok{w =}\NormalTok{ support, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+  \CommentTok{\# In kết quả}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}|     Best Parameters     |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \ControlFlowTok{for}\NormalTok{ (param }\ControlFlowTok{in} \FunctionTok{names}\NormalTok{(best\_param)) \{}
+    \FunctionTok{cat}\NormalTok{(}\FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%s = \%s}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, param, best\_param[[param]]))}
+\NormalTok{  \}}
+
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}|     Best CV Accuracy    |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\FunctionTok{max}\NormalTok{(model\_fit}\SpecialCharTok{$}\NormalTok{results}\SpecialCharTok{$}\NormalTok{Accuracy), }\DecValTok{4}\NormalTok{))}
+
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}|      Test Accuracy      |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{round}\NormalTok{(test\_acc, }\DecValTok{4}\NormalTok{))}
+
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}| Precision / Recall / F1 |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{round}\NormalTok{(report, }\DecValTok{4}\NormalTok{))}
+
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}|   Macro Avg (All Classes)  |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\FunctionTok{sprintf}\NormalTok{(}\StringTok{"Precision: \%.4f}\SpecialCharTok{\textbackslash{}n}\StringTok{Recall   : \%.4f}\SpecialCharTok{\textbackslash{}n}\StringTok{F1{-}score : \%.4f}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+\NormalTok{              macro\_precision, macro\_recall, macro\_f1))}
+
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}| Weighted Avg (By Support)  |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\FunctionTok{sprintf}\NormalTok{(}\StringTok{"Precision: \%.4f}\SpecialCharTok{\textbackslash{}n}\StringTok{Recall   : \%.4f}\SpecialCharTok{\textbackslash{}n}\StringTok{F1{-}score : \%.4f}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+\NormalTok{              weighted\_precision, weighted\_recall, weighted\_f1))}
+
+  \CommentTok{\# Vẽ confusion matrix}
+\NormalTok{  cm\_table }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(cm}\SpecialCharTok{$}\NormalTok{table)}
+  \FunctionTok{colnames}\NormalTok{(cm\_table) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Predicted"}\NormalTok{, }\StringTok{"Actual"}\NormalTok{, }\StringTok{"Freq"}\NormalTok{)}
+
+\NormalTok{  p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ cm\_table, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Actual, }\AttributeTok{y =}\NormalTok{ Predicted, }\AttributeTok{fill =}\NormalTok{ Freq)) }\SpecialCharTok{+}
     \FunctionTok{geom\_tile}\NormalTok{(}\AttributeTok{color =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
     \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ Freq), }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
     \FunctionTok{scale\_fill\_gradient}\NormalTok{(}\AttributeTok{low =} \StringTok{"white"}\NormalTok{, }\AttributeTok{high =} \StringTok{"darkgreen"}\NormalTok{) }\SpecialCharTok{+}
@@ -1849,26 +1899,18 @@ nhau như Random Forest, SVM, Logistic Regression, hoặc k-NN.
     \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
     \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
 
-  \CommentTok{\# Classification report}
-  \FunctionTok{cat}\NormalTok{(}\StringTok{"{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-  \FunctionTok{cat}\NormalTok{(}\StringTok{"| Classification Report |}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-  \FunctionTok{cat}\NormalTok{(}\StringTok{"{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-  \FunctionTok{print}\NormalTok{(}\FunctionTok{confusionMatrix}\NormalTok{(y\_pred, y\_test)}\SpecialCharTok{$}\NormalTok{byClass)}
+  \FunctionTok{print}\NormalTok{(p)}
 
-  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
-  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}|     Best Parameters     |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
-  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
-  \FunctionTok{print}\NormalTok{(model\_fit}\SpecialCharTok{$}\NormalTok{bestTune)}
-
-  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
-  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}|      Best Accuracy      |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
-  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
-  \FunctionTok{print}\NormalTok{(}\FunctionTok{max}\NormalTok{(model\_fit}\SpecialCharTok{$}\NormalTok{results}\SpecialCharTok{$}\NormalTok{Accuracy))}
-
+  \CommentTok{\# Trả về kết quả}
   \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}
-    \AttributeTok{model =}\NormalTok{ model\_fit,}
-    \AttributeTok{accuracy =}\NormalTok{ accuracy,}
-    \AttributeTok{confusion\_matrix =}\NormalTok{ cm,}
+    \AttributeTok{model =}\NormalTok{ final\_model,}
+    \AttributeTok{best\_parameters =}\NormalTok{ best\_param,}
+    \AttributeTok{best\_cv\_accuracy =} \FunctionTok{max}\NormalTok{(model\_fit}\SpecialCharTok{$}\NormalTok{results}\SpecialCharTok{$}\NormalTok{Accuracy),}
+    \AttributeTok{test\_accuracy =}\NormalTok{ test\_acc,}
+    \AttributeTok{report =}\NormalTok{ report,}
+    \AttributeTok{macro\_metrics =} \FunctionTok{c}\NormalTok{(}\AttributeTok{Precision =}\NormalTok{ macro\_precision, }\AttributeTok{Recall =}\NormalTok{ macro\_recall, }\AttributeTok{F1 =}\NormalTok{ macro\_f1),}
+    \AttributeTok{weighted\_metrics =} \FunctionTok{c}\NormalTok{(}\AttributeTok{Precision =}\NormalTok{ weighted\_precision, }\AttributeTok{Recall =}\NormalTok{ weighted\_recall, }\AttributeTok{F1 =}\NormalTok{ weighted\_f1),}
+    \AttributeTok{confusion\_matrix =}\NormalTok{ cm}\SpecialCharTok{$}\NormalTok{table,}
     \AttributeTok{prediction =}\NormalTok{ y\_pred}
 \NormalTok{  ))}
 \NormalTok{\}}
@@ -1884,8 +1926,10 @@ nhau như Random Forest, SVM, Logistic Regression, hoặc k-NN.
 
 \NormalTok{results\_log }\OtherTok{\textless{}{-}} \FunctionTok{train\_and\_evaluate\_model}\NormalTok{(}
   \AttributeTok{model\_name =} \StringTok{"glmnet"}\NormalTok{,}
-  \AttributeTok{X\_train =}\NormalTok{ X\_train, }\AttributeTok{y\_train =}\NormalTok{ y\_train,}
-  \AttributeTok{X\_test =}\NormalTok{ X\_test, }\AttributeTok{y\_test =}\NormalTok{ y\_test,}
+  \AttributeTok{X\_train =}\NormalTok{ X\_train,}
+  \AttributeTok{y\_train =}\NormalTok{ y\_train,}
+  \AttributeTok{X\_test =}\NormalTok{ X\_test, }
+  \AttributeTok{y\_test =}\NormalTok{ y\_test,}
   \AttributeTok{class\_labels =}\NormalTok{ labels,}
   \AttributeTok{tuneGrid =}\NormalTok{ grid\_logistic,}
   \AttributeTok{k\_folds =} \DecValTok{5}
@@ -1902,65 +1946,50 @@ nhau như Random Forest, SVM, Logistic Regression, hoặc k-NN.
 \end{verbatim}
 
 \begin{verbatim}
-## ---------------------
-## |      Accuracy      |
-## ---------------------
-## 
-##     0.9488
-## 
-## --------------------
-## | Confusion Matrix |
-## --------------------
-##                     Actual
-## Predicted            LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS
-##   LAYING                537       0        0       0                  0
-##   SITTING                 0     431       30       0                  0
-##   STANDING                0      57      502       0                  0
-##   WALKING                 0       0        0     493                 10
-##   WALKING_DOWNSTAIRS      0       0        0       3                387
-##   WALKING_UPSTAIRS        0       3        0       0                 23
-##                     Actual
-## Predicted            WALKING_UPSTAIRS
-##   LAYING                            0
-##   SITTING                           0
-##   STANDING                          1
-##   WALKING                          22
-##   WALKING_DOWNSTAIRS                2
-##   WALKING_UPSTAIRS                446
-## -------------------------
-## | Classification Report |
-## -------------------------
-##                           Sensitivity Specificity Pos Pred Value Neg Pred Value
-## Class: LAYING               1.0000000   1.0000000      1.0000000      1.0000000
-## Class: SITTING              0.8778004   0.9877850      0.9349241      0.9758648
-## Class: STANDING             0.9436090   0.9759834      0.8964286      0.9874319
-## Class: WALKING              0.9939516   0.9869441      0.9390476      0.9987614
-## Class: WALKING_DOWNSTAIRS   0.9214286   0.9980214      0.9872449      0.9870841
-## Class: WALKING_UPSTAIRS     0.9469214   0.9894992      0.9449153      0.9898990
-##                           Precision    Recall        F1 Prevalence
-## Class: LAYING             1.0000000 1.0000000 1.0000000  0.1822192
-## Class: SITTING            0.9349241 0.8778004 0.9054622  0.1666101
-## Class: STANDING           0.8964286 0.9436090 0.9194139  0.1805226
-## Class: WALKING            0.9390476 0.9939516 0.9657199  0.1683068
-## Class: WALKING_DOWNSTAIRS 0.9872449 0.9214286 0.9532020  0.1425178
-## Class: WALKING_UPSTAIRS   0.9449153 0.9469214 0.9459173  0.1598235
-##                           Detection Rate Detection Prevalence Balanced Accuracy
-## Class: LAYING                  0.1822192            0.1822192         1.0000000
-## Class: SITTING                 0.1462504            0.1564303         0.9327927
-## Class: STANDING                0.1703427            0.1900238         0.9597962
-## Class: WALKING                 0.1672888            0.1781473         0.9904479
-## Class: WALKING_DOWNSTAIRS      0.1313200            0.1330166         0.9597250
-## Class: WALKING_UPSTAIRS        0.1513403            0.1601629         0.9682103
 ## --------------------------
 ## |     Best Parameters     |
 ## --------------------------
-##   alpha     lambda
-## 1     0 0.03333333
+## alpha = 0
+## lambda = 0.0333333333333333
 ## --------------------------
-## |      Best Accuracy      |
+## |     Best CV Accuracy    |
 ## --------------------------
-## [1] 0.9688516
+## [1] 0.9689
+## --------------------------
+## |      Test Accuracy      |
+## --------------------------
+## [1] 0.9488
+## --------------------------
+## | Precision / Recall / F1 |
+## --------------------------
+##                           Precision Recall     F1
+## Class: LAYING                1.0000 1.0000 1.0000
+## Class: SITTING               0.9349 0.8778 0.9055
+## Class: STANDING              0.8964 0.9436 0.9194
+## Class: WALKING               0.9390 0.9940 0.9657
+## Class: WALKING_DOWNSTAIRS    0.9872 0.9214 0.9532
+## Class: WALKING_UPSTAIRS      0.9449 0.9469 0.9459
+## ------------------------------
+## |   Macro Avg (All Classes)  |
+## ------------------------------
+## Precision: 0.9504
+## Recall   : 0.9473
+## F1-score : 0.9483
+## ------------------------------
+## | Weighted Avg (By Support)  |
+## ------------------------------
+## Precision: 0.9496
+## Recall   : 0.9488
+## F1-score : 0.9486
 \end{verbatim}
+
+\includegraphics{report_files/figure-latex/unnamed-chunk-25-1.pdf}
+
+Mô hình đạt độ chính xác tổng thể 94.88\%. Giá trị F1-score trung bình
+giữa các lớp (Macro F1) là 0.9483, chứng tỏ mô hình hoạt động đồng đều,
+không bỏ sót lớp hiếm. Weighted F1-score là 0.9486, gần với Accuracy,
+cho thấy mô hình hiệu quả toàn cục, ổn định trên cả lớp phổ biến và ít
+phổ biến.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1978,65 +2007,43 @@ nhau như Random Forest, SVM, Logistic Regression, hoặc k-NN.
 \end{Shaded}
 
 \begin{verbatim}
-## ---------------------
-## |      Accuracy      |
-## ---------------------
-## 
-##     0.9606
-## 
-## --------------------
-## | Confusion Matrix |
-## --------------------
-##                     Actual
-## Predicted            LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS
-##   LAYING                537       0        0       0                  0
-##   SITTING                 0     436       16       0                  0
-##   STANDING                0      53      516       0                  0
-##   WALKING                 0       0        0     493                  5
-##   WALKING_DOWNSTAIRS      0       0        0       2                399
-##   WALKING_UPSTAIRS        0       2        0       1                 16
-##                     Actual
-## Predicted            WALKING_UPSTAIRS
-##   LAYING                            0
-##   SITTING                           0
-##   STANDING                          0
-##   WALKING                          16
-##   WALKING_DOWNSTAIRS                5
-##   WALKING_UPSTAIRS                450
-## -------------------------
-## | Classification Report |
-## -------------------------
-##                           Sensitivity Specificity Pos Pred Value Neg Pred Value
-## Class: LAYING               1.0000000   1.0000000      1.0000000      1.0000000
-## Class: SITTING              0.8879837   0.9934853      0.9646018      0.9779559
-## Class: STANDING             0.9699248   0.9780538      0.9068541      0.9932717
-## Class: WALKING              0.9939516   0.9914321      0.9591440      0.9987670
-## Class: WALKING_DOWNSTAIRS   0.9500000   0.9972299      0.9827586      0.9917355
-## Class: WALKING_UPSTAIRS     0.9554140   0.9923263      0.9594883      0.9915254
-##                           Precision    Recall        F1 Prevalence
-## Class: LAYING             1.0000000 1.0000000 1.0000000  0.1822192
-## Class: SITTING            0.9646018 0.8879837 0.9247084  0.1666101
-## Class: STANDING           0.9068541 0.9699248 0.9373297  0.1805226
-## Class: WALKING            0.9591440 0.9939516 0.9762376  0.1683068
-## Class: WALKING_DOWNSTAIRS 0.9827586 0.9500000 0.9661017  0.1425178
-## Class: WALKING_UPSTAIRS   0.9594883 0.9554140 0.9574468  0.1598235
-##                           Detection Rate Detection Prevalence Balanced Accuracy
-## Class: LAYING                  0.1822192            0.1822192         1.0000000
-## Class: SITTING                 0.1479471            0.1533763         0.9407345
-## Class: STANDING                0.1750933            0.1930777         0.9739893
-## Class: WALKING                 0.1672888            0.1744147         0.9926918
-## Class: WALKING_DOWNSTAIRS      0.1353919            0.1377672         0.9736150
-## Class: WALKING_UPSTAIRS        0.1526977            0.1591449         0.9738702
 ## --------------------------
 ## |     Best Parameters     |
 ## --------------------------
-##       C
-## 1 0.125
+## C = 0.125
 ## --------------------------
-## |      Best Accuracy      |
+## |     Best CV Accuracy    |
 ## --------------------------
-## [1] 0.9844929
+## [1] 0.9845
+## --------------------------
+## |      Test Accuracy      |
+## --------------------------
+## [1] 0.9606
+## --------------------------
+## | Precision / Recall / F1 |
+## --------------------------
+##                           Precision Recall     F1
+## Class: LAYING                1.0000 1.0000 1.0000
+## Class: SITTING               0.9646 0.8880 0.9247
+## Class: STANDING              0.9069 0.9699 0.9373
+## Class: WALKING               0.9591 0.9940 0.9762
+## Class: WALKING_DOWNSTAIRS    0.9828 0.9500 0.9661
+## Class: WALKING_UPSTAIRS      0.9595 0.9554 0.9574
+## ------------------------------
+## |   Macro Avg (All Classes)  |
+## ------------------------------
+## Precision: 0.9621
+## Recall   : 0.9595
+## F1-score : 0.9603
+## ------------------------------
+## | Weighted Avg (By Support)  |
+## ------------------------------
+## Precision: 0.9615
+## Recall   : 0.9606
+## F1-score : 0.9605
 \end{verbatim}
+
+\includegraphics{report_files/figure-latex/unnamed-chunk-26-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2056,65 +2063,43 @@ nhau như Random Forest, SVM, Logistic Regression, hoặc k-NN.
 \end{Shaded}
 
 \begin{verbatim}
-## ---------------------
-## |      Accuracy      |
-## ---------------------
-## 
-##     0.8402
-## 
-## --------------------
-## | Confusion Matrix |
-## --------------------
-##                     Actual
-## Predicted            LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS
-##   LAYING                537       0        0       0                  0
-##   SITTING                 0     400      107       0                  0
-##   STANDING                0      91      425       0                  0
-##   WALKING                 0       0        0     430                 40
-##   WALKING_DOWNSTAIRS      0       0        0      11                282
-##   WALKING_UPSTAIRS        0       0        0      55                 98
-##                     Actual
-## Predicted            WALKING_UPSTAIRS
-##   LAYING                            0
-##   SITTING                           0
-##   STANDING                          0
-##   WALKING                          61
-##   WALKING_DOWNSTAIRS                8
-##   WALKING_UPSTAIRS                402
-## -------------------------
-## | Classification Report |
-## -------------------------
-##                           Sensitivity Specificity Pos Pred Value Neg Pred Value
-## Class: LAYING               1.0000000   1.0000000      1.0000000      1.0000000
-## Class: SITTING              0.8146640   0.9564332      0.7889546      0.9627049
-## Class: STANDING             0.7988722   0.9623188      0.8236434      0.9559852
-## Class: WALKING              0.8669355   0.9587923      0.8097928      0.9726821
-## Class: WALKING_DOWNSTAIRS   0.6714286   0.9924812      0.9368771      0.9478458
-## Class: WALKING_UPSTAIRS     0.8535032   0.9382068      0.7243243      0.9711538
-##                           Precision    Recall        F1 Prevalence
-## Class: LAYING             1.0000000 1.0000000 1.0000000  0.1822192
-## Class: SITTING            0.7889546 0.8146640 0.8016032  0.1666101
-## Class: STANDING           0.8236434 0.7988722 0.8110687  0.1805226
-## Class: WALKING            0.8097928 0.8669355 0.8373905  0.1683068
-## Class: WALKING_DOWNSTAIRS 0.9368771 0.6714286 0.7822469  0.1425178
-## Class: WALKING_UPSTAIRS   0.7243243 0.8535032 0.7836257  0.1598235
-##                           Detection Rate Detection Prevalence Balanced Accuracy
-## Class: LAYING                 0.18221921            0.1822192         1.0000000
-## Class: SITTING                0.13573125            0.1720394         0.8855486
-## Class: STANDING               0.14421446            0.1750933         0.8805955
-## Class: WALKING                0.14591110            0.1801832         0.9128639
-## Class: WALKING_DOWNSTAIRS     0.09569053            0.1021378         0.8319549
-## Class: WALKING_UPSTAIRS       0.13640991            0.1883271         0.8958550
 ## --------------------------
 ## |     Best Parameters     |
 ## --------------------------
-##   maxdepth
-## 3        7
+## maxdepth = 7
 ## --------------------------
-## |      Best Accuracy      |
+## |     Best CV Accuracy    |
 ## --------------------------
-## [1] 0.8860176
+## [1] 0.886
+## --------------------------
+## |      Test Accuracy      |
+## --------------------------
+## [1] 0.8402
+## --------------------------
+## | Precision / Recall / F1 |
+## --------------------------
+##                           Precision Recall     F1
+## Class: LAYING                1.0000 1.0000 1.0000
+## Class: SITTING               0.7890 0.8147 0.8016
+## Class: STANDING              0.8236 0.7989 0.8111
+## Class: WALKING               0.8098 0.8669 0.8374
+## Class: WALKING_DOWNSTAIRS    0.9369 0.6714 0.7822
+## Class: WALKING_UPSTAIRS      0.7243 0.8535 0.7836
+## ------------------------------
+## |   Macro Avg (All Classes)  |
+## ------------------------------
+## Precision: 0.8473
+## Recall   : 0.8342
+## F1-score : 0.8360
+## ------------------------------
+## | Weighted Avg (By Support)  |
+## ------------------------------
+## Precision: 0.8479
+## Recall   : 0.8402
+## F1-score : 0.8399
 \end{verbatim}
+
+\includegraphics{report_files/figure-latex/unnamed-chunk-27-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2170,69 +2155,47 @@ nhau như Random Forest, SVM, Logistic Regression, hoặc k-NN.
 \end{Shaded}
 
 \begin{verbatim}
-## ---------------------
-## |      Accuracy      |
-## ---------------------
-## 
-##     0.9355
-## 
-## --------------------
-## | Confusion Matrix |
-## --------------------
-##                     Actual
-## Predicted            LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS
-##   LAYING                537       0        0       0                  0
-##   SITTING                 0     448       29       0                  0
-##   STANDING                0      43      503       0                  0
-##   WALKING                 0       0        0     480                 19
-##   WALKING_DOWNSTAIRS      0       0        0       8                354
-##   WALKING_UPSTAIRS        0       0        0       8                 47
-##                     Actual
-## Predicted            WALKING_UPSTAIRS
-##   LAYING                            0
-##   SITTING                           0
-##   STANDING                          0
-##   WALKING                          30
-##   WALKING_DOWNSTAIRS                6
-##   WALKING_UPSTAIRS                435
-## -------------------------
-## | Classification Report |
-## -------------------------
-##                           Sensitivity Specificity Pos Pred Value Neg Pred Value
-## Class: LAYING               1.0000000   1.0000000      1.0000000      1.0000000
-## Class: SITTING              0.9124236   0.9881922      0.9392034      0.9825911
-## Class: STANDING             0.9454887   0.9821946      0.9212454      0.9879217
-## Class: WALKING              0.9677419   0.9800082      0.9073724      0.9933830
-## Class: WALKING_DOWNSTAIRS   0.8428571   0.9944598      0.9619565      0.9744087
-## Class: WALKING_UPSTAIRS     0.9235669   0.9777868      0.8877551      0.9853480
-##                           Precision    Recall        F1 Prevalence
-## Class: LAYING             1.0000000 1.0000000 1.0000000  0.1822192
-## Class: SITTING            0.9392034 0.9124236 0.9256198  0.1666101
-## Class: STANDING           0.9212454 0.9454887 0.9332096  0.1805226
-## Class: WALKING            0.9073724 0.9677419 0.9365854  0.1683068
-## Class: WALKING_DOWNSTAIRS 0.9619565 0.8428571 0.8984772  0.1425178
-## Class: WALKING_UPSTAIRS   0.8877551 0.9235669 0.9053070  0.1598235
-##                           Detection Rate Detection Prevalence Balanced Accuracy
-## Class: LAYING                  0.1822192            0.1822192         1.0000000
-## Class: SITTING                 0.1520190            0.1618595         0.9503079
-## Class: STANDING                0.1706820            0.1852732         0.9638417
-## Class: WALKING                 0.1628775            0.1795046         0.9738750
-## Class: WALKING_DOWNSTAIRS      0.1201222            0.1248728         0.9186585
-## Class: WALKING_UPSTAIRS        0.1476077            0.1662708         0.9506768
 ## --------------------------
 ## |     Best Parameters     |
 ## --------------------------
-##   mtry
-## 1   16
+## mtry = 16
 ## --------------------------
-## |      Best Accuracy      |
+## |     Best CV Accuracy    |
 ## --------------------------
-## [1] 0.9829978
+## [1] 0.983
+## --------------------------
+## |      Test Accuracy      |
+## --------------------------
+## [1] 0.941
+## --------------------------
+## | Precision / Recall / F1 |
+## --------------------------
+##                           Precision Recall     F1
+## Class: LAYING                1.0000 1.0000 1.0000
+## Class: SITTING               0.9515 0.9185 0.9347
+## Class: STANDING              0.9271 0.9568 0.9417
+## Class: WALKING               0.9162 0.9698 0.9422
+## Class: WALKING_DOWNSTAIRS    0.9592 0.8405 0.8959
+## Class: WALKING_UPSTAIRS      0.8947 0.9384 0.9161
+## ------------------------------
+## |   Macro Avg (All Classes)  |
+## ------------------------------
+## Precision: 0.9415
+## Recall   : 0.9373
+## F1-score : 0.9384
+## ------------------------------
+## | Weighted Avg (By Support)  |
+## ------------------------------
+## Precision: 0.9420
+## Recall   : 0.9410
+## F1-score : 0.9406
 \end{verbatim}
+
+\includegraphics{report_files/figure-latex/unnamed-chunk-28-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{grid\_knn }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{k =} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{30}\NormalTok{, }\AttributeTok{by =} \DecValTok{2}\NormalTok{))  }
+\NormalTok{grid\_knn }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{k =} \FunctionTok{seq}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{30}\NormalTok{, }\AttributeTok{by =} \DecValTok{2}\NormalTok{))  }
 
 \NormalTok{results\_knn }\OtherTok{\textless{}{-}} \FunctionTok{train\_and\_evaluate\_model}\NormalTok{(}
   \AttributeTok{model\_name =} \StringTok{"knn"}\NormalTok{,}
@@ -2248,65 +2211,43 @@ nhau như Random Forest, SVM, Logistic Regression, hoặc k-NN.
 \end{Shaded}
 
 \begin{verbatim}
-## ---------------------
-## |      Accuracy      |
-## ---------------------
-## 
-##     0.8799
-## 
-## --------------------
-## | Confusion Matrix |
-## --------------------
-##                     Actual
-## Predicted            LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS
-##   LAYING                535       1        0       0                  0
-##   SITTING                 2     393       80       0                  0
-##   STANDING                0      96      452       0                  0
-##   WALKING                 0       0        0     472                 53
-##   WALKING_DOWNSTAIRS      0       0        0      13                317
-##   WALKING_UPSTAIRS        0       1        0      11                 50
-##                     Actual
-## Predicted            WALKING_UPSTAIRS
-##   LAYING                            0
-##   SITTING                           0
-##   STANDING                          0
-##   WALKING                          29
-##   WALKING_DOWNSTAIRS               18
-##   WALKING_UPSTAIRS                424
-## -------------------------
-## | Classification Report |
-## -------------------------
-##                           Sensitivity Specificity Pos Pred Value Neg Pred Value
-## Class: LAYING               0.9962756   0.9995851      0.9981343      0.9991705
-## Class: SITTING              0.8004073   0.9666124      0.8273684      0.9603560
-## Class: STANDING             0.8496241   0.9602484      0.8248175      0.9666528
-## Class: WALKING              0.9516129   0.9665443      0.8519856      0.9899707
-## Class: WALKING_DOWNSTAIRS   0.7547619   0.9877325      0.9109195      0.9603694
-## Class: WALKING_UPSTAIRS     0.9002123   0.9749596      0.8724280      0.9809021
-##                           Precision    Recall        F1 Prevalence
-## Class: LAYING             0.9981343 0.9962756 0.9972041  0.1822192
-## Class: SITTING            0.8273684 0.8004073 0.8136646  0.1666101
-## Class: STANDING           0.8248175 0.8496241 0.8370370  0.1805226
-## Class: WALKING            0.8519856 0.9516129 0.8990476  0.1683068
-## Class: WALKING_DOWNSTAIRS 0.9109195 0.7547619 0.8255208  0.1425178
-## Class: WALKING_UPSTAIRS   0.8724280 0.9002123 0.8861024  0.1598235
-##                           Detection Rate Detection Prevalence Balanced Accuracy
-## Class: LAYING                  0.1815405            0.1818799         0.9979303
-## Class: SITTING                 0.1333560            0.1611809         0.8835099
-## Class: STANDING                0.1533763            0.1859518         0.9049363
-## Class: WALKING                 0.1601629            0.1879878         0.9590786
-## Class: WALKING_DOWNSTAIRS      0.1075670            0.1180862         0.8712472
-## Class: WALKING_UPSTAIRS        0.1438751            0.1649135         0.9375860
 ## --------------------------
 ## |     Best Parameters     |
 ## --------------------------
-##   k
-## 1 1
+## k = 5
 ## --------------------------
-## |      Best Accuracy      |
+## |     Best CV Accuracy    |
 ## --------------------------
-## [1] 0.9717066
+## [1] 0.9675
+## --------------------------
+## |      Test Accuracy      |
+## --------------------------
+## [1] 0.903
+## --------------------------
+## | Precision / Recall / F1 |
+## --------------------------
+##                           Precision Recall     F1
+## Class: LAYING                1.0000 0.9963 0.9981
+## Class: SITTING               0.9032 0.7984 0.8476
+## Class: STANDING              0.8353 0.9248 0.8778
+## Class: WALKING               0.8597 0.9758 0.9141
+## Class: WALKING_DOWNSTAIRS    0.9463 0.7976 0.8656
+## Class: WALKING_UPSTAIRS      0.8962 0.8981 0.8971
+## ------------------------------
+## |   Macro Avg (All Classes)  |
+## ------------------------------
+## Precision: 0.9068
+## Recall   : 0.8985
+## F1-score : 0.9001
+## ------------------------------
+## | Weighted Avg (By Support)  |
+## ------------------------------
+## Precision: 0.9063
+## Recall   : 0.9030
+## F1-score : 0.9021
 \end{verbatim}
+
+\includegraphics{report_files/figure-latex/unnamed-chunk-29-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2316,7 +2257,7 @@ nhau như Random Forest, SVM, Logistic Regression, hoặc k-NN.
 \end{Shaded}
 
 \begin{verbatim}
-## Giá trị k tối ưu là: 1
+## Giá trị k tối ưu là: 5
 \end{verbatim}
 
 \end{document}
