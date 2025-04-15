@@ -1,7 +1,6 @@
 ---
 title: ""
 author: ""
-
 output:
   pdf_document:
     latex_engine: xelatex
@@ -21,10 +20,8 @@ output:
     number_sections: true
     fig_caption: true
     reference_docx: "template.docx"
-
 bibliography: reference.bib
 csl: ieee.csl
-
 header-includes:
   - \usepackage{pdfpages}
   - \usepackage{fontspec}
@@ -79,10 +76,9 @@ TP.\ Hồ Chí Minh, ngày 28 tháng 3 năm 2025
 \setcounter{page}{1}
 
 
+\newpage
+# GIỚI THIỆU TỔNG QUAN
 
-\section*{CHƯƠNG 1: GIỚI THIỆU TỔNG QUAN}
-\addcontentsline{toc}{section}{CHƯƠNG 1: GIỚI THIỆU TỔNG QUAN}
-\setcounter{section}{1}
   Trong thời đại của điện toán di động và thiết bị thông minh, việc theo dõi và nhận dạng hoạt động con người (Human Activity Recognition - HAR) đã trở thành một lĩnh vực nghiên cứu đóng vai trò quan trọng trong nhiều ngành như trí tuệ nhân tạo, khoa học dữ liệu, y học và công nghệ cảm biến. HAR đóng vai trò cốt lõi trong các ứng dụng như giám sát sức khỏe, phát hiện té ngã, điều khiển nhà thông minh. Ngày nay, nhu cầu càng ngày gia tăng về các thiết bị công nghệ có thể hiểu hành vi con người dẫn đến việc phát triển các mô hình HAR là chính xác, hiệu quả và có khả năng triển khai thực tế là vô cùng cần thết. 
   
   Một trong những yếu tố chính thúc đẩy sự phát triển của HAR là sự phổ biến của các thiết bị di động thông minh và đồng hồ thông minh, vốn đợc trang bị sẵn các cảm biến quán tính bao gồm gia tốc kế (accelerometer) và con quay hồi chuyển (gyroscope). Những cảm biến này cho phép thu thập dữ liệu về chuyển động của người sử dụng với độ chính xác cao, chi phí thấp và tính khả dụng cao trong đời sống hàng ngày. Nhờ vậy, hệ thống HAR có thể được lắp đặt mà không cần sử dụng các thiết bị đắt tiền hoặc lắp đặt phức tạp.
@@ -91,15 +87,14 @@ TP.\ Hồ Chí Minh, ngày 28 tháng 3 năm 2025
   
   Trong nghiên cứu này, chúng em đã tiến hành khai thác bộ dữ liệu "**Human Activity Recognition with Smartphones**" do UCI Machine Learning Repository cung cấp, một bộ dữ liệu được sử dụng rộng rãi trong cộng đồng nghiên cứu HAR. Chúng em đề xuất một quy trình học máy toàn diện bao gồm phân tích đặc trưng, giảm chiều dữ liệu bằng UMAP, PCA, TSNE và huấn luyện bằng các mô hình học máy như Random Forest, Decision Tree, Logistic Regression, Support Vectot Machine (SVM) để phân loại các hoạt động với mục tiêu là nâng cao độ chính xác và hiệu quả của mô hình. Những kết quả này sẽ cung cấp cái nhìn thực nghiệm rõ ràng cho các nhà nghiên cứu, đồng thời làm nền móng cho việc triển khai các hệ thống nhận dạng hoạt động trong thế giới thực.
  
- 
-\section*{CHƯƠNG 2: CƠ SỞ LÝ THUYẾT}
-\addcontentsline{toc}{section}{CHƯƠNG 2: CƠ SỞ LÝ THUYẾT}
-\setcounter{section}{2}
-\setcounter{subsection}{0}
+
+\newpage
+# CƠ SỞ LÝ THUYẾT
 
 ## Hồi quy logistic (Logistic Regression)
 
 ### Khái niệm
+
   Hồi quy logistic (Logistic Regression) là một thuật toán học máy có giám sát (supervised learning), đồng thời cũng là một phương pháp thống kê phổ biến, được sử dụng
 rộng rãi trong việc phân tích và dự đoán dữ liệu phân loại. Mô hình này đặc biệt hiệu quả trong các bài toán phân loại nhị phân, nơi mà biến phụ thuộc chỉ có hai giá trị khả dĩ như có/không, đúng/sai hoặc 1/0.[@noauthor_frontmatter_2013]
   
@@ -485,10 +480,8 @@ cục bộ.
 * Không giải thích được biến gốc.
 * Phụ thuộc vào tham số.
 
-\section*{CHƯƠNG 3: GIỚI THIỆU BỘ DỮ LIỆU}
-\addcontentsline{toc}{section}{CHƯƠNG 3: GIỚI THIỆU BỘ DỮ LIỆU}
-\setcounter{section}{3}
-
+\newpage
+# GIỚI THIỆU BỘ DỮ LIỆU
 
   Bộ dữ liệu **Human Activity Recognition with Smartphones** được xây dựng nhằm phục vụ cho các nghiên cứu về nhận diện hành vi con người thông qua dữ liệu cảm biến thu thập từ thiết bị di động. Tập dữ liệu được thu thập từ 30 người tham gia (gọi là *subjects*) (15 nam và 15 nữ, độ tuổi từ 19 đến 48) thực hiện sáu hoạt động thường ngày như Đi bộ (Walking), đi lên cầu thang (Walking Upstairs), đi xuống cầu thang (WalkingDownstairs), ngồi (Sitting), đứng (Standing)và nằm (Laying).[@noauthor_human_nodate]
   
@@ -545,23 +538,28 @@ dim(test)
 
   Kiểm tra kiểu dữ liệu của các biến trong tập huấn luyện để thống kê số lượng cột thuộc từng kiểu dữ liệu trong bảng dữ liệu train. Kết quả sẽ cung cấp một cái nhìn tổng quan về cấu trúc dữ liệu, giúp đánh giá mức độ sẵn sàng của tập dữ liệu cho các bước xử lý tiếp theo.
   
+  
 ```{r}
 table(sapply(train, class))
 ```
+
 
   Theo kết quả trả về, bộ dữ liệu train bao gồm: 561 biến kiểu numeric, 1 biến kiểu character, 1 biến kiểu integer.
   
   
   Kiểm tra xem có biến nào được lưu dưới dạng chuỗi ký tự (character) hay không. Đảm bảo các biến phân loại sẽ được xử lý đúng cách trong mô hình học máy.
   
+  
 ```{r}
 names(train)[sapply(train, class) == "character"]
 ```
+
 
   Kết quả cho thấy chỉ có một biến duy nhất là "Activity" đang được lưu dưới dạng character. Cho thấy nhãn phân loại hiện tại vẫn chưa được chuyển đổi về dạng factor, cần được xử lý lại để đảm bảo phù hợp với các thuật toán phân loại.
   
   
   Kiểm tra danh sách đầy đủ các giá trị duy nhất (tức là các lớp phân loại) mà biến này chứa.
+  
   
 ```{r}
 unique(train$Activity)
@@ -576,23 +574,29 @@ train$Activity <- as.factor(train$Activity)
 test$Activity <- as.factor(test$Activity)
 ```
 
+
   Để đảm bảo chất lượng dữ liệu đầu vào cho mô hình học máy, chúng em thực hiện kiểm tra các giá trị bị thiếu (missing values) trong cả hai tập dữ liệu huấn luyện và kiểm tra.
+  
   
 ```{r}
 cat("Giá trị thiếu ở tập train:", sum(is.na(train)), "\n")
 cat("Giá trị thiếu ở tập test:", sum(is.na(test)), "\n")
 ```
 
+
   Kết quả cho thấy không có giá trị thiếu trong cả tập huấn luyện (train) và tập kiểm tra (test), với tổng số lượng NA bằng 0.
   
   Bên cạnh việc kiểm tra giá trị thiếu, chúng em đánh giá tính duy nhất của các dữ liệu bằng cách xác định xem có các dòng dữ liệu nào bị trùng lặp trong cả hai tập huấn luyện và kiểm tra hay không.
+
 
 ```{r}
 cat("Số dòng bị trùng lặp trong tập train:", sum(duplicated(train)), "\n")
 cat("Số dòng bị trùng lặp trong tập test :", sum(duplicated(test)), "\n")
 ```
 
+
   Kết quả hiển thị không có dòng nào bị trùng lặp trong cả hai tập dữ liệu (train và test), với tổng số dòng trùng là 0.
+  
 
 ```{r}
 columns <- colnames(train)
@@ -601,7 +605,9 @@ colnames(train) <- columns
 colnames(test) <- columns
 ``` 
 
+
   Tiến hành xem phân phối dữ liệu qua biểu đồ sau:
+  
   
 ```{r, fig.width=16, fig.height=8, fig.cap=" Số lượng mẫu dữ liệu theo người dùng và hoạt động"}
 library(ggplot2)
@@ -625,6 +631,7 @@ ggplot(train, aes(x = factor(subject), fill = Activity)) +
   )
 ```
 
+
   Nhận xét biểu đồ:
   
 * Nhìn chung, số lượng mẫu giữa các người dùng tương đối đồng đều, thường dao động trong khoảng từ 50 đến 75 mẫu cho mỗi hoạt động.
@@ -636,6 +643,7 @@ ggplot(train, aes(x = factor(subject), fill = Activity)) +
 * Các hoạt động tĩnh như LAYING, SITTING và STANDING nhìn chung ổn định, không có sự chênh lệch đáng kể giữa các người dùng.
 
 => Dữ liệu khá cân bằng giữa các đối tượng và hoạt động, ngoại trừ trường hợp đặc biệt ở người dùng số 1 với hoạt động WALKING có thể cần xem xét thêm để tránh ảnh hưởng đến phân tích và xây dựng mô hình.
+
 
 ```{r, fig.width=18, fig.height=8, fig.cap="Số lượng mẫu theo từng hoạt động"}
 
@@ -655,6 +663,7 @@ ggplot(train, aes(x = Activity, fill = Activity)) +
   ) +
   guides(fill = "none")
 ```
+
 
   Số lượng mẫu cho mỗi hoạt động dao động trong khoảng 1000 mẫu đến 1200 mẫu. Các hoạt động tĩnh như laying, sitting, standing có xu hướng chiếm tỷ lệ cao hơn một chút so với các hoạt động di chuyển như walking, walking_upstairs, walking_downstairs. Mức độ chênh lệch không qua lớn giữa các nhóm, là điểm thuận lợi cho các mô hình học máy tránh bị lệch nhãn và đảm bảo khả năng học đều giữa các lớp.  
 
@@ -676,6 +685,7 @@ ggplot(train, aes(x = tBodyAccMagmean, color = Activity)) +
   )
 ```
   
+  
   Biểu đồ cho thấy biến tBodyAccMagmean phân biệt rõ giữa nhóm hoạt động tĩnh và hoạt động động:
   
 * LAYING, SITTING, STANDING có mật độ tập trung mạnh quanh giá trị âm lớn (gần -1), cho thấy ít dao động, phù hợp với các hoạt động ít vận động.
@@ -683,6 +693,7 @@ ggplot(train, aes(x = tBodyAccMagmean, color = Activity)) +
 * Trong khi đó, WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS phân bố lệch phải, trải dài và cao hơn ở các giá trị gần 0, biểu thị mức độ chuyển động nhiều hơn.
 
   Điều này cho thấy tBodyAccMagmean là biến có khả năng phân biệt tốt giữa hành vi tĩnh và động.
+
 
 ```{r, warning=FALSE,message=FALSE,fig.cap="Phân bố tBodyAccMagmean theo hoạt động sitting, standing, laying"}
 library(ggplot2)
@@ -703,6 +714,8 @@ p1 <- train %>%
   theme_minimal(base_size = 14)
 p1
 ```
+
+
   Biểu đồ cho thấy 3 hoạt động LAYING, SITTING, và STANDING đều có phân bố giá trị tBodyAccMagmean rất hẹp, tập trung mạnh quanh -1.
   
 * SITTING có đỉnh mật độ cao nhất (~33), cho thấy dữ liệu phân bố rất dày và ổn định ở vùng gia tốc thấp.
@@ -710,6 +723,7 @@ p1
 * LAYING và STANDING có dạng phân bố tương tự nhưng thấp hơn, cũng tập trung gần -1.
 
 => Điều này phản ánh rằng các hoạt động tĩnh tạo ra rất ít chuyển động cơ thể, phù hợp với giá trị tBodyAccMagmean thấp và ổn định, tuy nhiên chúng khó phân biệt rõ ràng với nhau chỉ dựa rên đặc trưng này, vì có sự chồng lấn phân bố giữa ba hoạt động.
+  
   
 ```{r, fig.cap="Phân bố tBodyAccMagmean theo hoạt động walking, walking_dowstairs, walking_upstairs"}
 p2 <- train %>%
@@ -727,6 +741,7 @@ p2
 
 ```
 
+
 Biểu đồ cho thấy sự khác biệt rõ rệt về phân bố giá trị tBodyAccMagmean giữa các hoạt động động:
 
 * WALKING có đỉnh mật độ cao nhất, tập trung quanh giá trị gần -0.1, cho thấy dao động đều và ổn định hơn so với hai hoạt động còn lại.
@@ -736,6 +751,7 @@ Biểu đồ cho thấy sự khác biệt rõ rệt về phân bố giá trị t
 * WALKING_DOWNSTAIRS có đuôi phân bố kéo dài và lan rộng hơn, với giá trị cao hơn về phía dương, phản ánh sự dao động mạnh và không đều khi đi xuống cầu thang.
 
 => Điều này cho thấy tBodyAccMagmean là một đặc trưng phân biệt tốt giữa các kiểu hoạt động động, đặc biệt là giữa đi lên và đi xuống cầu thang.
+
   
 ```{r, fig.cap="Phân bố giữa tBodyAccMagmean và Activity"}
 library(ggplot2)
@@ -757,10 +773,11 @@ ggplot(train, aes(x = Activity, y = tBodyAccMagmean)) +
   theme(
     plot.title = element_text(hjust = 0.5, size = 15, face = "bold"),
     axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-    axis.title.x = element_text(margin = margin(t = 10)),
-    axis.title.y = element_text(margin = margin(r = 10))
+    axis.title.x = element_text(margin = ggplot2::margin(t = 10)),
+    axis.title.y = element_text(margin = ggplot2::margin(r = 10))
   )
 ```
+
 
   Biểu đồ boxplot thể hiện rõ sự khác biệt giữa nhóm hoạt động tĩnh và hoạt động động:
   
@@ -769,6 +786,7 @@ ggplot(train, aes(x = Activity, y = tBodyAccMagmean)) +
 * Ngược lại, WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS có median cao hơn nhiều và khoảng biến thiên rộng, đặc biệt WALKING_DOWNSTAIRS có độ dao động lớn nhất → phản ánh cường độ hoạt động mạnh và không đều.
 
 => Từ đó ta thấy được Biến tBodyAccMagmean có khả năng phân biệt rõ ràng giữa hoạt động tĩnh và động, tuy nhiên khó phân biệt giữa các hoạt động tĩnh với nhau do phân bố quá giống nhau
+
 
 ```{r, fig.cap="Phân bố giữa angleXgravityMean và Activity"}
 library(ggplot2)
@@ -822,6 +840,8 @@ ggplot(train, aes(x = Activity, y = angleYgravityMean)) +
   )
 
 ```
+
+
   Sau khi quan sát biểu đồ ta thấy được: 	
  	
 * LAYING có giá trị angleYgravityMean thấp nhất, tập trung quanh -0.5, và có phân bố lệch mạnh về phía âm.
@@ -844,12 +864,11 @@ ggplot(train, aes(x = Activity, y = angleYgravityMean)) +
   Phân tích các đặc trưng tBodyAccMagmean, angleXgravityMean và angleYgravityMean không chỉ làm rõ cấu trúc phân bố của dữ liệu, mà còn cho thấy mỗi hoạt động trong bộ dữ liệu HAR đều thể hiện dấu hiệu đặc trưng về mặt hình học hoặc vận động học, đóng vai trò quan trọng trong việc xây dựng các mô hình học máy chính xác nhằm phân loại hành vi người dùng. 
 
 
-\section*{CHƯƠNG 4: THỰC NGHIỆM}
-\addcontentsline{toc}{section}{CHƯƠNG 4: THỰC NGHIỆM}
-\setcounter{section}{4}
-\setcounter{subsection}{0}
+\newpage
+# THỰC NGHIỆM
 
 ## Kiểm tra outlier
+
   Tiến hành kiểm tra outlier trên tập train và tập test, xác định các điểm ngoại lai  bằng phương pháp khoảng tứ phân vị (Interquartile Range – IQR). Loại bỏ biến subject và Activity để tạo ra tập dữ liệu sensor_data, bao gồm 561 đặc trưng cảm biến, với mỗi cột trong tập dữ liệu xác định ranh giới bất thường dựa trên công thức:
   
 $$
@@ -859,6 +878,7 @@ $$
 
   Trong đó *\(Q1\)* và *\(Q3\)* là các tứ phân vị thứ nhất và thứ ba tương ứng, và 
 *\(IQR = Q3 - Q1\)*. Mọi giá trị vượt ngoài khoảng này được coi là ngoại lai.
+  
   
 ```{r}
 subject_ids <- train$subject
@@ -911,6 +931,7 @@ cat("Tỷ lệ giá trị outlier:", percent_outlier_cells, "%\n")
 
 
 ```
+
 
 ## Giảm chiều dữ liệu bằng UMAP 
 
@@ -968,6 +989,7 @@ perform_umap_grid(
 )
 ```
 
+
   Khi **n_neighbors = 5** mạng lưới lân cận nhỏ, cấu trúc cục bộ lỏng lẻo và thiếu kết nối giữa các cụm, các cụm co mạnh nhưng phân bố không đồng đều.  **n neighbors = 15** cấu trúc dữ liệu trở nên rõ ràng hơn. Khi kết hợp với min dist = 0.01, các cụm đại diện cho các chức năng khác nhau bắt đầu được hình thành rõ ràng và phân chia khá mạch lạc, thể hiện sự phân cấp cao giữa các đối tượng, các cụm nhỏ như sitting và lay ing bắt đầu được gom sát nhau. **n_neighbors = 30** thể hiện cấu trúc dữ liệu ổn định hơn. Dữ liệu được sắp xếp hợp lý, thấy được sự ổn định trong phân cụm. Đặc biệt với 
   min_dist = 0.1, dữ liệu dàn rộng hơn trong không gian nhúng,  phù hợp cho việc phân tích tổng thể.
  
@@ -1001,6 +1023,7 @@ ggplot(umap_df, aes(x = UMAP_1, y = UMAP_2, color = Activity)) +
   )
 ```
 
+
   Các hoạt động như LAYING, SITTING và STANDING tạo thành ba cụm rõ ràng, thấy được tín hiệu cảm biến ở trong thái tĩnh có sự ổn định cao và dễ phân biệt.
   
   Các hoạt động như WALKING, WALKING_DOWNSTAIRS, WALKING_UPSTAIRS có xu hướng gần nhau hơn trong không gian 2 chiều, mặc dù vẫn tạo thành các cụm riêng biệt, nhưng vẫn có vẻ chồng lấn, cho thấy được biến thiên phức tạp của vận động trong thực tế. Thấy được sự tách biệt rõ ràng giữa các nhóm động và tĩnh. Đây là bước tiền xử lý và kiểm định trực quan quan trọng trước khi đưa dữ liệu vào các thuật toán học máy như Random Forest, SVM, Logistic Regression và k-NN.
@@ -1008,6 +1031,7 @@ ggplot(umap_df, aes(x = UMAP_1, y = UMAP_2, color = Activity)) +
 ## Chuẩn bị dữ liệu cho mô hình học máy
 
   Sau khi hoàn thành các bước tiền xử lý, tập dữ liệu được chia thành hai thành phần chính: ma trận đặc trưng đầu vào và nhãn đầu ra tương ứng. Các biến định danh như subject và Activity được loại bỏ khỏi ma trận đặc trưng, nhằm đảm bảo mô hình chỉ học từ các tín hiệu cảm biến mà không bị ảnh hưởng bởi thông tin định danh.
+    
     
 ```{r}
 X_train <- train_capped[, !(names(train_capped) %in% c("subject", "Activity"))]
@@ -1023,6 +1047,7 @@ dim(X_test)
 length(y_test)
 ```
 
+
 ## xây dựng hàm đánh giá tổng quá mô hình học máy 
 
   Để đảm bảo sự thống nhất và tái sử dụng trong việc đào tạo và đánh giá các mô hình học máy, một hàm tổng quát có tên train_and_evaluate_model đã được thiết lập.Hàm thực hiện quy trình huấn luyện, dự đoán, đánh giá và trực quan hóa kết quả của một mô hình phân loại với cấu trúc linh hoạt, cho phép sử dụng nhiều thuật toán khác nhau như Random Forest, SVM, Logistic Regression, hoặc k-NN.
@@ -1032,6 +1057,7 @@ length(y_test)
   Quá trình huấn luyện mô hình được thực hiện thông qua hàm train() từ thưu viện cảet, cho phép sử dụng kiểm định chéo k-fold đồng thời tối ưu hóa các tham số theo lưới định nghĩa trước đó. Sau khi huấn luyện xong, mô hình được sử dụng để dự đoán trên dữ liệu kiểm tra, sau đó tính toán độ chính xác tổng thể và tạo ra ma trận nhầm lẫn để đánh giá mô hình. Bên cạnh đó, hàm còn cung cấp chi tiết các chỉ số quan trọng như recision, Recall, F1-score, được tính thông qua hàm confusionMatrix() từ gói caret.
   
   Ngoài việc đánh giá hiệu suất cho từng lớp riêng biệt, hàm train_and_evaluate_model còn tiến hành tính toán các chỉ số trung bình ở cả hai mức độ: macro average (trung bình không trọng số giữa các lớp) và weighted average (trung bình có trọng số theo số mẫu trên mỗi lớp). Điều này giúp cung cấp một cái nhìn toàn diện hơn về hiệu suất mô hình, đặc biệt hữu ích trong các bài toán phân loại không cân bằng. Hàm còn sử dụng ggplot2 để sinh ra ma trận nhầm lẫn dưới dạng đồ họa  giúp dễ dàng phát hiện những nhóm hành vi dễ bị mô hình nhầm lẫn.
+  
   
 ```{r, warning=FALSE}
 train_and_evaluate_model <- function(
@@ -1150,6 +1176,7 @@ train_and_evaluate_model <- function(
 
   Trước tiên mô hình hồi quy logistic được triển khai thông qua gói glmnet, với việc tinh chỉnh lưới tham số alpha và lambda, tham số alpha kiểm soát mức độ pha trộn giữa Lasso (L1) và Ridge (L2), trong khi lambda điều chỉnh cường độ của hình phạt. Thử nghiệm với nhiều giá trị lambda đảo ngược (1/λ) cho phép kiểm tra ảnh hưởng của việc điều chỉnh trọng số lên khả năng phân loại. 
 
+
 ```{r,fig.cap="confusion matrix Logistic Regression"}
 grid_logistic <- expand.grid(
   alpha = c(0, 1),
@@ -1168,6 +1195,7 @@ results_log <- train_and_evaluate_model(
 )
 ```
 
+
   Mô hình Logistic Regression với lựa chọn siêu tham số tối ưu (alpha = 0, lambda = 0.0333) đạt độ chính xác rất cao trên tập kiểm tra (94.88%) và kiểm định chéo (96.89%), cho thấy mô hình tổng quát hóa tốt và không bị overfitting.
 
   Nhìn vào confusion matrix, phần lớn các dự đoán đều nằm trên đường chéo chính, thể hiện mô hình đã phân loại chính xác đa số các trường hợp. Một số điểm đáng chú ý:
@@ -1185,6 +1213,7 @@ results_log <- train_and_evaluate_model(
 
   Sau khi đánh giá Logistic Regression, ta tiếp tục thử nghiệm với mô hình SVM tuyến tính để so sánh hiệu quả giữa hai phương pháp phân loại tuyến tính. Mô hình SVM tuyến tính được thực hiện với lưới tham số c. Các giá trị C thấp khuyến khích mô hình đơn giản, trong khi giá trị lớn hướng tới việc giảm thiểu lỗi huấn luyện. Lựa chọn tập các giá trị c từ 0.125 đến 16 giúp đánh giá độ nhạy của SVM với mức độ điều chuẩn khác nhau.
   
+  
 ```{r, fig.cap="confusion matrix SVC"}
 grid_linear_svc <- expand.grid(C = c(0.125, 0.5, 1, 2, 8, 16))
 
@@ -1197,6 +1226,7 @@ results_svc <- train_and_evaluate_model(
   k_folds = 5
 )
 ```
+
 
   Mô hình SVM tuyến tính cho kết quả rất tốt trên tập kiểm tra, với độ chính xác đạt 96.06%. Đồng thời, các chỉ số đánh giá F1-score trung bình cũng rất cao (Macro F1 = 0.9603, Weighted F1 = 0.9605), cho thấy mô hình hoạt động hiệu quả và khá ổn định trên cả các lớp phổ biến lẫn các lớp ít xuất hiện.
   
@@ -1213,6 +1243,7 @@ results_svc <- train_and_evaluate_model(
 
   Tiếp theo, ta tiến hành xây dựng và đánh giá mô hình Decision Tree Classifier nhằm so sánh hiệu quả với các mô hình tuyến tính đã triển khai trước đó. Mô hình Decision Tree Classifier được thực hiện thông qua rpart2, một biến thể của cây quyết định truyền thống cho phép tối ưu độ sâu cây (maxdepth). Điều chỉnh độ sâu của cây thông qua grid_dt giúp kiểm soát mức độ phức tạp, tránh việc cây học thuộc dữ liệu huấn luyện. Các giá trị từ 3 đến 9 được thử nghiệm để tìm ra cấu trúc cây phù hợp nhất với độ phức tạp của dữ liệu. Quá trình huấn luyện và đánh giá được thực hiện đồng bộ trong hàm train_and_evaluate_model() với xác thực chéo k-fold (k = 5), cho phép đo lường hiệu suất mô hình một cách khách quan. 
   
+  
 ```{r, fig.cap="confusion matrix decision tree"}
 grid_dt <- expand.grid(maxdepth = seq(3, 9, by = 2))
 
@@ -1228,6 +1259,7 @@ results_dt <- train_and_evaluate_model(
 )
 
 ```
+
 
   Mô hình Decision Tree với độ sâu tối ưu là maxdepth = 7 đạt độ chính xác kiểm định chéo ở mức 88.60% và độ chính xác trên tập kiểm tra là 84.02%. So với Logistic Regression và SVM, độ chính xác của mô hình này thấp hơn, cho thấy khả năng tổng quát hóa của cây quyết định có phần hạn chế hơn trong bài toán này.
 
@@ -1249,6 +1281,7 @@ results_dt <- train_and_evaluate_model(
 
 
 Sau khi đánh giá hiệu quả của mô hình Decision Tree, ta tiếp tục triển khai mô hình Random Forest – một phương pháp tổ hợp (ensemble) giúp khắc phục hiện tượng overfitting thường gặp ở cây quyết định đơn lẻ. Mô hình Random Forest trên bộ dữ liệu nhận diện hành vi người dùng từ cảm biến điện thoại thông minh, với mục tiêu là tìm ra số mtry tối ưu là số lượng biến ngẫu nhiên được chọn tại mỗi nút phân tách trong cây. Việc chọn mtry trong khoảng 16 đến 32 là phù hợp vì xét trên tổng thể số đặc trưng đầu vào 561 để đảm bảo sự đa dạn và ngẫu nhiên trong rừng cây. Cross-validation 5-fold đảm bảo rằng kết quả không bị lệ thuộc vào một phân phối dữ liệu cụ thể, tăng tính tổng quát hóa cho mô hình.
+
   
 ```{r,warning=FALSE, message=FALSE, fig.cap="confusion matrix random forest"}
 library(randomForest)
@@ -1264,6 +1297,7 @@ results_rf <- train_and_evaluate_model(
   k_folds = 5
 )
 ```
+
 
   Mô hình Random Forest đạt độ chính xác kiểm tra là 94.1%, cùng với Macro F1-score = 0.9384 và Weighted F1-score = 0.9406, cho thấy đây là một mô hình mạnh, có khả năng phân loại tổng thể tốt và tương đối đồng đều giữa các lớp.
 
@@ -1281,6 +1315,7 @@ results_rf <- train_and_evaluate_model(
 
   Sau đó chúng em tiếp tục triển khai K-Nearest Neighbors (KNN), một lưới các giá trị siêu tham số k đã được thiết lập từ 3 đến 30, với bước nhảy 2. Việc giới hạn lựa chọn k là các số lẻ nhằm tránh tình trạng hòa phiếu trong quá trình bỏ phiếu đa số của KNN. Sử dụng hàm train_and_evaluate_model() để huấn luyện và đánh giá mô hình KNN ứng với từng giá trị k trong lưới thông qua quy trình cross-validation 5-fold. Sau quá trình huấn luyện, giá trị k tối ưu được trích xuất từ mô hình đã hiệu chỉnh thông qua thuộc tính bestTune, cho phép xác định cấu hình KNN có hiệu suất dự đoán tốt nhất trên tập kiểm tra. 
 
+
 ```{r, fig.cap="confusion matrix KNN"}
 grid_knn <- expand.grid(k = seq(3, 30, by = 2))  
 
@@ -1294,9 +1329,8 @@ results_knn <- train_and_evaluate_model(
   tuneGrid = grid_knn,
   k_folds = 5
 )
-
-best_k <- results_knn$model$bestTune$k
 ```
+
 
   Mô hình KNN mặc dù đơn giản, nhưng cho thấy hiệu quả phân loại khá cao trên tập dữ liệu hoạt động con người. Với độ chính xác kiểm tra đạt 90.3% và Macro F1-score 90.01%, KNN đứng trong nhóm mô hình có hiệu suất tốt nhất, chỉ xếp sau các mô hình tuyến tính như SVM và Logistic Regression.
 
@@ -1312,17 +1346,17 @@ best_k <- results_knn$model$bestTune$k
 
 
 
-\section*{CHƯƠNG 5: KẾT LUẬN}
-\addcontentsline{toc}{section}{CHƯƠNG 5: KẾT LUẬN}
-\setcounter{section}{5}
-\setcounter{subsection}{0}
+\newpage
+# KẾT QUẢ THỰC NGHIỆM
+
+## Tổng hợp kết quả mô hình
 
   Trong nghiên cứu này, chúng em đã thực hiện một quy trình phân tích và xây dựng mô hình học máy nhằm phân loại hành vi vận động của con người dựa trên dữ liệu cảm biến từ bộ dữ liệu Human Activity Recognition with Smartphones. Bộ dữ liệu chứa các đặc trưng trích xuất từ gia tốc kế và con quay hồi chuyển gắn trên điện thoại thông minh, với 561 đặc trưng đầu vào đại diện cho các thông tin trong miền thời gian và tần số.
   
   Trước khi đưa vào mô hình, dữ liệu được xử lý kỹ lưỡng bao gồm: kiểm tra dữ liệu thiếu, loại bỏ dòng trùng lặp,  xử lý các giá trị ngoại lai thông qua kỹ thuật capping theo ngưỡng phần trăm vị (percentile). Sau đó, nhóm đã áp dụng các kỹ thuật giảm chiều dữ liệu như UMAP để trực quan hóa dữ liệu. Kết quả trực quan cho thấy các nhóm hành vi có xu hướng phân tách rõ ràng, đặc biệt là các hoạt động như LAYING, WALKING_UPSTAIRS và WALKING_DOWNSTAIRS.Phần xây dựng mô hình, nhóm đã thử nghiệm và đánh giá hiệu quả của các thuật toán học máy khác nhau
-  
-  
+ 
   Tiếp theo chúng em tiến hành tổng hợp và so sánh hiệu suất của các mô hình dựa trên các chỉ số đánh giá quan trọng như Accuracy, Macro F1 và Weighted F1.
+
 
 ```{r}
 model_summary <- data.frame(
@@ -1353,9 +1387,13 @@ model_summary <- data.frame(
 print(model_summary)
 ```
   
+  
   SVM tuyến tính là mô hình tốt nhất với độ chính xác và F1-score cao nhất trên cả hai tiêu chí macro và weighted. Điều này chứng tỏ SVM không chỉ hoạt động tốt trên toàn tập dữ liệu mà còn duy trì độ ổn định giữa các lớp phân loại.Logistic Regression cũng thể hiện hiệu quả rất tốt, cho thấy các đặc trưng đầu vào phù hợp với mô hình tuyến tính. Random Forest đạt hiệu suất cao, đặc biệt thích hợp với các lớp hành vi chuyển động rõ ràng như WALKING hay LAYING. Tuy KNN bị ảnh hưởng bởi độ lớn của chiều dữ liệu nhưng kết quả vẫn đạt ở mức ổn định khi k = 5. Decision Tree tuy không tối ưu về độ chính xác nhưng lại đóng vai trò baseline quan trọng và giúp giải thích được logic phân loại.
+  
+## Phân tích và so sánh mô hình
 
   Hình dưới đây minh họa trực quan mức độ hiệu quả của các mô hình dựa trên ba chỉ số đánh giá chính. Có thể thấy rõ rằng SVM đạt điểm cao nhất ở cả ba thước đo, trong khi các mô hình như Logistic Regression và Random Forest bám sát theo sau. Decision Tree là mô hình có hiệu suất thấp nhất trong nhóm, đặc biệt trên chỉ số Macro F1.
+
 
 ```{r, warning=FALSE, message=FALSE}
 library(ggplot2)
@@ -1381,17 +1419,19 @@ ggplot(model_summary_long, aes(x = Model, y = Value, fill = Metric)) +
 
 ```
 
-# Chương 5 Kết luận:
 
-	SVM tuyến tính là mô hình có hiệu suất cao nhất trên cả ba chỉ số, thể hiện khả năng phân loại mạnh mẽ và ổn định giữa các lớp.
+  SVM tuyến tính là mô hình có hiệu suất cao nhất trên cả ba chỉ số, thể hiện khả năng phân loại mạnh mẽ và ổn định giữa các lớp.
 	
-	Logistic Regression và Random Forest cũng cho kết quả rất tốt, chỉ xếp sau SVM một cách sát sao. Logistic hoạt động đặc biệt hiệu quả trong không gian tuyến tính, còn Random Forest thể hiện ưu thế ở các lớp có tính phi tuyến cao.
+  Logistic Regression và Random Forest cũng cho kết quả rất tốt, chỉ xếp sau SVM một cách sát sao. Logistic hoạt động đặc biệt hiệu quả trong không gian tuyến tính, còn Random Forest thể hiện ưu thế ở các lớp có tính phi tuyến cao.
 	
-	KNN, mặc dù đơn giản, vẫn đạt hiệu suất đáng kể với Accuracy > 90%, cho thấy phù hợp với dữ liệu đã được chuẩn hóa và có ranh giới rõ ràng.
+  KNN, mặc dù đơn giản, vẫn đạt hiệu suất đáng kể với Accuracy > 90%, cho thấy phù hợp với dữ liệu đã được chuẩn hóa và có ranh giới rõ ràng.
 	
-	Decision Tree là mô hình có độ chính xác thấp nhất, chủ yếu do nhầm lẫn giữa các lớp tĩnh và giới hạn về khả năng khái quát khi không được kết hợp với các kỹ thuật tổ hợp như Random Forest.
+  Decision Tree là mô hình có độ chính xác thấp nhất, chủ yếu do nhầm lẫn giữa các lớp tĩnh và giới hạn về khả năng khái quát khi không được kết hợp với các kỹ thuật tổ hợp như Random Forest.
 
-  => Tổng thể, mô hình SVM tuyến tính được đánh giá là lựa chọn tối ưu nhất cho bài toán phân loại này, trong khi các mô hình khác như Logistic Regression và Random Forest vẫn có thể được cân nhắc tùy theo yêu cầu cụ thể về tốc độ, độ phức tạp và khả năng giải thích.
+=> Tổng thể, mô hình SVM tuyến tính được đánh giá là lựa chọn tối ưu nhất cho bài toán phân loại này, trong khi các mô hình khác như Logistic Regression và Random Forest vẫn có thể được cân nhắc tùy theo yêu cầu cụ thể về tốc độ, độ phức tạp và khả năng giải thích.
+
+\newpage
+# KẾT LUẬN
 
   Qua quá trình thực hiện đã cho thấy tiềm năng lớn của các mô hình học máy trong việc nhận diện hành vi từ dữ liệu cảm biến, đồng thời khẳng định vai trò quan trọng của tiền xử lý, giảm chiều, lựa chọn mô hình và đánh giá hiệu năng chi tiết theo từng lớp.
 

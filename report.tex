@@ -37,6 +37,46 @@
 \makeatother
 \usepackage{xcolor}
 \usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -176,9 +216,10 @@ TP.\ Hồ Chí Minh, ngày 28 tháng 3 năm 2025
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-\section*{CHƯƠNG 1: GIỚI THIỆU TỔNG QUAN}
-\addcontentsline{toc}{section}{CHƯƠNG 1: GIỚI THIỆU TỔNG QUAN}
-\setcounter{section}{1}
+\newpage
+
+\section{GIỚI THIỆU TỔNG
+QUAN}\label{giux1edbi-thiux1ec7u-tux1ed5ng-quan}
 
 Trong thời đại của điện toán di động và thiết bị thông minh, việc theo
 dõi và nhận dạng hoạt động con người (Human Activity Recognition - HAR)
@@ -221,10 +262,9 @@ Những kết quả này sẽ cung cấp cái nhìn thực nghiệm rõ ràng ch
 nghiên cứu, đồng thời làm nền móng cho việc triển khai các hệ thống nhận
 dạng hoạt động trong thế giới thực.
 
-\section*{CHƯƠNG 2: CƠ SỞ LÝ THUYẾT}
-\addcontentsline{toc}{section}{CHƯƠNG 2: CƠ SỞ LÝ THUYẾT}
-\setcounter{section}{2}
-\setcounter{subsection}{0}
+\newpage
+
+\section{CƠ SỞ LÝ THUYẾT}\label{cux1a1-sux1edf-luxfd-thuyux1ebft}
 
 \subsection{Hồi quy logistic (Logistic
 Regression)}\label{hux1ed3i-quy-logistic-logistic-regression}
@@ -870,9 +910,10 @@ UMAP}\label{quy-truxecnh-thux1ef1c-hiux1ec7n-umap}
   Phụ thuộc vào tham số.
 \end{itemize}
 
-\section*{CHƯƠNG 3: GIỚI THIỆU BỘ DỮ LIỆU}
-\addcontentsline{toc}{section}{CHƯƠNG 3: GIỚI THIỆU BỘ DỮ LIỆU}
-\setcounter{section}{3}
+\newpage
+
+\section{GIỚI THIỆU BỘ DỮ
+LIỆU}\label{giux1edbi-thiux1ec7u-bux1ed9-dux1eef-liux1ec7u}
 
 Bộ dữ liệu \textbf{Human Activity Recognition with Smartphones} được xây
 dựng nhằm phục vụ cho các nghiên cứu về nhận diện hành vi con người
@@ -958,6 +999,1669 @@ Giá trị nhãn & Hoạt động \\
 5 & STANDING \\
 6 & LAYING \\
 \end{longtable}
+
+Đầu tiên ta tiến hành đọc dữ liệu
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# train \textless{}{-}read.csv(\textquotesingle{}/Users/huy/Documents/doanthaytung/archive/train.csv\textquotesingle{})}
+\CommentTok{\# train \textless{}{-}read.csv("D:/BT/clonegit/doanthaytung/archive/train.csv")}
+\NormalTok{train }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}archive/train.csv\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# test \textless{}{-}read.csv(\textquotesingle{}/Users/huy/Documents/doanthaytung/archive/test.csv\textquotesingle{})}
+\CommentTok{\# test \textless{}{-}read.csv("D:/BT/clonegit/doanthaytung/archive/test.csv")}
+\NormalTok{test }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"archive/test.csv"}\NormalTok{)}
+\CommentTok{\#head(train)}
+\FunctionTok{dim}\NormalTok{(train)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7352  563
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#head(test)}
+\FunctionTok{dim}\NormalTok{(test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2947  563
+\end{verbatim}
+
+Kiểm tra kiểu dữ liệu của các biến trong tập huấn luyện để thống kê số
+lượng cột thuộc từng kiểu dữ liệu trong bảng dữ liệu train. Kết quả sẽ
+cung cấp một cái nhìn tổng quan về cấu trúc dữ liệu, giúp đánh giá mức
+độ sẵn sàng của tập dữ liệu cho các bước xử lý tiếp theo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(}\FunctionTok{sapply}\NormalTok{(train, class))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## character   integer   numeric 
+##         1         1       561
+\end{verbatim}
+
+Theo kết quả trả về, bộ dữ liệu train bao gồm: 561 biến kiểu numeric, 1
+biến kiểu character, 1 biến kiểu integer.
+
+Kiểm tra xem có biến nào được lưu dưới dạng chuỗi ký tự (character) hay
+không. Đảm bảo các biến phân loại sẽ được xử lý đúng cách trong mô hình
+học máy.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(train)[}\FunctionTok{sapply}\NormalTok{(train, class) }\SpecialCharTok{==} \StringTok{"character"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Activity"
+\end{verbatim}
+
+Kết quả cho thấy chỉ có một biến duy nhất là ``Activity'' đang được lưu
+dưới dạng character. Cho thấy nhãn phân loại hiện tại vẫn chưa được
+chuyển đổi về dạng factor, cần được xử lý lại để đảm bảo phù hợp với các
+thuật toán phân loại.
+
+Kiểm tra danh sách đầy đủ các giá trị duy nhất (tức là các lớp phân
+loại) mà biến này chứa.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{unique}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{Activity)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "STANDING"           "SITTING"           
+## [3] "LAYING"             "WALKING"           
+## [5] "WALKING_DOWNSTAIRS" "WALKING_UPSTAIRS"
+\end{verbatim}
+
+Tiến hành chuyển đổi kiểu dữ liệu này sang kiểu factor.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{train}\SpecialCharTok{$}\NormalTok{Activity }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{Activity)}
+\NormalTok{test}\SpecialCharTok{$}\NormalTok{Activity }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(test}\SpecialCharTok{$}\NormalTok{Activity)}
+\end{Highlighting}
+\end{Shaded}
+
+Để đảm bảo chất lượng dữ liệu đầu vào cho mô hình học máy, chúng em thực
+hiện kiểm tra các giá trị bị thiếu (missing values) trong cả hai tập dữ
+liệu huấn luyện và kiểm tra.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Giá trị thiếu ở tập train:"}\NormalTok{, }\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(train)), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Giá trị thiếu ở tập train: 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Giá trị thiếu ở tập test:"}\NormalTok{, }\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(test)), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Giá trị thiếu ở tập test: 0
+\end{verbatim}
+
+Kết quả cho thấy không có giá trị thiếu trong cả tập huấn luyện (train)
+và tập kiểm tra (test), với tổng số lượng NA bằng 0.
+
+Bên cạnh việc kiểm tra giá trị thiếu, chúng em đánh giá tính duy nhất
+của các dữ liệu bằng cách xác định xem có các dòng dữ liệu nào bị trùng
+lặp trong cả hai tập huấn luyện và kiểm tra hay không.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Số dòng bị trùng lặp trong tập train:"}\NormalTok{, }\FunctionTok{sum}\NormalTok{(}\FunctionTok{duplicated}\NormalTok{(train)), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Số dòng bị trùng lặp trong tập train: 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Số dòng bị trùng lặp trong tập test :"}\NormalTok{, }\FunctionTok{sum}\NormalTok{(}\FunctionTok{duplicated}\NormalTok{(test)), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Số dòng bị trùng lặp trong tập test : 0
+\end{verbatim}
+
+Kết quả hiển thị không có dòng nào bị trùng lặp trong cả hai tập dữ liệu
+(train và test), với tổng số dòng trùng là 0.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{columns }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(train)}
+\NormalTok{columns }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{."}\NormalTok{, }\StringTok{""}\NormalTok{, columns)}
+\FunctionTok{colnames}\NormalTok{(train) }\OtherTok{\textless{}{-}}\NormalTok{ columns}
+\FunctionTok{colnames}\NormalTok{(test) }\OtherTok{\textless{}{-}}\NormalTok{ columns}
+\end{Highlighting}
+\end{Shaded}
+
+Tiến hành xem phân phối dữ liệu qua biểu đồ sau:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(showtext)}
+\FunctionTok{showtext\_auto}\NormalTok{()}
+
+\FunctionTok{ggplot}\NormalTok{(train, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{factor}\NormalTok{(subject), }\AttributeTok{fill =}\NormalTok{ Activity)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Số lượng mẫu dữ liệu theo người dùng và hoạt động"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Người dùng (Subject)"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Số lượng mẫu"}\NormalTok{,}
+    \AttributeTok{fill =} \StringTok{"Hoạt động"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{16}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{size =} \DecValTok{20}\NormalTok{),}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{),}
+    \AttributeTok{legend.position =} \StringTok{"right"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-9-1.pdf}
+\caption{Số lượng mẫu dữ liệu theo người dùng và hoạt động}
+\end{figure}
+
+Nhận xét biểu đồ:
+
+\begin{itemize}
+\item
+  Nhìn chung, số lượng mẫu giữa các người dùng tương đối đồng đều,
+  thường dao động trong khoảng từ 50 đến 75 mẫu cho mỗi hoạt động.
+\item
+  Riêng người dùng số 1 có hoạt động WALKING cao bất thường (trên 75
+  mẫu), vượt xa các hoạt động khác của cùng người dùng này cũng như so
+  với các người dùng còn lại.
+\item
+  Các hoạt động WALKING\_DOWNSTAIRS và WALKING\_UPSTAIRS thường có số
+  lượng mẫu thấp hơn các hoạt động khác, đặc biệt là WALKING\_UPSTAIRS.
+\item
+  Các hoạt động tĩnh như LAYING, SITTING và STANDING nhìn chung ổn định,
+  không có sự chênh lệch đáng kể giữa các người dùng.
+\end{itemize}
+
+=\textgreater{} Dữ liệu khá cân bằng giữa các đối tượng và hoạt động,
+ngoại trừ trường hợp đặc biệt ở người dùng số 1 với hoạt động WALKING có
+thể cần xem xét thêm để tránh ảnh hưởng đến phân tích và xây dựng mô
+hình.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\FunctionTok{ggplot}\NormalTok{(train, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Activity, }\AttributeTok{fill =}\NormalTok{ Activity)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Số lượng mẫu theo từng hoạt động"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Hoạt động"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Số lượng mẫu"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{15}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{vjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{hjust=}\DecValTok{1}\NormalTok{),}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \StringTok{"none"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-10-1.pdf}
+\caption{Số lượng mẫu theo từng hoạt động}
+\end{figure}
+
+Số lượng mẫu cho mỗi hoạt động dao động trong khoảng 1000 mẫu đến 1200
+mẫu. Các hoạt động tĩnh như laying, sitting, standing có xu hướng chiếm
+tỷ lệ cao hơn một chút so với các hoạt động di chuyển như walking,
+walking\_upstairs, walking\_downstairs. Mức độ chênh lệch không qua lớn
+giữa các nhóm, là điểm thuận lợi cho các mô hình học máy tránh bị lệch
+nhãn và đảm bảo khả năng học đều giữa các lớp.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\FunctionTok{ggplot}\NormalTok{(train, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tBodyAccMagmean, }\AttributeTok{color =}\NormalTok{ Activity)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{size =} \FloatTok{1.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set1"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{1.1}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Phân bố tBodyAccMagmean theo hoạt động"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"tBodyAccMagmean"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Mật độ"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{16}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-11-1.pdf}
+\caption{Phân bố tBodyAccMagmean theo hoạt động}
+\end{figure}
+
+Biểu đồ cho thấy biến tBodyAccMagmean phân biệt rõ giữa nhóm hoạt động
+tĩnh và hoạt động động:
+
+\begin{itemize}
+\item
+  LAYING, SITTING, STANDING có mật độ tập trung mạnh quanh giá trị âm
+  lớn (gần -1), cho thấy ít dao động, phù hợp với các hoạt động ít vận
+  động.
+\item
+  Trong khi đó, WALKING, WALKING\_UPSTAIRS, WALKING\_DOWNSTAIRS phân bố
+  lệch phải, trải dài và cao hơn ở các giá trị gần 0, biểu thị mức độ
+  chuyển động nhiều hơn.
+
+  Điều này cho thấy tBodyAccMagmean là biến có khả năng phân biệt tốt
+  giữa hành vi tĩnh và động.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(gridExtra)}
+
+\NormalTok{p1 }\OtherTok{\textless{}{-}}\NormalTok{ train }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Activity }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"SITTING"}\NormalTok{, }\StringTok{"STANDING"}\NormalTok{, }\StringTok{"LAYING"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tBodyAccMagmean, }\AttributeTok{color =}\NormalTok{ Activity)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{size =} \FloatTok{1.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Static Activities (closer view)"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"tBodyAccMagmean"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Density"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{xlim}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{1.05}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{35}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{)}
+\NormalTok{p1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-12-1.pdf}
+\caption{Phân bố tBodyAccMagmean theo hoạt động sitting, standing,
+laying}
+\end{figure}
+
+Biểu đồ cho thấy 3 hoạt động LAYING, SITTING, và STANDING đều có phân bố
+giá trị tBodyAccMagmean rất hẹp, tập trung mạnh quanh -1.
+
+\begin{itemize}
+\item
+  SITTING có đỉnh mật độ cao nhất (\textasciitilde33), cho thấy dữ liệu
+  phân bố rất dày và ổn định ở vùng gia tốc thấp.
+\item
+  LAYING và STANDING có dạng phân bố tương tự nhưng thấp hơn, cũng tập
+  trung gần -1.
+\end{itemize}
+
+=\textgreater{} Điều này phản ánh rằng các hoạt động tĩnh tạo ra rất ít
+chuyển động cơ thể, phù hợp với giá trị tBodyAccMagmean thấp và ổn định,
+tuy nhiên chúng khó phân biệt rõ ràng với nhau chỉ dựa rên đặc trưng
+này, vì có sự chồng lấn phân bố giữa ba hoạt động.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p2 }\OtherTok{\textless{}{-}}\NormalTok{ train }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Activity }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"WALKING"}\NormalTok{, }\StringTok{"WALKING\_DOWNSTAIRS"}\NormalTok{, }\StringTok{"WALKING\_UPSTAIRS"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tBodyAccMagmean, }\AttributeTok{color =}\NormalTok{ Activity)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{size =} \FloatTok{1.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Dynamic Activities (closer view)"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"tBodyAccMagmean"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Density"}
+\NormalTok{  ) }\SpecialCharTok{+} \FunctionTok{xlim}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.65}\NormalTok{, }\DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{)}
+
+\NormalTok{p2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-13-1.pdf}
+\caption{Phân bố tBodyAccMagmean theo hoạt động walking,
+walking\_dowstairs, walking\_upstairs}
+\end{figure}
+
+Biểu đồ cho thấy sự khác biệt rõ rệt về phân bố giá trị tBodyAccMagmean
+giữa các hoạt động động:
+
+\begin{itemize}
+\item
+  WALKING có đỉnh mật độ cao nhất, tập trung quanh giá trị gần -0.1, cho
+  thấy dao động đều và ổn định hơn so với hai hoạt động còn lại.
+\item
+  WALKING\_UPSTAIRS có phân bố lệch trái hơn, cho thấy cường độ vận động
+  ít hơn WALKING\_DOWNSTAIRS.
+\item
+  WALKING\_DOWNSTAIRS có đuôi phân bố kéo dài và lan rộng hơn, với giá
+  trị cao hơn về phía dương, phản ánh sự dao động mạnh và không đều khi
+  đi xuống cầu thang.
+\end{itemize}
+
+=\textgreater{} Điều này cho thấy tBodyAccMagmean là một đặc trưng phân
+biệt tốt giữa các kiểu hoạt động động, đặc biệt là giữa đi lên và đi
+xuống cầu thang.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\FunctionTok{ggplot}\NormalTok{(train, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Activity, }\AttributeTok{y =}\NormalTok{ tBodyAccMagmean)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}
+    \AttributeTok{outlier.shape =} \ConstantTok{NA}\NormalTok{,}
+    \AttributeTok{fill =} \StringTok{"skyblue"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"darkgreen"}\NormalTok{,}
+    \AttributeTok{width =} \FloatTok{0.6}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Phân bố giữa tBodyAccMagmean và Activity"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"tBodyAccMagmean"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Activity"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{1.1}\NormalTok{, }\FloatTok{1.2}\NormalTok{)) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \DecValTok{15}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{),}
+    \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{margin =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{margin}\NormalTok{(}\AttributeTok{t =} \DecValTok{10}\NormalTok{)),}
+    \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{margin =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{margin}\NormalTok{(}\AttributeTok{r =} \DecValTok{10}\NormalTok{))}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-14-1.pdf}
+\caption{Phân bố giữa tBodyAccMagmean và Activity}
+\end{figure}
+
+Biểu đồ boxplot thể hiện rõ sự khác biệt giữa nhóm hoạt động tĩnh và
+hoạt động động:
+
+\begin{itemize}
+\item
+  LAYING, SITTING, STANDING có giá trị tBodyAccMagmean gần như cố định
+  quanh -1, với khoảng biến thiên cực nhỏ → cho thấy rất ít chuyển động.
+\item
+  Ngược lại, WALKING, WALKING\_UPSTAIRS, WALKING\_DOWNSTAIRS có median
+  cao hơn nhiều và khoảng biến thiên rộng, đặc biệt WALKING\_DOWNSTAIRS
+  có độ dao động lớn nhất → phản ánh cường độ hoạt động mạnh và không
+  đều.
+\end{itemize}
+
+=\textgreater{} Từ đó ta thấy được Biến tBodyAccMagmean có khả năng phân
+biệt rõ ràng giữa hoạt động tĩnh và động, tuy nhiên khó phân biệt giữa
+các hoạt động tĩnh với nhau do phân bố quá giống nhau
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\FunctionTok{ggplot}\NormalTok{(train, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Activity, }\AttributeTok{y =}\NormalTok{ angleXgravityMean)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}
+    \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"darkblue"}\NormalTok{,}
+    \AttributeTok{outlier.shape =} \ConstantTok{NA}\NormalTok{,}
+    \AttributeTok{width =} \FloatTok{0.6}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Phân bố giữa angleXgravityMean và Activity"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Activity"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"angleXgravityMean"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \DecValTok{15}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{40}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{11}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-15-1.pdf}
+\caption{Phân bố giữa angleXgravityMean và Activity}
+\end{figure}
+
+\begin{itemize}
+\item
+  LAYING có giá trị angleXgravityMean cao vượt trội, median nằm khoảng
+  0.5 -- 0.6, khác biệt rõ rệt so với các hoạt động còn lại.
+\item
+  Các hoạt động còn lại (SITTING, STANDING, WALKING, WALKING\_UPSTAIRS,
+  WALKING\_DOWNSTAIRS) có giá trị nghiêng về âm, tập trung gần -0.8 đến
+  -0.5, với độ dao động nhỏ và tương đối đồng đều.
+\end{itemize}
+
+=\textgreater{} Điều này cho thấy biến angleXgravityMean có khả năng
+phân biệt tốt hoạt động nằm (LAYING) so với các hoạt động khác. Tuy
+nhiên, nó không đủ để phân biệt rõ giữa các hoạt động còn lại, do các
+boxplot gần như chồng lấn.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\FunctionTok{ggplot}\NormalTok{(train, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Activity, }\AttributeTok{y =}\NormalTok{ angleYgravityMean)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}
+    \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"darkblue"}\NormalTok{,}
+    \AttributeTok{outlier.shape =} \ConstantTok{NA}\NormalTok{,}
+    \AttributeTok{width =} \FloatTok{0.6}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Phân bố giữa angleYgravityMean và Activity"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Activity"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"angleYgravityMean"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \DecValTok{15}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{40}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{11}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+Sau khi quan sát biểu đồ ta thấy được:
+
+\begin{itemize}
+\item
+  LAYING có giá trị angleYgravityMean thấp nhất, tập trung quanh -0.5,
+  và có phân bố lệch mạnh về phía âm.
+\item
+  SITTING có median gần 0 và khoảng biến thiên rộng nhất trong tất cả
+  các hoạt động.
+\item
+  STANDING, WALKING, WALKING\_DOWNSTAIRS, WALKING\_UPSTAIRS đều có
+  median gần 0.4--0.5, với phân bố rất hẹp và gần như trùng nhau.
+\end{itemize}
+
+=\textgreater{} angleYgravityMean phân biệt rất tốt LAYING với phần còn
+lại, và một phần phân biệt được SITTING.Tuy nhiên, nó không hiệu quả để
+phân biệt các hoạt động động vì các boxplot gần như giống nhau.
+
+\textbf{Kết luận:}
+
+Đặc trưng tBodyAccMagmean -- đại diện cho độ lớn trung bình của gia tốc
+cơ thể trong mỗi phân đoạn tín hiệu. Biểu đồ mật độ cho thấy ba hoạt
+động tĩnh đều có phân phối rất hẹp, tập trung gần giá trị -1.0, với đỉnh
+phân phối cao và sắc. Điều này phản ánh rằng khi người dùng không di
+chuyển, thiết bị ở thắt lưng ghi nhận gia tốc gần như bằng 0 trong toàn
+bộ cửa sổ thời gian. Trong đó, hoạt động SITTING có mật độ tập trung cao
+nhất, cho thấy đây là tư thế có ít dao động nhất; STANDING có phân bố
+hơi rộng hơn một chút, có thể do người thực hiện có xu hướng chuyển
+trọng lượng nhẹ nhàng khi đứng. Ngược lại, hoạt động LAYING lại xuất
+hiện sự phân tán hơn -- phản ánh trạng thái nằm có thể mang nhiều tư thế
+khác nhau (nằm nghiêng, nằm ngửa\ldots).
+
+AngleXgravityMean cho thấy sự khác biệt rõ giữa tư thế nằm và các tư thế
+còn lại: trong khi LAYING có giá trị trung bình dương lớn (≈ 0.5--0.7),
+các hoạt động khác có xu hướng âm rõ rệt, thường nằm trong khoảng -0.6
+đến -1.0. Là chỉ báo mạnh về góc nghiêng của cơ thể theo trục
+trước--sau, rất hữu ích trong việc phân biệt trạng thái nghỉ ngơi so với
+trạng thái hoạt động.
+
+AngleYgravityMean -- thể hiện góc nghiêng cơ thể theo trục ngang. LAYING
+có giá trị âm lớn (≈ -0.5), SITTING nằm quanh giá trị 0, trong khi
+STANDING và các hoạt động di chuyển đều có giá trị dương và tập trung
+gần nhau, phản ánh trạng thái thẳng đứng của cơ thể. Các đặc trưng liên
+quan đến góc độ không gian của thiết bị có khả năng phân biệt rõ tư thế
+mà không cần đến các đặc trưng vận tốc hay gia tốc.
+
+Phân tích các đặc trưng tBodyAccMagmean, angleXgravityMean và
+angleYgravityMean không chỉ làm rõ cấu trúc phân bố của dữ liệu, mà còn
+cho thấy mỗi hoạt động trong bộ dữ liệu HAR đều thể hiện dấu hiệu đặc
+trưng về mặt hình học hoặc vận động học, đóng vai trò quan trọng trong
+việc xây dựng các mô hình học máy chính xác nhằm phân loại hành vi người
+dùng.
+
+\newpage
+
+\section{THỰC NGHIỆM}\label{thux1ef1c-nghiux1ec7m}
+
+\subsection{Kiểm tra outlier}\label{kiux1ec3m-tra-outlier}
+
+Tiến hành kiểm tra outlier trên tập train và tập test, xác định các điểm
+ngoại lai bằng phương pháp khoảng tứ phân vị (Interquartile Range --
+IQR). Loại bỏ biến subject và Activity để tạo ra tập dữ liệu
+sensor\_data, bao gồm 561 đặc trưng cảm biến, với mỗi cột trong tập dữ
+liệu xác định ranh giới bất thường dựa trên công thức:
+
+\[
+\text{Lower bound} = Q1 - 1.5 \times IQR, \quad
+\text{Upper bound} = Q3 + 1.5 \times IQR
+\]
+
+Trong đó \emph{\(Q1\)} và \emph{\(Q3\)} là các tứ phân vị thứ nhất và
+thứ ba tương ứng, và \emph{\(IQR = Q3 - Q1\)}. Mọi giá trị vượt ngoài
+khoảng này được coi là ngoại lai.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{subject\_ids }\OtherTok{\textless{}{-}}\NormalTok{ train}\SpecialCharTok{$}\NormalTok{subject}
+\NormalTok{activity\_labels }\OtherTok{\textless{}{-}}\NormalTok{ train}\SpecialCharTok{$}\NormalTok{Activity}
+\NormalTok{sensor\_data }\OtherTok{\textless{}{-}}\NormalTok{ train[, }\SpecialCharTok{!}\NormalTok{(}\FunctionTok{names}\NormalTok{(train) }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Activity"}\NormalTok{, }\StringTok{"subject"}\NormalTok{))]}
+\NormalTok{subject\_ids\_test }\OtherTok{\textless{}{-}}\NormalTok{ test}\SpecialCharTok{$}\NormalTok{subject}
+\NormalTok{activity\_labels\_test }\OtherTok{\textless{}{-}}\NormalTok{ test}\SpecialCharTok{$}\NormalTok{Activity}
+\NormalTok{sensor\_data\_test }\OtherTok{\textless{}{-}}\NormalTok{ test[, }\SpecialCharTok{!}\NormalTok{(}\FunctionTok{names}\NormalTok{(test) }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Activity"}\NormalTok{, }\StringTok{"subject"}\NormalTok{))]}
+
+\NormalTok{is\_outlier\_iqr }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  Q1 }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(x, }\FloatTok{0.25}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  Q3 }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(x, }\FloatTok{0.75}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  IQR\_val }\OtherTok{\textless{}{-}}\NormalTok{ Q3 }\SpecialCharTok{{-}}\NormalTok{ Q1}
+\NormalTok{  lower\_bound }\OtherTok{\textless{}{-}}\NormalTok{ Q1 }\SpecialCharTok{{-}} \FloatTok{1.5} \SpecialCharTok{*}\NormalTok{ IQR\_val}
+\NormalTok{  upper\_bound }\OtherTok{\textless{}{-}}\NormalTok{ Q3 }\SpecialCharTok{+} \FloatTok{1.5} \SpecialCharTok{*}\NormalTok{ IQR\_val}
+\NormalTok{  x }\SpecialCharTok{\textless{}}\NormalTok{ lower\_bound }\SpecialCharTok{|}\NormalTok{ x }\SpecialCharTok{\textgreater{}}\NormalTok{ upper\_bound}
+\NormalTok{\}}
+
+\NormalTok{outlier\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{mapply}\NormalTok{(is\_outlier\_iqr, sensor\_data)}
+
+\NormalTok{total\_outlier\_values }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(outlier\_matrix)}
+\NormalTok{total\_cells }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(sensor\_data) }\SpecialCharTok{*} \FunctionTok{ncol}\NormalTok{(sensor\_data)}
+\NormalTok{percent\_outlier\_cells }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(total\_outlier\_values }\SpecialCharTok{/}\NormalTok{ total\_cells }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Tổng số giá trị outlier:"}\NormalTok{, total\_outlier\_values, }\StringTok{"/"}\NormalTok{, total\_cells, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Tổng số giá trị outlier: 163682 / 4124472
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Tỷ lệ giá trị outlier:"}\NormalTok{, percent\_outlier\_cells, }\StringTok{"\%}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Tỷ lệ giá trị outlier: 3.97 %
+\end{verbatim}
+
+Kết quả có tổng cộng 163,682 giá trị được đánh dấu là ngoại lai, trên
+tổng số 4,124,472 giá trị dữ liệu. Điều này tương ứng với tỷ lệ 3.97\%,
+một mức thấp, dữ liệu phần lớn ổn định và sạch.
+
+Tiến hành Chuẩn hóa outlier bằng kỹ thuật cắt ngưỡng (Percentile
+Capping) nhằm giảm ảnh hưởng của các outlier mà không loại bỏ chúng hoàn
+toàn khỏi tập dữ liệu. Thay thế các giá trị cực đoan bằng một ngưỡng
+giới hạn mềm dựa trên các phân vị phần trăm (percentiles) của phân phối
+dữ liệu. định nghĩa một hàm cap\_outliers() để áp dụng quy tắc sau trên
+từng cột trong bảng dữ liệu: giá trị nhỏ hơn phân vị 1\% (1st
+percentile) được gán bằng chính giá trị tại phân vị này, giá trị lớn hơn
+phân vị 99\% (99th percentile) được gán bằng giá trị tại phân vị đó, các
+giá trị nằm giữa hai ngưỡng này được giữ nguyên.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ cap\_outliers }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df, }\AttributeTok{lower =} \FloatTok{0.01}\NormalTok{, }\AttributeTok{upper =} \FloatTok{0.99}\NormalTok{) \{}
+   \ControlFlowTok{for}\NormalTok{ (col }\ControlFlowTok{in} \FunctionTok{names}\NormalTok{(df)) \{}
+\NormalTok{     q\_low }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(df[[col]], lower, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{     q\_high }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(df[[col]], upper, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{     df[[col]] }\OtherTok{\textless{}{-}} \FunctionTok{pmin}\NormalTok{(}\FunctionTok{pmax}\NormalTok{(df[[col]], q\_low), q\_high)}
+\NormalTok{   \}}
+\NormalTok{   df}
+\NormalTok{ \}}
+
+\NormalTok{ sensor\_data\_capped }\OtherTok{\textless{}{-}} \FunctionTok{cap\_outliers}\NormalTok{(sensor\_data)}
+\NormalTok{ sensor\_data\_test\_capped }\OtherTok{\textless{}{-}} \FunctionTok{cap\_outliers}\NormalTok{(sensor\_data\_test)}
+
+\NormalTok{ train\_capped }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(sensor\_data\_capped, }\AttributeTok{subject =}\NormalTok{ subject\_ids, }\AttributeTok{Activity =}\NormalTok{ activity\_labels)}
+\NormalTok{ test\_capped }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(sensor\_data\_test\_capped, }\AttributeTok{subject =}\NormalTok{ subject\_ids\_test, }\AttributeTok{Activity =}\NormalTok{ activity\_labels\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Giảm chiều dữ liệu bằng
+UMAP}\label{giux1ea3m-chiux1ec1u-dux1eef-liux1ec7u-bux1eb1ng-umap}
+
+Kỹ thuật UMAP sử dụng để giảm chiều dữ liệu nhằm mục tiêu trực quan hóa
+và đánh giá khả năng phân tách giữa các nhãn hoạt động khác nhau. Việc
+giảm chiều không gian về 2 chiều giúp quan sát cấu trúc không gian nhúng
+của dữ liệu gốc gồm 561 đặc trưng đầu vào.
+
+Thử nghiệm hệ thống trên lưới các tổ hợp siêu tham số khác nhau, số
+lượng lân cận (n\_neighbors): 5, 15, 30 thể hiện mức độ chú trọng vào
+cấu trúc cục bộ hay toàn cục. Giá trị nhỏ nhấn mạnh mối quan hệ địa
+phương, giá trị lớn mang tính toàn cục cao hơn. Khoảng cách tối thiểu
+(min\_dist): 0.001, 0.01, 0.1 điều chỉnh mức độ nén các cụm dữ liệu
+trong không gian nhúng. Giá trị càng nhỏ thì các cụm càng bị nén lại gần
+nhau, cho phép bảo toàn mật độ; giá trị lớn làm dàn trải không gian
+nhúng.
+
+Kết quả được trình bày thông qua ma trận trực quan gồm 9 biểu đồ, tương
+ứng với 9 tổ hợp siêu tham số khác nhau. Mỗi điểm trên biểu đồ đại diện
+cho một mẫu dữ liệu cảm biến, được tô màu theo nhãn Activity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(umap)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(gridExtra)}
+
+\NormalTok{perform\_umap\_grid }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(X\_data, y\_data,}
+                              \AttributeTok{neighbors\_list =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{30}\NormalTok{),}
+                              \AttributeTok{min\_dist\_list =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.001}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\FloatTok{0.1}\NormalTok{)) \{}
+\NormalTok{  plots }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\NormalTok{  index }\OtherTok{\textless{}{-}} \DecValTok{1}
+
+  \ControlFlowTok{for}\NormalTok{ (n }\ControlFlowTok{in}\NormalTok{ neighbors\_list) \{}
+    \ControlFlowTok{for}\NormalTok{ (d }\ControlFlowTok{in}\NormalTok{ min\_dist\_list) \{}
+\NormalTok{      config }\OtherTok{\textless{}{-}}\NormalTok{ umap.defaults}
+\NormalTok{      config}\SpecialCharTok{$}\NormalTok{n\_neighbors }\OtherTok{\textless{}{-}}\NormalTok{ n}
+\NormalTok{      config}\SpecialCharTok{$}\NormalTok{min\_dist }\OtherTok{\textless{}{-}}\NormalTok{ d}
+\NormalTok{      config}\SpecialCharTok{$}\NormalTok{n\_components }\OtherTok{\textless{}{-}} \DecValTok{2}
+
+\NormalTok{      umap\_result }\OtherTok{\textless{}{-}} \FunctionTok{umap}\NormalTok{(X\_data, }\AttributeTok{config =}\NormalTok{ config)}
+\NormalTok{      df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(umap\_result}\SpecialCharTok{$}\NormalTok{layout)}
+      \FunctionTok{colnames}\NormalTok{(df) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{)}
+\NormalTok{      df}\SpecialCharTok{$}\NormalTok{label }\OtherTok{\textless{}{-}}\NormalTok{ y\_data}
+
+\NormalTok{      p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y, }\AttributeTok{color =}\NormalTok{ label)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set1"}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{10}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \FunctionTok{paste}\NormalTok{(}\StringTok{"n ="}\NormalTok{, n, }\StringTok{", dist ="}\NormalTok{, d), }\AttributeTok{x =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{y =} \ConstantTok{NULL}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+              \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\NormalTok{      plots[[index]] }\OtherTok{\textless{}{-}}\NormalTok{ p}
+\NormalTok{      index }\OtherTok{\textless{}{-}}\NormalTok{ index }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{    \}}
+\NormalTok{  \}}
+
+  \FunctionTok{do.call}\NormalTok{(grid.arrange, }\FunctionTok{c}\NormalTok{(plots, }\AttributeTok{ncol =} \FunctionTok{length}\NormalTok{(min\_dist\_list)))}
+\NormalTok{\}}
+
+\FunctionTok{perform\_umap\_grid}\NormalTok{(}
+  \AttributeTok{X\_data =}\NormalTok{ sensor\_data\_capped,}
+  \AttributeTok{y\_data =}\NormalTok{ train}\SpecialCharTok{$}\NormalTok{Activity,}
+  \AttributeTok{neighbors\_list =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{30}\NormalTok{),}
+  \AttributeTok{min\_dist\_list =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.001}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-19-1.pdf}
+\caption{trực quan hóa UMAP}
+\end{figure}
+
+Khi \textbf{n\_neighbors = 5} mạng lưới lân cận nhỏ, cấu trúc cục bộ
+lỏng lẻo và thiếu kết nối giữa các cụm, các cụm co mạnh nhưng phân bố
+không đồng đều. \textbf{n neighbors = 15} cấu trúc dữ liệu trở nên rõ
+ràng hơn. Khi kết hợp với min dist = 0.01, các cụm đại diện cho các chức
+năng khác nhau bắt đầu được hình thành rõ ràng và phân chia khá mạch
+lạc, thể hiện sự phân cấp cao giữa các đối tượng, các cụm nhỏ như
+sitting và lay ing bắt đầu được gom sát nhau. \textbf{n\_neighbors = 30}
+thể hiện cấu trúc dữ liệu ổn định hơn. Dữ liệu được sắp xếp hợp lý, thấy
+được sự ổn định trong phân cụm. Đặc biệt với min\_dist = 0.1, dữ liệu
+dàn rộng hơn trong không gian nhúng, phù hợp cho việc phân tích tổng
+thể.
+
+Kết quả phân tích thấy được các siêu tham số n neighbors = 30 và min
+dist = 0.1 tạo ra hình ảnh không gian nhúng chính xác và có sự phân biệt
+tốt nhất giữa các hoạt động. Đây là cơ sở quan trọng giúp xác định cấu
+hình tối ưu khi dùng UMAP như một bước tiền xử lý trong pipeline học
+máy.
+
+=\textgreater{} Dựa vào kết phân tích hệ thống các siêu tham số trong kỹ
+thuật giảm chiều UMAP thì cấu hình n\_neighbors = 30 và min\_dist = 0.01
+đã được xác định là một trong những cấu hình hiệu quả nhất để đảm bảo
+cấu trúc dữ liệu và phân tách các nhãn rõ ràng. Chúng em sẽ tiến hành
+minh họa kết quả giảm chiều dữ liệu cảm biến từ 561 đặc trưng về 2
+chiều, áp dụng các cấu hinhg tối ưu nêu trên, mỗi điểm là đại diện cho
+một mẫu dữ liệu và được tô mày theo loại hoạt động được gán nhãn.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(umap)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{config }\OtherTok{\textless{}{-}}\NormalTok{ umap.defaults}
+\NormalTok{config}\SpecialCharTok{$}\NormalTok{n\_neighbors }\OtherTok{\textless{}{-}} \DecValTok{30}
+\NormalTok{config}\SpecialCharTok{$}\NormalTok{min\_dist }\OtherTok{\textless{}{-}} \FloatTok{0.1}
+\NormalTok{config}\SpecialCharTok{$}\NormalTok{n\_components }\OtherTok{\textless{}{-}} \DecValTok{2}
+
+\NormalTok{umap\_result }\OtherTok{\textless{}{-}} \FunctionTok{umap}\NormalTok{(sensor\_data\_capped, }\AttributeTok{config =}\NormalTok{ config)}
+
+\NormalTok{umap\_df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(umap\_result}\SpecialCharTok{$}\NormalTok{layout)}
+\FunctionTok{colnames}\NormalTok{(umap\_df) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"UMAP\_1"}\NormalTok{, }\StringTok{"UMAP\_2"}\NormalTok{)}
+\NormalTok{umap\_df}\SpecialCharTok{$}\NormalTok{Activity }\OtherTok{\textless{}{-}}\NormalTok{ train}\SpecialCharTok{$}\NormalTok{Activity}
+
+\FunctionTok{ggplot}\NormalTok{(umap\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ UMAP\_1, }\AttributeTok{y =}\NormalTok{ UMAP\_2, }\AttributeTok{color =}\NormalTok{ Activity)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \FloatTok{0.7}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set1"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"UMAP (n\_neighbors = 30, min\_dist = 0.01)"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"UMAP 1"}\NormalTok{, }\AttributeTok{y =} \StringTok{"UMAP 2"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-20-1.pdf}
+\caption{trực quan hóa kết quả giảm chiều dữ liệu bằng UMAP}
+\end{figure}
+
+Các hoạt động như LAYING, SITTING và STANDING tạo thành ba cụm rõ ràng,
+thấy được tín hiệu cảm biến ở trong thái tĩnh có sự ổn định cao và dễ
+phân biệt.
+
+Các hoạt động như WALKING, WALKING\_DOWNSTAIRS, WALKING\_UPSTAIRS có xu
+hướng gần nhau hơn trong không gian 2 chiều, mặc dù vẫn tạo thành các
+cụm riêng biệt, nhưng vẫn có vẻ chồng lấn, cho thấy được biến thiên phức
+tạp của vận động trong thực tế. Thấy được sự tách biệt rõ ràng giữa các
+nhóm động và tĩnh. Đây là bước tiền xử lý và kiểm định trực quan quan
+trọng trước khi đưa dữ liệu vào các thuật toán học máy như Random
+Forest, SVM, Logistic Regression và k-NN.
+
+\subsection{Chuẩn bị dữ liệu cho mô hình học
+máy}\label{chuux1ea9n-bux1ecb-dux1eef-liux1ec7u-cho-muxf4-huxecnh-hux1ecdc-muxe1y}
+
+Sau khi hoàn thành các bước tiền xử lý, tập dữ liệu được chia thành hai
+thành phần chính: ma trận đặc trưng đầu vào và nhãn đầu ra tương ứng.
+Các biến định danh như subject và Activity được loại bỏ khỏi ma trận đặc
+trưng, nhằm đảm bảo mô hình chỉ học từ các tín hiệu cảm biến mà không bị
+ảnh hưởng bởi thông tin định danh.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X\_train }\OtherTok{\textless{}{-}}\NormalTok{ train\_capped[, }\SpecialCharTok{!}\NormalTok{(}\FunctionTok{names}\NormalTok{(train\_capped) }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"subject"}\NormalTok{, }\StringTok{"Activity"}\NormalTok{))]}
+\NormalTok{y\_train }\OtherTok{\textless{}{-}}\NormalTok{ train\_capped}\SpecialCharTok{$}\NormalTok{Activity}
+
+\NormalTok{X\_test }\OtherTok{\textless{}{-}}\NormalTok{ test\_capped[, }\SpecialCharTok{!}\NormalTok{(}\FunctionTok{names}\NormalTok{(test\_capped) }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"subject"}\NormalTok{, }\StringTok{"Activity"}\NormalTok{))]}
+\NormalTok{y\_test }\OtherTok{\textless{}{-}}\NormalTok{ test\_capped}\SpecialCharTok{$}\NormalTok{Activity}
+
+\FunctionTok{dim}\NormalTok{(X\_train)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7352  561
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(y\_train)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7352
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(X\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2947  561
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(y\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2947
+\end{verbatim}
+
+\subsection{xây dựng hàm đánh giá tổng quá mô hình học
+máy}\label{xuxe2y-dux1ef1ng-huxe0m-ux111uxe1nh-giuxe1-tux1ed5ng-quuxe1-muxf4-huxecnh-hux1ecdc-muxe1y}
+
+Để đảm bảo sự thống nhất và tái sử dụng trong việc đào tạo và đánh giá
+các mô hình học máy, một hàm tổng quát có tên
+train\_and\_evaluate\_model đã được thiết lập.Hàm thực hiện quy trình
+huấn luyện, dự đoán, đánh giá và trực quan hóa kết quả của một mô hình
+phân loại với cấu trúc linh hoạt, cho phép sử dụng nhiều thuật toán khác
+nhau như Random Forest, SVM, Logistic Regression, hoặc k-NN.
+
+Hàm thiết ké với đầu vào linh hoạt bao gồm tên mô hình (model\_name), dữ
+liệu huấn luyện và kiểm tra (X\_train, y\_train, X\_test, y\_test), danh
+sách nhãn phân loại (class\_labels), bảng tham số tinh chỉnh (tuneGrid)
+và số lượng folds trong quy trình kiểm định chéo (k\_folds). Chuyển đổi
+các nhãn phân loại về kiểu factor để tương tích với các mô hình phân
+loại đa lớp trong môi trường R.
+
+Quá trình huấn luyện mô hình được thực hiện thông qua hàm train() từ
+thưu viện cảet, cho phép sử dụng kiểm định chéo k-fold đồng thời tối ưu
+hóa các tham số theo lưới định nghĩa trước đó. Sau khi huấn luyện xong,
+mô hình được sử dụng để dự đoán trên dữ liệu kiểm tra, sau đó tính toán
+độ chính xác tổng thể và tạo ra ma trận nhầm lẫn để đánh giá mô hình.
+Bên cạnh đó, hàm còn cung cấp chi tiết các chỉ số quan trọng như
+recision, Recall, F1-score, được tính thông qua hàm confusionMatrix() từ
+gói caret.
+
+Ngoài việc đánh giá hiệu suất cho từng lớp riêng biệt, hàm
+train\_and\_evaluate\_model còn tiến hành tính toán các chỉ số trung
+bình ở cả hai mức độ: macro average (trung bình không trọng số giữa các
+lớp) và weighted average (trung bình có trọng số theo số mẫu trên mỗi
+lớp). Điều này giúp cung cấp một cái nhìn toàn diện hơn về hiệu suất mô
+hình, đặc biệt hữu ích trong các bài toán phân loại không cân bằng. Hàm
+còn sử dụng ggplot2 để sinh ra ma trận nhầm lẫn dưới dạng đồ họa giúp dễ
+dàng phát hiện những nhóm hành vi dễ bị mô hình nhầm lẫn.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{train\_and\_evaluate\_model }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}
+\NormalTok{  model\_name,}
+\NormalTok{  X\_train, y\_train, X\_test, y\_test,}
+\NormalTok{  class\_labels,}
+  \AttributeTok{tuneGrid =} \ConstantTok{NULL}\NormalTok{,}
+  \AttributeTok{k\_folds =} \DecValTok{5}
+\NormalTok{) \{}
+  \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(caret)) }\FunctionTok{install.packages}\NormalTok{(}\StringTok{"caret"}\NormalTok{, }\AttributeTok{quiet =} \ConstantTok{TRUE}\NormalTok{)}
+  \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(ggplot2)) }\FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{, }\AttributeTok{quiet =} \ConstantTok{TRUE}\NormalTok{)}
+
+  \FunctionTok{library}\NormalTok{(caret)}
+  \FunctionTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{  y\_train }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(y\_train)}
+\NormalTok{  y\_test }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(y\_test)}
+
+\NormalTok{  ctrl }\OtherTok{\textless{}{-}} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method =} \StringTok{"cv"}\NormalTok{, }\AttributeTok{number =}\NormalTok{ k\_folds)}
+
+  \FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{  model\_fit }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(}
+    \AttributeTok{x =}\NormalTok{ X\_train,}
+    \AttributeTok{y =}\NormalTok{ y\_train,}
+    \AttributeTok{method =}\NormalTok{ model\_name,}
+    \AttributeTok{trControl =}\NormalTok{ ctrl,}
+    \AttributeTok{tuneGrid =}\NormalTok{ tuneGrid}
+\NormalTok{  )}
+
+\NormalTok{  best\_param }\OtherTok{\textless{}{-}}\NormalTok{ model\_fit}\SpecialCharTok{$}\NormalTok{bestTune}
+
+\NormalTok{  final\_model }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(}
+    \AttributeTok{x =}\NormalTok{ X\_train,}
+    \AttributeTok{y =}\NormalTok{ y\_train,}
+    \AttributeTok{method =}\NormalTok{ model\_name,}
+    \AttributeTok{trControl =} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method =} \StringTok{"none"}\NormalTok{),}
+    \AttributeTok{tuneGrid =}\NormalTok{ best\_param}
+\NormalTok{  )}
+
+\NormalTok{  y\_pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(final\_model, X\_test)}
+
+\NormalTok{  cm }\OtherTok{\textless{}{-}} \FunctionTok{confusionMatrix}\NormalTok{(y\_pred, y\_test)}
+\NormalTok{  report }\OtherTok{\textless{}{-}}\NormalTok{ cm}\SpecialCharTok{$}\NormalTok{byClass[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Precision"}\NormalTok{, }\StringTok{"Recall"}\NormalTok{, }\StringTok{"F1"}\NormalTok{)]}
+\NormalTok{  test\_acc }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(y\_pred }\SpecialCharTok{==}\NormalTok{ y\_test)}
+
+\NormalTok{  macro\_precision }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(report[, }\StringTok{"Precision"}\NormalTok{], }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  macro\_recall }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(report[, }\StringTok{"Recall"}\NormalTok{], }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  macro\_f1 }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(report[, }\StringTok{"F1"}\NormalTok{], }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{  support }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{table}\NormalTok{(y\_test))}
+\NormalTok{  weighted\_precision }\OtherTok{\textless{}{-}} \FunctionTok{weighted.mean}\NormalTok{(report[, }\StringTok{"Precision"}\NormalTok{], }\AttributeTok{w =}\NormalTok{ support, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  weighted\_recall }\OtherTok{\textless{}{-}} \FunctionTok{weighted.mean}\NormalTok{(report[, }\StringTok{"Recall"}\NormalTok{], }\AttributeTok{w =}\NormalTok{ support, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  weighted\_f1 }\OtherTok{\textless{}{-}} \FunctionTok{weighted.mean}\NormalTok{(report[, }\StringTok{"F1"}\NormalTok{], }\AttributeTok{w =}\NormalTok{ support, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}|     Best Parameters     |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \ControlFlowTok{for}\NormalTok{ (param }\ControlFlowTok{in} \FunctionTok{names}\NormalTok{(best\_param)) \{}
+    \FunctionTok{cat}\NormalTok{(}\FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%s = \%s}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, param, best\_param[[param]]))}
+\NormalTok{  \}}
+
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}|     Best CV Accuracy    |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\FunctionTok{max}\NormalTok{(model\_fit}\SpecialCharTok{$}\NormalTok{results}\SpecialCharTok{$}\NormalTok{Accuracy), }\DecValTok{4}\NormalTok{))}
+
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}|      Test Accuracy      |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{round}\NormalTok{(test\_acc, }\DecValTok{4}\NormalTok{))}
+
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}| Precision / Recall / F1 |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{round}\NormalTok{(report, }\DecValTok{4}\NormalTok{))}
+
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}|   Macro Avg (All Classes)  |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\FunctionTok{sprintf}\NormalTok{(}\StringTok{"Precision: \%.4f}\SpecialCharTok{\textbackslash{}n}\StringTok{Recall   : \%.4f}\SpecialCharTok{\textbackslash{}n}\StringTok{F1{-}score : \%.4f}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+\NormalTok{              macro\_precision, macro\_recall, macro\_f1))}
+
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}| Weighted Avg (By Support)  |}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\FunctionTok{sprintf}\NormalTok{(}\StringTok{"Precision: \%.4f}\SpecialCharTok{\textbackslash{}n}\StringTok{Recall   : \%.4f}\SpecialCharTok{\textbackslash{}n}\StringTok{F1{-}score : \%.4f}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+\NormalTok{              weighted\_precision, weighted\_recall, weighted\_f1))}
+
+\NormalTok{  cm\_table }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(cm}\SpecialCharTok{$}\NormalTok{table)}
+  \FunctionTok{colnames}\NormalTok{(cm\_table) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Predicted"}\NormalTok{, }\StringTok{"Actual"}\NormalTok{, }\StringTok{"Freq"}\NormalTok{)}
+
+\NormalTok{  p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ cm\_table, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Actual, }\AttributeTok{y =}\NormalTok{ Predicted, }\AttributeTok{fill =}\NormalTok{ Freq)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_tile}\NormalTok{(}\AttributeTok{color =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ Freq), }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{scale\_fill\_gradient}\NormalTok{(}\AttributeTok{low =} \StringTok{"white"}\NormalTok{, }\AttributeTok{high =} \StringTok{"darkgreen"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Confusion Matrix"}\NormalTok{, }\AttributeTok{x =} \StringTok{"True Label"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Predicted Label"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+
+  \FunctionTok{print}\NormalTok{(p)}
+
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}
+    \AttributeTok{model =}\NormalTok{ final\_model,}
+    \AttributeTok{best\_parameters =}\NormalTok{ best\_param,}
+    \AttributeTok{best\_cv\_accuracy =} \FunctionTok{max}\NormalTok{(model\_fit}\SpecialCharTok{$}\NormalTok{results}\SpecialCharTok{$}\NormalTok{Accuracy),}
+    \AttributeTok{test\_accuracy =}\NormalTok{ test\_acc,}
+    \AttributeTok{report =}\NormalTok{ report,}
+    \AttributeTok{macro\_metrics =} \FunctionTok{c}\NormalTok{(}\AttributeTok{Precision =}\NormalTok{ macro\_precision, }\AttributeTok{Recall =}\NormalTok{ macro\_recall, }\AttributeTok{F1 =}\NormalTok{ macro\_f1),}
+    \AttributeTok{weighted\_metrics =} \FunctionTok{c}\NormalTok{(}\AttributeTok{Precision =}\NormalTok{ weighted\_precision, }\AttributeTok{Recall =}\NormalTok{ weighted\_recall, }\AttributeTok{F1 =}\NormalTok{ weighted\_f1),}
+    \AttributeTok{confusion\_matrix =}\NormalTok{ cm}\SpecialCharTok{$}\NormalTok{table,}
+    \AttributeTok{prediction =}\NormalTok{ y\_pred}
+\NormalTok{  ))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Trước tiên mô hình hồi quy logistic được triển khai thông qua gói
+glmnet, với việc tinh chỉnh lưới tham số alpha và lambda, tham số alpha
+kiểm soát mức độ pha trộn giữa Lasso (L1) và Ridge (L2), trong khi
+lambda điều chỉnh cường độ của hình phạt. Thử nghiệm với nhiều giá trị
+lambda đảo ngược (1/λ) cho phép kiểm tra ảnh hưởng của việc điều chỉnh
+trọng số lên khả năng phân loại.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grid\_logistic }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}
+  \AttributeTok{alpha =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+  \AttributeTok{lambda =} \DecValTok{1} \SpecialCharTok{/} \FunctionTok{c}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\NormalTok{)}
+
+\NormalTok{results\_log }\OtherTok{\textless{}{-}} \FunctionTok{train\_and\_evaluate\_model}\NormalTok{(}
+  \AttributeTok{model\_name =} \StringTok{"glmnet"}\NormalTok{,}
+  \AttributeTok{X\_train =}\NormalTok{ X\_train,}
+  \AttributeTok{y\_train =}\NormalTok{ y\_train,}
+  \AttributeTok{X\_test =}\NormalTok{ X\_test, }
+  \AttributeTok{y\_test =}\NormalTok{ y\_test,}
+  \AttributeTok{class\_labels =}\NormalTok{ labels,}
+  \AttributeTok{tuneGrid =}\NormalTok{ grid\_logistic,}
+  \AttributeTok{k\_folds =} \DecValTok{5}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## --------------------------
+## |     Best Parameters     |
+## --------------------------
+## alpha = 0
+## lambda = 0.0333333333333333
+## --------------------------
+## |     Best CV Accuracy    |
+## --------------------------
+## [1] 0.9689
+## --------------------------
+## |      Test Accuracy      |
+## --------------------------
+## [1] 0.9488
+## --------------------------
+## | Precision / Recall / F1 |
+## --------------------------
+##                           Precision Recall     F1
+## Class: LAYING                1.0000 1.0000 1.0000
+## Class: SITTING               0.9349 0.8778 0.9055
+## Class: STANDING              0.8964 0.9436 0.9194
+## Class: WALKING               0.9390 0.9940 0.9657
+## Class: WALKING_DOWNSTAIRS    0.9872 0.9214 0.9532
+## Class: WALKING_UPSTAIRS      0.9449 0.9469 0.9459
+## ------------------------------
+## |   Macro Avg (All Classes)  |
+## ------------------------------
+## Precision: 0.9504
+## Recall   : 0.9473
+## F1-score : 0.9483
+## ------------------------------
+## | Weighted Avg (By Support)  |
+## ------------------------------
+## Precision: 0.9496
+## Recall   : 0.9488
+## F1-score : 0.9486
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-23-1.pdf}
+\caption{confusion matrix Logistic Regression}
+\end{figure}
+
+Mô hình Logistic Regression với lựa chọn siêu tham số tối ưu (alpha = 0,
+lambda = 0.0333) đạt độ chính xác rất cao trên tập kiểm tra (94.88\%) và
+kiểm định chéo (96.89\%), cho thấy mô hình tổng quát hóa tốt và không bị
+overfitting.
+
+Nhìn vào confusion matrix, phần lớn các dự đoán đều nằm trên đường chéo
+chính, thể hiện mô hình đã phân loại chính xác đa số các trường hợp. Một
+số điểm đáng chú ý:
+
+\begin{itemize}
+\item
+  LAYING được mô hình nhận diện chính xác tuyệt đối với 537/537 mẫu,
+  phản ánh đặc trưng tín hiệu riêng biệt và dễ nhận dạng.
+\item
+  WALKING cũng đạt độ chính xác rất cao, chỉ nhầm lẫn rất ít sang
+  WALKING\_UPSTAIRS (22 mẫu) và WALKING\_DOWNSTAIRS (10 mẫu), phù hợp
+  với sự tương đồng trong hoạt động vận động.
+\item
+  SITTING và STANDING là hai lớp dễ nhầm lẫn lẫn nhau: 57 mẫu STANDING
+  bị dự đoán nhầm sang SITTING, và 30 mẫu SITTING nhầm sang STANDING,
+  điều này là hợp lý do hai tư thế này có tín hiệu khá giống nhau.
+\item
+  WALKING\_UPSTAIRS vẫn là lớp có nhiều nhầm lẫn nhất, với 446 mẫu bị dự
+  đoán nhầm sang các hành vi khác như WALKING (23 mẫu) hoặc
+  WALKING\_DOWNSTAIRS (3 mẫu), cho thấy mô hình gặp khó khăn trong việc
+  phân biệt các hoạt động di chuyển gần giống nhau.
+\end{itemize}
+
+=\textgreater{} Tổng thể, Logistic Regression cho kết quả rất ấn tượng
+trên tập dữ liệu này, đặc biệt là ở các lớp có đặc trưng rõ ràng. Tuy
+nhiên, vẫn tồn tại sự nhầm lẫn ở các lớp có hành vi tương đồng, điều này
+có thể được cải thiện bằng cách bổ sung thêm đặc trưng hoặc thử các mô
+hình phi tuyến khác.
+
+Sau khi đánh giá Logistic Regression, ta tiếp tục thử nghiệm với mô hình
+SVM tuyến tính để so sánh hiệu quả giữa hai phương pháp phân loại tuyến
+tính. Mô hình SVM tuyến tính được thực hiện với lưới tham số c.~Các giá
+trị C thấp khuyến khích mô hình đơn giản, trong khi giá trị lớn hướng
+tới việc giảm thiểu lỗi huấn luyện. Lựa chọn tập các giá trị c từ 0.125
+đến 16 giúp đánh giá độ nhạy của SVM với mức độ điều chuẩn khác nhau.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grid\_linear\_svc }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{C =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.125}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{16}\NormalTok{))}
+
+\NormalTok{results\_svc }\OtherTok{\textless{}{-}} \FunctionTok{train\_and\_evaluate\_model}\NormalTok{(}
+  \AttributeTok{model\_name =} \StringTok{"svmLinear"}\NormalTok{,}
+  \AttributeTok{X\_train =}\NormalTok{ X\_train, }\AttributeTok{y\_train =}\NormalTok{ y\_train,}
+  \AttributeTok{X\_test =}\NormalTok{ X\_test, }\AttributeTok{y\_test =}\NormalTok{ y\_test,}
+  \AttributeTok{class\_labels =}\NormalTok{ labels,}
+  \AttributeTok{tuneGrid =}\NormalTok{ grid\_linear\_svc,}
+  \AttributeTok{k\_folds =} \DecValTok{5}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## --------------------------
+## |     Best Parameters     |
+## --------------------------
+## C = 0.125
+## --------------------------
+## |     Best CV Accuracy    |
+## --------------------------
+## [1] 0.9845
+## --------------------------
+## |      Test Accuracy      |
+## --------------------------
+## [1] 0.9606
+## --------------------------
+## | Precision / Recall / F1 |
+## --------------------------
+##                           Precision Recall     F1
+## Class: LAYING                1.0000 1.0000 1.0000
+## Class: SITTING               0.9646 0.8880 0.9247
+## Class: STANDING              0.9069 0.9699 0.9373
+## Class: WALKING               0.9591 0.9940 0.9762
+## Class: WALKING_DOWNSTAIRS    0.9828 0.9500 0.9661
+## Class: WALKING_UPSTAIRS      0.9595 0.9554 0.9574
+## ------------------------------
+## |   Macro Avg (All Classes)  |
+## ------------------------------
+## Precision: 0.9621
+## Recall   : 0.9595
+## F1-score : 0.9603
+## ------------------------------
+## | Weighted Avg (By Support)  |
+## ------------------------------
+## Precision: 0.9615
+## Recall   : 0.9606
+## F1-score : 0.9605
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-24-1.pdf}
+\caption{confusion matrix SVC}
+\end{figure}
+
+Mô hình SVM tuyến tính cho kết quả rất tốt trên tập kiểm tra, với độ
+chính xác đạt 96.06\%. Đồng thời, các chỉ số đánh giá F1-score trung
+bình cũng rất cao (Macro F1 = 0.9603, Weighted F1 = 0.9605), cho thấy mô
+hình hoạt động hiệu quả và khá ổn định trên cả các lớp phổ biến lẫn các
+lớp ít xuất hiện.
+
+Khi quan sát ma trận nhầm lẫn, ta thấy phần lớn các điểm dữ liệu đều
+được mô hình phân loại đúng, thể hiện qua các giá trị lớn nằm trên đường
+chéo chính. Tuy nhiên, vẫn còn một số lỗi nhầm lẫn nhỏ:
+
+\begin{itemize}
+\item
+  SITTING và STANDING đôi lúc bị nhầm lẫn cho nhau (ví dụ: có 16 mẫu
+  SITTING bị nhầm thành STANDING, và 53 mẫu STANDING bị dự đoán thành
+  SITTING). Điều này dễ hiểu vì hai hoạt động này đều thuộc nhóm tĩnh và
+  có tín hiệu khá giống nhau.
+\item
+  Một vài mẫu WALKING bị nhầm sang WALKING\_UPSTAIRS hoặc
+  WALKING\_DOWNSTAIRS, phản ánh sự tương đồng giữa các hành vi di
+  chuyển.
+\item
+  Các lớp như LAYING, WALKING và WALKING\_DOWNSTAIRS được mô hình phân
+  loại rất chính xác, hầu như không có nhầm lẫn.
+\end{itemize}
+
+=\textgreater{} Tổng thể, mô hình SVM tuyến tính phân loại khá tốt và ổn
+định, đặc biệt hiệu quả với các hành vi có đặc trưng rõ ràng. Những lỗi
+nhỏ chủ yếu xảy ra ở các hành vi có tín hiệu tương tự nhau, điều này là
+hợp lý trong bài toán phân loại hoạt động con người.
+
+Tiếp theo, ta tiến hành xây dựng và đánh giá mô hình Decision Tree
+Classifier nhằm so sánh hiệu quả với các mô hình tuyến tính đã triển
+khai trước đó. Mô hình Decision Tree Classifier được thực hiện thông qua
+rpart2, một biến thể của cây quyết định truyền thống cho phép tối ưu độ
+sâu cây (maxdepth). Điều chỉnh độ sâu của cây thông qua grid\_dt giúp
+kiểm soát mức độ phức tạp, tránh việc cây học thuộc dữ liệu huấn luyện.
+Các giá trị từ 3 đến 9 được thử nghiệm để tìm ra cấu trúc cây phù hợp
+nhất với độ phức tạp của dữ liệu. Quá trình huấn luyện và đánh giá được
+thực hiện đồng bộ trong hàm train\_and\_evaluate\_model() với xác thực
+chéo k-fold (k = 5), cho phép đo lường hiệu suất mô hình một cách khách
+quan.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grid\_dt }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{maxdepth =} \FunctionTok{seq}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{9}\NormalTok{, }\AttributeTok{by =} \DecValTok{2}\NormalTok{))}
+
+\NormalTok{results\_dt }\OtherTok{\textless{}{-}} \FunctionTok{train\_and\_evaluate\_model}\NormalTok{(}
+  \AttributeTok{model\_name =} \StringTok{"rpart2"}\NormalTok{,}
+  \AttributeTok{X\_train =}\NormalTok{ X\_train,}
+  \AttributeTok{y\_train =}\NormalTok{ y\_train,}
+  \AttributeTok{X\_test =}\NormalTok{ X\_test,}
+  \AttributeTok{y\_test =}\NormalTok{ y\_test,}
+  \AttributeTok{class\_labels =}\NormalTok{ labels,}
+  \AttributeTok{tuneGrid =}\NormalTok{ grid\_dt,}
+  \AttributeTok{k\_folds =} \DecValTok{5}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## --------------------------
+## |     Best Parameters     |
+## --------------------------
+## maxdepth = 7
+## --------------------------
+## |     Best CV Accuracy    |
+## --------------------------
+## [1] 0.886
+## --------------------------
+## |      Test Accuracy      |
+## --------------------------
+## [1] 0.8402
+## --------------------------
+## | Precision / Recall / F1 |
+## --------------------------
+##                           Precision Recall     F1
+## Class: LAYING                1.0000 1.0000 1.0000
+## Class: SITTING               0.7890 0.8147 0.8016
+## Class: STANDING              0.8236 0.7989 0.8111
+## Class: WALKING               0.8098 0.8669 0.8374
+## Class: WALKING_DOWNSTAIRS    0.9369 0.6714 0.7822
+## Class: WALKING_UPSTAIRS      0.7243 0.8535 0.7836
+## ------------------------------
+## |   Macro Avg (All Classes)  |
+## ------------------------------
+## Precision: 0.8473
+## Recall   : 0.8342
+## F1-score : 0.8360
+## ------------------------------
+## | Weighted Avg (By Support)  |
+## ------------------------------
+## Precision: 0.8479
+## Recall   : 0.8402
+## F1-score : 0.8399
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-25-1.pdf}
+\caption{confusion matrix decision tree}
+\end{figure}
+
+Mô hình Decision Tree với độ sâu tối ưu là maxdepth = 7 đạt độ chính xác
+kiểm định chéo ở mức 88.60\% và độ chính xác trên tập kiểm tra là
+84.02\%. So với Logistic Regression và SVM, độ chính xác của mô hình này
+thấp hơn, cho thấy khả năng tổng quát hóa của cây quyết định có phần hạn
+chế hơn trong bài toán này.
+
+Quan sát confusion matrix cho thấy một số xu hướng nhầm lẫn điển hình:
+
+\begin{itemize}
+\item
+  LAYING tiếp tục là lớp được phân loại chính xác tuyệt đối với 537/537
+  mẫu, khẳng định đặc trưng tín hiệu rõ ràng của hoạt động này.
+\item
+  WALKING có hiệu suất khá tốt, tuy có 40 mẫu nhầm sang
+  WALKING\_DOWNSTAIRS và 61 mẫu nhầm sang WALKING\_UPSTAIRS phản ánh sự
+  chồng lấn về đặc trưng giữa các hoạt động di chuyển.
+\item
+  SITTING và STANDING tiếp tục là cặp lớp dễ nhầm lẫn nhất: 91 mẫu
+  STANDING bị nhầm sang SITTING, và 107 mẫu SITTING bị nhầm thành
+  STANDING.
+\item
+  WALKING\_UPSTAIRS là lớp có tỉ lệ nhầm lẫn cao nhất, với hơn 400 mẫu
+  bị dự đoán sai, chủ yếu sang WALKING và WALKING\_DOWNSTAIRS.
+
+  Về mặt chỉ số:
+\item
+  F1-score các lớp dao động từ 0.78 đến 1.00, với điểm trung bình Macro
+  F1 đạt 0.8360 và Weighted F1 đạt 0.8399, phản ánh mô hình vẫn giữ được
+  độ chính xác tương đối ổn định dù không cao bằng các mô hình trước đó.
+\end{itemize}
+
+=\textgreater{} Tổng thể, Decision Tree là mô hình trực quan, dễ giải
+thích nhưng hiệu suất phân loại thấp hơn đáng kể so với Logistic
+Regression và SVM trong trường hợp này. Những sai số đáng kể giữa các
+lớp tĩnh và động có thể được giảm thiểu nếu kết hợp với các kỹ thuật như
+pruning, boosting hoặc sử dụng các mô hình phức tạp hơn như Random
+Forest.
+
+Sau khi đánh giá hiệu quả của mô hình Decision Tree, ta tiếp tục triển
+khai mô hình Random Forest -- một phương pháp tổ hợp (ensemble) giúp
+khắc phục hiện tượng overfitting thường gặp ở cây quyết định đơn lẻ. Mô
+hình Random Forest trên bộ dữ liệu nhận diện hành vi người dùng từ cảm
+biến điện thoại thông minh, với mục tiêu là tìm ra số mtry tối ưu là số
+lượng biến ngẫu nhiên được chọn tại mỗi nút phân tách trong cây. Việc
+chọn mtry trong khoảng 16 đến 32 là phù hợp vì xét trên tổng thể số đặc
+trưng đầu vào 561 để đảm bảo sự đa dạn và ngẫu nhiên trong rừng cây.
+Cross-validation 5-fold đảm bảo rằng kết quả không bị lệ thuộc vào một
+phân phối dữ liệu cụ thể, tăng tính tổng quát hóa cho mô hình.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(randomForest)}
+\NormalTok{grid\_rf }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{mtry =} \FunctionTok{c}\NormalTok{(}\DecValTok{16}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{24}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{32}\NormalTok{))}
+\NormalTok{results\_rf }\OtherTok{\textless{}{-}} \FunctionTok{train\_and\_evaluate\_model}\NormalTok{(}
+  \AttributeTok{model\_name =} \StringTok{"rf"}\NormalTok{,}
+  \AttributeTok{X\_train =}\NormalTok{ X\_train,}
+  \AttributeTok{y\_train =}\NormalTok{ y\_train,}
+  \AttributeTok{X\_test =}\NormalTok{ X\_test,}
+  \AttributeTok{y\_test =}\NormalTok{ y\_test,}
+  \AttributeTok{class\_labels =}\NormalTok{ labels,}
+  \AttributeTok{tuneGrid =}\NormalTok{ grid\_rf,}
+  \AttributeTok{k\_folds =} \DecValTok{5}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## --------------------------
+## |     Best Parameters     |
+## --------------------------
+## mtry = 16
+## --------------------------
+## |     Best CV Accuracy    |
+## --------------------------
+## [1] 0.983
+## --------------------------
+## |      Test Accuracy      |
+## --------------------------
+## [1] 0.941
+## --------------------------
+## | Precision / Recall / F1 |
+## --------------------------
+##                           Precision Recall     F1
+## Class: LAYING                1.0000 1.0000 1.0000
+## Class: SITTING               0.9515 0.9185 0.9347
+## Class: STANDING              0.9271 0.9568 0.9417
+## Class: WALKING               0.9162 0.9698 0.9422
+## Class: WALKING_DOWNSTAIRS    0.9592 0.8405 0.8959
+## Class: WALKING_UPSTAIRS      0.8947 0.9384 0.9161
+## ------------------------------
+## |   Macro Avg (All Classes)  |
+## ------------------------------
+## Precision: 0.9415
+## Recall   : 0.9373
+## F1-score : 0.9384
+## ------------------------------
+## | Weighted Avg (By Support)  |
+## ------------------------------
+## Precision: 0.9420
+## Recall   : 0.9410
+## F1-score : 0.9406
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-26-1.pdf}
+\caption{confusion matrix random forest}
+\end{figure}
+
+Mô hình Random Forest đạt độ chính xác kiểm tra là 94.1\%, cùng với
+Macro F1-score = 0.9384 và Weighted F1-score = 0.9406, cho thấy đây là
+một mô hình mạnh, có khả năng phân loại tổng thể tốt và tương đối đồng
+đều giữa các lớp.
+
+Dựa vào ma trận nhầm lẫn, ta thấy hầu hết các hoạt động như LAYING,
+SITTING, STANDING, và WALKING đều được mô hình nhận diện khá tốt, với số
+lượng mẫu dự đoán đúng lớn nằm trên đường chéo chính. Tuy nhiên, mô hình
+vẫn mắc một số lỗi phân loại:
+
+\begin{itemize}
+\item
+  SITTING bị nhầm sang STANDING 23 mẫu, và chiều ngược lại STANDING nhầm
+  40 mẫu sang SITTING. Đây là điều dễ hiểu vì hai hoạt động đều là trạng
+  thái tĩnh, có đặc điểm tín hiệu gần giống nhau.
+\item
+  WALKING\_UPSTAIRS có mức độ nhầm lẫn cao nhất, với 47 mẫu bị nhầm sang
+  WALKING\_DOWNSTAIRS và 24 mẫu sang WALKING. Điều này phản ánh rằng các
+  hành vi di chuyển tương tự như lên cầu thang, xuống cầu thang và đi bộ
+  có tín hiệu khá giống nhau nên mô hình dễ nhầm lẫn.
+\item
+  WALKING\_DOWNSTAIRS cũng bị ảnh hưởng, với 10 mẫu bị nhầm sang
+  WALKING, cho thấy cần cải thiện khả năng phân biệt giữa các hành vi
+  động học này.
+\end{itemize}
+
+=\textgreater{} Về tổng thể, mô hình Random Forest có khả năng nhận diện
+tốt các hành vi rõ ràng như LAYING (F1 = 1.000), WALKING (F1 = 0.9422),
+và STANDING (F1 = 0.9417). Tuy nhiên, vẫn còn không ít nhầm lẫn ở các
+lớp có ranh giới mờ hoặc tín hiệu gần nhau như WALKING\_UPSTAIRS và
+WALKING\_DOWNSTAIRS.
+
+Sau đó chúng em tiếp tục triển khai K-Nearest Neighbors (KNN), một lưới
+các giá trị siêu tham số k đã được thiết lập từ 3 đến 30, với bước nhảy
+2. Việc giới hạn lựa chọn k là các số lẻ nhằm tránh tình trạng hòa phiếu
+trong quá trình bỏ phiếu đa số của KNN. Sử dụng hàm
+train\_and\_evaluate\_model() để huấn luyện và đánh giá mô hình KNN ứng
+với từng giá trị k trong lưới thông qua quy trình cross-validation
+5-fold. Sau quá trình huấn luyện, giá trị k tối ưu được trích xuất từ mô
+hình đã hiệu chỉnh thông qua thuộc tính bestTune, cho phép xác định cấu
+hình KNN có hiệu suất dự đoán tốt nhất trên tập kiểm tra.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grid\_knn }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{k =} \FunctionTok{seq}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{30}\NormalTok{, }\AttributeTok{by =} \DecValTok{2}\NormalTok{))  }
+
+\NormalTok{results\_knn }\OtherTok{\textless{}{-}} \FunctionTok{train\_and\_evaluate\_model}\NormalTok{(}
+  \AttributeTok{model\_name =} \StringTok{"knn"}\NormalTok{,}
+  \AttributeTok{X\_train =}\NormalTok{ X\_train, }
+  \AttributeTok{y\_train =}\NormalTok{ y\_train,}
+  \AttributeTok{X\_test =}\NormalTok{ X\_test, }
+  \AttributeTok{y\_test =}\NormalTok{ y\_test,}
+  \AttributeTok{class\_labels =}\NormalTok{ labels,}
+  \AttributeTok{tuneGrid =}\NormalTok{ grid\_knn,}
+  \AttributeTok{k\_folds =} \DecValTok{5}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## --------------------------
+## |     Best Parameters     |
+## --------------------------
+## k = 5
+## --------------------------
+## |     Best CV Accuracy    |
+## --------------------------
+## [1] 0.9675
+## --------------------------
+## |      Test Accuracy      |
+## --------------------------
+## [1] 0.903
+## --------------------------
+## | Precision / Recall / F1 |
+## --------------------------
+##                           Precision Recall     F1
+## Class: LAYING                1.0000 0.9963 0.9981
+## Class: SITTING               0.9032 0.7984 0.8476
+## Class: STANDING              0.8353 0.9248 0.8778
+## Class: WALKING               0.8597 0.9758 0.9141
+## Class: WALKING_DOWNSTAIRS    0.9463 0.7976 0.8656
+## Class: WALKING_UPSTAIRS      0.8962 0.8981 0.8971
+## ------------------------------
+## |   Macro Avg (All Classes)  |
+## ------------------------------
+## Precision: 0.9068
+## Recall   : 0.8985
+## F1-score : 0.9001
+## ------------------------------
+## | Weighted Avg (By Support)  |
+## ------------------------------
+## Precision: 0.9063
+## Recall   : 0.9030
+## F1-score : 0.9021
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/unnamed-chunk-27-1.pdf}
+\caption{confusion matrix KNN}
+\end{figure}
+
+Mô hình KNN mặc dù đơn giản, nhưng cho thấy hiệu quả phân loại khá cao
+trên tập dữ liệu hoạt động con người. Với độ chính xác kiểm tra đạt
+90.3\% và Macro F1-score 90.01\%, KNN đứng trong nhóm mô hình có hiệu
+suất tốt nhất, chỉ xếp sau các mô hình tuyến tính như SVM và Logistic
+Regression.
+
+Tuy nhiên, một số điểm cần lưu ý:
+
+\begin{itemize}
+\item
+  Mô hình nhạy cảm với nhiễu và có thể gặp khó khăn với các lớp có ranh
+  giới mờ như SITTING và STANDING điều thể hiện rõ qua tỷ lệ nhầm lẫn
+  cao giữa hai lớp này.
+\item
+  Các hoạt động động như WALKING, WALKING\_UPSTAIRS, WALKING\_DOWNSTAIRS
+  vẫn còn nhầm lẫn lẫn nhau, phản ánh tính chất tín hiệu gần giống trong
+  không gian đặc trưng.
+\item
+  Mô hình yêu cầu dữ liệu được chuẩn hóa tốt để đảm bảo khoảng cách
+  Euclidean phản ánh đúng sự tương đồng giữa các điểm.
+\end{itemize}
+
+=\textgreater{} Tóm lại, KNN là một lựa chọn hiệu quả cho bài toán phân
+loại này, đặc biệt khi không cần mô hình phức tạp. Tuy nhiên, hiệu năng
+của KNN phụ thuộc nhiều vào việc chọn số k phù hợp và đặc điểm phân bố
+dữ liệu trong không gian.
+
+\newpage
+
+\section{KẾT QUẢ THỰC
+NGHIỆM}\label{kux1ebft-quux1ea3-thux1ef1c-nghiux1ec7m}
+
+\subsection{Tổng hợp kết quả mô
+hình}\label{tux1ed5ng-hux1ee3p-kux1ebft-quux1ea3-muxf4-huxecnh}
+
+Trong nghiên cứu này, chúng em đã thực hiện một quy trình phân tích và
+xây dựng mô hình học máy nhằm phân loại hành vi vận động của con người
+dựa trên dữ liệu cảm biến từ bộ dữ liệu Human Activity Recognition with
+Smartphones. Bộ dữ liệu chứa các đặc trưng trích xuất từ gia tốc kế và
+con quay hồi chuyển gắn trên điện thoại thông minh, với 561 đặc trưng
+đầu vào đại diện cho các thông tin trong miền thời gian và tần số.
+
+Trước khi đưa vào mô hình, dữ liệu được xử lý kỹ lưỡng bao gồm: kiểm tra
+dữ liệu thiếu, loại bỏ dòng trùng lặp, xử lý các giá trị ngoại lai thông
+qua kỹ thuật capping theo ngưỡng phần trăm vị (percentile). Sau đó, nhóm
+đã áp dụng các kỹ thuật giảm chiều dữ liệu như UMAP để trực quan hóa dữ
+liệu. Kết quả trực quan cho thấy các nhóm hành vi có xu hướng phân tách
+rõ ràng, đặc biệt là các hoạt động như LAYING, WALKING\_UPSTAIRS và
+WALKING\_DOWNSTAIRS.Phần xây dựng mô hình, nhóm đã thử nghiệm và đánh
+giá hiệu quả của các thuật toán học máy khác nhau
+
+Tiếp theo chúng em tiến hành tổng hợp và so sánh hiệu suất của các mô
+hình dựa trên các chỉ số đánh giá quan trọng như Accuracy, Macro F1 và
+Weighted F1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model\_summary }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Model =} \FunctionTok{c}\NormalTok{(}\StringTok{"Logistic Regression"}\NormalTok{, }\StringTok{"SVM (Linear)"}\NormalTok{, }\StringTok{"Decision Tree"}\NormalTok{, }\StringTok{"Random Forest"}\NormalTok{, }\StringTok{"KNN"}\NormalTok{),}
+  \AttributeTok{Accuracy =} \FunctionTok{c}\NormalTok{(}
+\NormalTok{    results\_log}\SpecialCharTok{$}\NormalTok{test\_accuracy,}
+\NormalTok{    results\_svc}\SpecialCharTok{$}\NormalTok{test\_accuracy,}
+\NormalTok{    results\_dt}\SpecialCharTok{$}\NormalTok{test\_accuracy,}
+\NormalTok{    results\_rf}\SpecialCharTok{$}\NormalTok{test\_accuracy,}
+\NormalTok{    results\_knn}\SpecialCharTok{$}\NormalTok{test\_accuracy}
+\NormalTok{  ),}
+  \AttributeTok{Macro\_F1 =} \FunctionTok{c}\NormalTok{(}
+\NormalTok{    results\_log}\SpecialCharTok{$}\NormalTok{macro\_metrics[}\StringTok{"F1"}\NormalTok{],}
+\NormalTok{    results\_svc}\SpecialCharTok{$}\NormalTok{macro\_metrics[}\StringTok{"F1"}\NormalTok{],}
+\NormalTok{    results\_dt}\SpecialCharTok{$}\NormalTok{macro\_metrics[}\StringTok{"F1"}\NormalTok{],}
+\NormalTok{    results\_rf}\SpecialCharTok{$}\NormalTok{macro\_metrics[}\StringTok{"F1"}\NormalTok{],}
+\NormalTok{    results\_knn}\SpecialCharTok{$}\NormalTok{macro\_metrics[}\StringTok{"F1"}\NormalTok{]}
+\NormalTok{  ),}
+  \AttributeTok{Weighted\_F1 =} \FunctionTok{c}\NormalTok{(}
+\NormalTok{    results\_log}\SpecialCharTok{$}\NormalTok{weighted\_metrics[}\StringTok{"F1"}\NormalTok{],}
+\NormalTok{    results\_svc}\SpecialCharTok{$}\NormalTok{weighted\_metrics[}\StringTok{"F1"}\NormalTok{],}
+\NormalTok{    results\_dt}\SpecialCharTok{$}\NormalTok{weighted\_metrics[}\StringTok{"F1"}\NormalTok{],}
+\NormalTok{    results\_rf}\SpecialCharTok{$}\NormalTok{weighted\_metrics[}\StringTok{"F1"}\NormalTok{],}
+\NormalTok{    results\_knn}\SpecialCharTok{$}\NormalTok{weighted\_metrics[}\StringTok{"F1"}\NormalTok{]}
+\NormalTok{  )}
+\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(model\_summary)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                 Model  Accuracy  Macro_F1 Weighted_F1
+## 1 Logistic Regression 0.9487615 0.9482859   0.9486186
+## 2        SVM (Linear) 0.9606379 0.9603040   0.9605108
+## 3       Decision Tree 0.8401765 0.8359892   0.8398550
+## 4       Random Forest 0.9409569 0.9384417   0.9406305
+## 5                 KNN 0.9029522 0.9000549   0.9021489
+\end{verbatim}
+
+SVM tuyến tính là mô hình tốt nhất với độ chính xác và F1-score cao nhất
+trên cả hai tiêu chí macro và weighted. Điều này chứng tỏ SVM không chỉ
+hoạt động tốt trên toàn tập dữ liệu mà còn duy trì độ ổn định giữa các
+lớp phân loại.Logistic Regression cũng thể hiện hiệu quả rất tốt, cho
+thấy các đặc trưng đầu vào phù hợp với mô hình tuyến tính. Random Forest
+đạt hiệu suất cao, đặc biệt thích hợp với các lớp hành vi chuyển động rõ
+ràng như WALKING hay LAYING. Tuy KNN bị ảnh hưởng bởi độ lớn của chiều
+dữ liệu nhưng kết quả vẫn đạt ở mức ổn định khi k = 5. Decision Tree tuy
+không tối ưu về độ chính xác nhưng lại đóng vai trò baseline quan trọng
+và giúp giải thích được logic phân loại.
+
+\subsection{Phân tích và so sánh mô
+hình}\label{phuxe2n-tuxedch-vuxe0-so-suxe1nh-muxf4-huxecnh}
+
+Hình dưới đây minh họa trực quan mức độ hiệu quả của các mô hình dựa
+trên ba chỉ số đánh giá chính. Có thể thấy rõ rằng SVM đạt điểm cao nhất
+ở cả ba thước đo, trong khi các mô hình như Logistic Regression và
+Random Forest bám sát theo sau. Decision Tree là mô hình có hiệu suất
+thấp nhất trong nhóm, đặc biệt trên chỉ số Macro F1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{model\_summary\_long }\OtherTok{\textless{}{-}}\NormalTok{ model\_summary }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(}\StringTok{"Accuracy"}\NormalTok{, }\StringTok{"Macro\_F1"}\NormalTok{, }\StringTok{"Weighted\_F1"}\NormalTok{),}
+               \AttributeTok{names\_to =} \StringTok{"Metric"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"Value"}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(model\_summary\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Model, }\AttributeTok{y =}\NormalTok{ Value, }\AttributeTok{fill =}\NormalTok{ Metric)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.8}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"So sánh hiệu suất các mô hình"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Mô hình"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Giá trị"}\NormalTok{,}
+    \AttributeTok{fill =} \StringTok{"Chỉ số đánh giá"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{15}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+SVM tuyến tính là mô hình có hiệu suất cao nhất trên cả ba chỉ số, thể
+hiện khả năng phân loại mạnh mẽ và ổn định giữa các lớp.
+
+Logistic Regression và Random Forest cũng cho kết quả rất tốt, chỉ xếp
+sau SVM một cách sát sao. Logistic hoạt động đặc biệt hiệu quả trong
+không gian tuyến tính, còn Random Forest thể hiện ưu thế ở các lớp có
+tính phi tuyến cao.
+
+KNN, mặc dù đơn giản, vẫn đạt hiệu suất đáng kể với Accuracy
+\textgreater{} 90\%, cho thấy phù hợp với dữ liệu đã được chuẩn hóa và
+có ranh giới rõ ràng.
+
+Decision Tree là mô hình có độ chính xác thấp nhất, chủ yếu do nhầm lẫn
+giữa các lớp tĩnh và giới hạn về khả năng khái quát khi không được kết
+hợp với các kỹ thuật tổ hợp như Random Forest.
+
+=\textgreater{} Tổng thể, mô hình SVM tuyến tính được đánh giá là lựa
+chọn tối ưu nhất cho bài toán phân loại này, trong khi các mô hình khác
+như Logistic Regression và Random Forest vẫn có thể được cân nhắc tùy
+theo yêu cầu cụ thể về tốc độ, độ phức tạp và khả năng giải thích.
+
+\newpage
+
+\section{KẾT LUẬN}\label{kux1ebft-luux1eadn}
+
+Qua quá trình thực hiện đã cho thấy tiềm năng lớn của các mô hình học
+máy trong việc nhận diện hành vi từ dữ liệu cảm biến, đồng thời khẳng
+định vai trò quan trọng của tiền xử lý, giảm chiều, lựa chọn mô hình và
+đánh giá hiệu năng chi tiết theo từng lớp.
+
+Trong tương lai, nhóm mong muốn mở rộng nghiên cứu theo các hướng như:
+Tích hợp thêm các thuật toán học sâu (Deep Learning) như RNN/LSTM để tận
+dụng tính liên tục theo thời gian trong tín hiệu. Nghiên cứu các kỹ
+thuật tăng cường dữ liệu và học chuyển giao (Transfer Learning). Ứng
+dụng vào các hệ thống nhận dạng thời gian thực cho thiết bị đeo thông
+minh hoặc giám sát sức khỏe từ xa.
 
 \newpage
 
